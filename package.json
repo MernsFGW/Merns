@@ -4,11 +4,14 @@
   "repository": "https://github.com/trinhdoduyhungss/Merns.git",
   "license": "MIT",
   "scripts": {
-    "development": "nodemon"
+    "development": "nodemon",
+    "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
+    "start": "NODE_ENV=production node ./dist/server.generated.js"
   },
   "main": "./dist/server.generated.js",
   "dependencies": {
     "@hot-loader/react-dom": "^17.0.2",
+    "@material-ui/core": "4.9.8",
     "body-parser": "1.19.0",
     "compression": "1.7.4",
     "cookie-parser": "1.4.5",
