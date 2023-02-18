@@ -27,9 +27,18 @@ Quoc is backend developer, he is working on login API and he is going to push hi
 
 <b>How to run this project</b>
 
+START FRONT-END
 ```
-1. npm i --force / yarn install
-2. npm start
+1. cd client
+2. npm i --force / yarn install
+3. npm start
+```
+
+START BACK-END
+```
+1. cd server
+2. npm i --force / yarn install
+3. npm start
 ```
 
 P/S: If you get something like: NODE_ENV, then you just delete `SET` in front of it in package.json file.
