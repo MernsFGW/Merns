@@ -22,7 +22,10 @@ const update = (req, res) => {
         }
         try {
             await idea.save();
-            res.json(idea);
+            res.json({
+                idea: idea,
+                message: "Updated idea successfully"
+            });
         } catch (err) {
             return res.status(400).json({
                 error: errorHandler.getErrorMessage(err)

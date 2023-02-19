@@ -19,7 +19,10 @@ const create = async (req, res) => {
         }
         try {
             let ideaResult = await idea.save();
-            res.json(ideaResult);
+            res.status(200).json({
+                idea: ideaResult,
+                message: "Created idea successfully"
+            });
         } catch (err) {
             return res.status(400).json({
                 error: errorHandler.getErrorMessage(err)
