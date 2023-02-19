@@ -7,6 +7,8 @@ import cors from 'cors';
 import helmet from 'helmet';
 import createIdeaRoutes from './routes/idea.routes/create.routes';
 import updateIdeaRoutes from './routes/idea.routes/update.routes';
+import deleteIdeaRoutes from './routes/idea.routes/delete.routes';
+import listIdeaRoutes from './routes/idea.routes/list.routes';
 
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
@@ -26,6 +28,8 @@ app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
 
 app.use('/', createIdeaRoutes);
 app.use('/', updateIdeaRoutes);
+app.use('/', deleteIdeaRoutes);
+app.use('/', listIdeaRoutes);
 // Catch unauthorised errors
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
