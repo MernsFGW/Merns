@@ -2,18 +2,18 @@ import mongoose, { model } from "mongoose";
 
 const IdeaSchema = new mongoose.Schema(
     {
-        title: String,
         content: String,
         userId: {
             type: mongoose.Schema.Types.ObjectId, ref: "User",
-            required: "User is required"
+            required: false
         },
-        documentId: {
-            type: mongoose.Schema.Types.ObjectId, ref: "Document",
+        photo:{
+            data: Buffer,
+            contentType: String
         },
         categoryId: {
             type: mongoose.Schema.Types.ObjectId, ref: "Category",
-            required: "Category is required"
+            required: false
         },
         likes: [{
             type: mongoose.Schema.Types.ObjectId, ref: "User",
@@ -27,4 +27,4 @@ const IdeaSchema = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model("Idea", IdeaSchema);
+export default mongoose.model("Idea", IdeaSchema);
