@@ -3,7 +3,7 @@ import {useSearchParams} from 'react-router-dom'
 
 export const Filter = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const consoleParam = () => {
+    const setQueryParams = () => {
         setSearchParams({keyword: 'sdasd'});
     }
 
@@ -20,8 +20,6 @@ export const Filter = () => {
 
     return (
         <div className='post-filter-container'>
-            <button onClick={() => consoleParam()}>Click me!!!</button>
-            <button onClick={() => removeQueryParams()}>Click me!!!</button>
         </div>
     )
 }

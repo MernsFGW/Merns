@@ -3,12 +3,12 @@ import { Avatar, Tag } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import './post.css'
 
-export const Post = () => {
+export const Post = ({title}) => {
     return (
         <div className='post-wrapper'>
             <img alt='' className='post-image' src="https://img.freepik.com/premium-vector/open-folder-folder-with-documents-document-protection-concept_183665-104.jpg?w=2000" />
             <div className='post-description'>
-                <p className='text-truncate post-title'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p className='text-truncate post-title'>{title}</p>
                 <div className='post-tag-list'>
                     <Tag className='tag-list-item' color='#2C353D'>Tag 1</Tag>
                     <Tag className='tag-list-item' color='#2C353D'>Tag 2</Tag>

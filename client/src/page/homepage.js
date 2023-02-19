@@ -1,17 +1,19 @@
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import { Layout, ContentBox, Post, Filter } from '../component';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Input, Button, List } from 'antd';
 
 export const Home = () => {
-  const data = Array.from({ length: 50 }).map((_, i) => ({
-    href: 'https://ant.design',
-    title: `ant design part ${i}`,
-    avatar: 'https://joeschmoe.io/api/v1/random',
-    description:
-      'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-    content:
-      'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-  }));
+
+  const [ideaList, setIdeaList] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/ideas')
+      .then(res => setIdeaList(res.data));
+  }, []);
+
+  console.log(ideaList); 
   return (
     <Layout>
       <div className='layout-panel extend'>
@@ -43,11 +45,11 @@ export const Home = () => {
             align: 'center',
             className: 'post-list-pagination'
           }}
-          dataSource={data}
+          dataSource={ideaList}
           renderItem={(item) => (
             <List.Item>
               <ContentBox>
-                <Post />
+                <Post title={item.content}/>
               </ContentBox>
             </List.Item>
           )}
