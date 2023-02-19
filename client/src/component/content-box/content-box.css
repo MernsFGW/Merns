@@ -1,0 +1,25 @@
+.box-content-wrapper {
+    border-radius: 16px;
+    background-color: #262D34;
+    padding: 20px;
+}
+
+.update-post {
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.update-post > button {
+    height: 39px;
+}
+
+.update-post > input {
+    flex: 1 ;
+}
+
+.update-post > button > span {
+    font-weight: bold;
+}

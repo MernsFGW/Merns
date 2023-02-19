@@ -1,0 +1,65 @@
+.post-wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+.post-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 16px;
+    object-fit: cover;
+
+}
+
+.post-title {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    width: 500px;
+}
+
+.post-tag-list .tag-list-item {
+    color: #858EAD;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-weight: 600;
+}
+
+.text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-description {
+    width: 100%;
+}
+
+.post-user-section {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-user-information {
+    color: white;
+}
+
+.post-user-information > p {
+    font-size: 10px;
+}
+
+.post-user-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.post-action-information {
+    display: flex;
+    color: white;
+    align-items: center;
+    gap: 20px;
+    font-size: 12px;
+}
