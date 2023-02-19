@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Layout, ContentBox, Post, Filter } from '../component';
 import { UserOutlined } from '@ant-design/icons';
@@ -7,13 +7,15 @@ import { Avatar, Input, Button, List } from 'antd';
 export const Home = () => {
 
   const [ideaList, setIdeaList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/ideas')
-      .then(res => setIdeaList(res.data));
+      .then(res => { setIdeaList(res.data); setIsLoading(false); });
   }, []);
 
-  console.log(ideaList); 
+  console.log(ideaList);
+
   return (
     <Layout>
       <div className='layout-panel extend'>
@@ -35,6 +37,7 @@ export const Home = () => {
           </div>
         </ContentBox>
         <List
+          loading={isLoading}
           className='post-list'
           itemLayout="vertical"
           pagination={{
@@ -49,7 +52,7 @@ export const Home = () => {
           renderItem={(item) => (
             <List.Item>
               <ContentBox>
-                <Post title={item.content}/>
+                <Post title={item.content} />
               </ContentBox>
             </List.Item>
           )}

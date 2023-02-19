@@ -6,3 +6,4 @@ export const ContentBox = ({children}) => {
     <div className='box-content-wrapper'>{children}</div>
   )
 }
+

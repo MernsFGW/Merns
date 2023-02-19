@@ -4,6 +4,14 @@
     padding: 20px;
 }
 
+.box-content-wrapper:has(.post-filter-container) {
+    padding: 10px;
+}
+
+.box-content-loading {
+    width: 190px;
+}
+
 .update-post {
     display: flex;
     gap: 20px;
