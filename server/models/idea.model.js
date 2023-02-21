@@ -2,10 +2,17 @@ import mongoose, { model } from "mongoose";
 
 const IdeaSchema = new mongoose.Schema(
     {
-        content: String,
+        title: {
+            type: String,
+            required: "Title is required",
+        },
+        content: { 
+            type: String,
+            required: "Content is required",
+        },
         userId: {
             type: mongoose.Schema.Types.ObjectId, ref: "User",
-            required: false
+            required: "User is required",
         },
         photo:{
             data: Buffer,
