@@ -13,6 +13,7 @@ const create = async (req, res) => {
             })
         }
         let idea = new Idea(fields);
+        idea.userId = req.profile;
         if(files.photo){
             idea.photo.data = fs.readFileSync(files.photo.path);
             idea.photo.contentType = files.photo.type;
