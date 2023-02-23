@@ -1,0 +1,92 @@
+
+.navbar-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px var(--spacing-md);
+    background-color: var(--contrast-color);
+    height: 55px;
+}
+
+.first-navbar-part {
+    display: flex;
+    align-items: center;
+}
+
+.app-logo-wrapper {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: var(--bd-rad-md);
+    margin-right: var(--spacing-sm);
+}
+
+.app-logo {
+    width: 100%;
+    height: 100%;
+}
+
+.app-title {
+    color: var(--orange);
+}
+
+.middle-navbar-part {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing);
+}
+
+.navigation-btn-grp > * {
+    margin-right: 12px;
+    padding: var(--spacing-sm);
+    font-size: var(--fs-lg);
+    color: white;
+    border-radius: var(--bd-rad-md);
+    cursor: pointer;
+}
+
+.navigation-btn-grp > *:hover {
+    background-color: #FF4401;
+}
+
+.active {
+    background-color: #FF4401;
+}
+
+.search-engine {
+    width: 400px;
+    height: 41px;
+}
+
+.last-navbar-part {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.ant-btn-primary {
+    background-color: #FF4401;
+}
+
+.ant-input {
+    background-color: var(--sub-contrast-color);
+    border-color: var(--sub-contrast-color);
+}
+
+.ant-input::placeholder {
+    color: #858EAD;
+}
+
+.noti-icon > * {
+    padding: var(--spacing-sm);
+    font-size: var(--fs-lg);
+    color: white;
+    border-radius: var(--bd-rad-md) ;
+    background-color: var(--sub-contrast-color) ;
+}
+
+.user-section {
+    display: flex;
+    align-items: center; 
+    gap: var(--spacing-sm);
+    color: white;
+}

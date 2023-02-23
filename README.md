@@ -17,6 +17,7 @@ Example:
 
 Quoc is backend developer, he is working on login API and he is going to push his code to develop branch. So he should do the following steps:
 
+FROM LOCAL
 ```
 1. at "develop" in your local: git checkout -b <branch's name>
 2. branch's name: feature/quocvm/login-api
@@ -25,20 +26,33 @@ Quoc is backend developer, he is working on login API and he is going to push hi
 5. Wait for me to check your code and merge it into develop branch.
 ```
 
+FROM JIRA:
+```
+1. At your work => click on "Create branch"
+2. Checkout your branch at local
+3. Add => Commit => Push
+```
+
 <b>How to run this project</b>
 
 START FRONT-END
 ```
 1. cd client
-2. npm i --force / yarn install
+2. npm i --force or yarn
 3. npm start
 ```
 
 START BACK-END
 ```
 1. cd server
-2. npm i --force / yarn install
-3. npm start
+2. npm i --force or yarn
+```
+```
+1. Run in development mode: npm run development or yarn development
+2. Run in production mode: 
+    npm run build
+    npm start
+```
 ```
 
 P/S: If you get something like: NODE_ENV, then you just delete `SET` in front of it in package.json file.
