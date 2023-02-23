@@ -12,6 +12,7 @@ const verifyToken = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, config.jwtSecret);
         req.userId = decoded.id;
+        // check if request do something about term, then user should admin
         next();
     } catch (err) {
         res.status(401).json({ message: 'Unauthorized' });
