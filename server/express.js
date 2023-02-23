@@ -14,6 +14,8 @@ import createUserRoutes from './routes/user.routes/create.routes';
 import updateUserRoutes from './routes/user.routes/update.routes';
 import deleteUserRoutes from './routes/user.routes/delete.routes';
 import listUserRoutes from './routes/user.routes/list.routes';
+import loginUserRoutes from './routes/user.routes/login.routes';
+
 
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
@@ -38,6 +40,7 @@ app.use('/', listIdeaRoutes);
 
 app.use('/', createUserRoutes);
 app.use('/', updateUserRoutes);
+app.use('/', loginUserRoutes);
 app.use('/', deleteUserRoutes);
 app.use('/', listUserRoutes);
 
