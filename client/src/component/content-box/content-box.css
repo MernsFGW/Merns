@@ -1,11 +1,11 @@
 .box-content-wrapper {
-    border-radius: 16px;
-    background-color: #262D34;
-    padding: 20px;
+    border-radius: var(--bd-rad-lg);
+    background-color: var(--contrast-color);
+    padding: var(--spacing);
 }
 
 .box-content-wrapper:has(.post-filter-container) {
-    padding: 10px;
+    padding: var(--spacing-sm);
 }
 
 .box-content-loading {
@@ -14,7 +14,7 @@
 
 .update-post {
     display: flex;
-    gap: 20px;
+    gap: var(--spacing);
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;

@@ -11,19 +11,16 @@ export const Home = () => {
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/ideas')
-      .then(res => { setIdeaList(res.data); setIsLoading(false); });
+      .then(res => {setIdeaList(res.data); setIsLoading(false);});
   }, []);
 
-  console.log(ideaList);
-
+ 
   return (
     <Layout>
       <div className='layout-panel extend'>
         <ContentBox>
           <Filter />
         </ContentBox>
-        <ContentBox></ContentBox>
-        <ContentBox></ContentBox>
       </div>
       <div className='layout-panel primary'>
         <ContentBox>
@@ -31,7 +28,7 @@ export const Home = () => {
             <Avatar size={38} icon={<UserOutlined />} />
             <Input
               disabled
-              style={{ borderColor: '#2C353D', backgroundColor: '#2C353D' }}
+              style={{ borderColor: 'var(--sub-contrast-color)', backgroundColor: 'var(--sub-contrast-color)' }}
               size='large' placeholder="Let's share what going on your mind..." />
             <Button type="primary">Create Post</Button>
           </div>
@@ -52,7 +49,7 @@ export const Home = () => {
           renderItem={(item) => (
             <List.Item>
               <ContentBox>
-                <Post title={item.content} />
+                <Post item={{...item}} />
               </ContentBox>
             </List.Item>
           )}

@@ -7,8 +7,22 @@
 :root {
     --orange: #FF4401;
     --contrast-color: #262D34;
-    --bd-rad-md: 7px;
+    --sub-contrast-color:#2C353D;
     --main-bg-color: #1E252B;
+    --bd-rad-md: 7px;
+    --bd-rad-lg: 16px;
+    --bd-rad-sm: 4px;
+    --spacing: 20px;
+    --spacing-md: 15px;
+    --spacing-sm: 10px;
+    --spacing-lg: 30px;
+    --white: white;
+    --black: black;
+    --fs-lg: 18px;
+    --fs: 16px;
+    --fs-md: 14px;
+    --fs-sm: 12px;
+    --fs-xs: 10px;
 }
 
 h1, h2, h3, h4, h5, p, a {
@@ -17,38 +31,38 @@ h1, h2, h3, h4, h5, p, a {
 
 /* end of global css */
 .layout-wrapper {
-    background-color: #1E252B;
+    background-color: var(--main-bg-color);
     height: 100vh;
     overflow: auto;
 }
 
 .layout-wrapper::-webkit-scrollbar {
     width: 10px;
-    background-color: #1E252B;
+    background-color: var(--main-bg-color);
 }
 
 .layout-wrapper::-webkit-scrollbar-track {
     border-radius: 5px;
-    border: 1px solid #1E252B;
+    border: 1px solid var(--main-bg-color);
 }
 
 .layout-wrapper::-webkit-scrollbar-thumb {
     background-color: white;
-    border-left: 5px solid #1E252B;
+    border-left: 5px solid var(--main-bg-color);
     background-clip: padding-box;
 }
 
 .page-content {
     display: flex;
-    padding: 20px 30px;
-    gap: 20px;
+    padding: var(--spacing) var(--spacing-lg);
+    gap: var(--spacing);
 
 }
 
 .post-list-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--spacing);
     align-items: center;
 }
 
@@ -56,7 +70,7 @@ h1, h2, h3, h4, h5, p, a {
     overflow: auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--spacing);
 }
 
 .primary {
@@ -76,7 +90,7 @@ h1, h2, h3, h4, h5, p, a {
 .post-list ul.ant-list-items {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--spacing);
     height: 1034px;
 }
 
@@ -89,8 +103,8 @@ h1, h2, h3, h4, h5, p, a {
 }
 
 .post-list-pagination .ant-pagination-item-active {
-    background-color: #262D34;
-    border-color: #262D34;
+    background-color: var(--contrast-color);
+    border-color: var(--contrast-color);
 }
 
 .post-list-pagination span {

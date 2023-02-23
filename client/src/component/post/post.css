@@ -1,28 +1,28 @@
 .post-wrapper {
     display: flex;
-    gap: 20px;
+    gap: var(--spacing);
 }
 
 .post-image {
     width: 150px;
     height: 150px;
-    border-radius: 16px;
+    border-radius: var(--bd-rad-lg);
     object-fit: cover;
 
 }
 
 .post-title {
     color: white;
-    font-size: 18px;
+    font-size: var(--fs-lg);
     font-weight: 500;
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-sm);
     width: 500px;
 }
 
 .post-tag-list .tag-list-item {
     color: #858EAD;
-    border-radius: 20px;
-    padding: 4px 10px;
+    border-radius: var(--spacing);
+    padding: 4px var(--spacing-sm);
     font-weight: 600;
 }
 
@@ -47,19 +47,19 @@
 }
 
 .post-user-information > p {
-    font-size: 10px;
+    font-size: var(--fs-xs);
 }
 
 .post-user-wrapper {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--spacing-sm);
 }
 
 .post-action-information {
     display: flex;
     color: white;
     align-items: center;
-    gap: 20px;
-    font-size: 12px;
+    gap: var(--spacing);
+    font-size: var(--fs-sm);
 }

@@ -1,34 +1,35 @@
 .post-filter-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--spacing-sm);
 }
 
 .post-filter-item {
-    background-color: #262D34;
+    background-color: var(--contrast-color);
     border: none;
-    font-size: 18px;
+    font-size: var(--fs-lg);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--spacing-sm);
     padding: 5px;
-    border-radius: 7px; 
+    border-radius: var(--bd-rad-md); 
     width: 100%;
+    cursor: pointer;
 }
 
 .post-filter-item:hover {
-    background-color: #2C353D ;
+    background-color: var(--sub-contrast-color) ;
 }
 
 .post-filter-item.active {
-    background-color: #2C353D ;
+    background-color: var(--sub-contrast-color) ;
 }
 
 
 .post-filter-icon { 
     padding: 7px;
-    background-color: #2C353D;
-    border-radius: 7px;
+    background-color: var(--sub-contrast-color);
+    border-radius: var(--bd-rad-md);
 }
 
 .filter-desciption {
@@ -40,12 +41,12 @@
 }
 
 .filter-title {
-    font-size: 14px;
+    font-size: var(--fs-md);
     font-weight: 600;
     color: white;
 }
 
 .filter-sub-title {
-    font-size: 11px;
+    font-size: var(--fs-sm);
     color: white;
 }

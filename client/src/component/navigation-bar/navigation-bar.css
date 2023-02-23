@@ -2,8 +2,8 @@
 .navbar-wrapper {
     display: flex;
     justify-content: space-between;
-    padding: 5px 15px;
-    background-color: #262D34;
+    padding: 5px var(--spacing-md);
+    background-color: var(--contrast-color);
     height: 55px;
 }
 
@@ -16,8 +16,8 @@
     width: 30px;
     height: 30px;
     background-color: white;
-    border-radius: 7px;
-    margin-right: 10px;
+    border-radius: var(--bd-rad-md);
+    margin-right: var(--spacing-sm);
 }
 
 .app-logo {
@@ -32,15 +32,20 @@
 .middle-navbar-part {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: var(--spacing);
 }
 
 .navigation-btn-grp > * {
     margin-right: 12px;
-    padding: 10px;
-    font-size: 18px;
+    padding: var(--spacing-sm);
+    font-size: var(--fs-lg);
     color: white;
-    border-radius: 7px ;
+    border-radius: var(--bd-rad-md);
+    cursor: pointer;
+}
+
+.navigation-btn-grp > *:hover {
+    background-color: #FF4401;
 }
 
 .active {
@@ -54,7 +59,7 @@
 
 .last-navbar-part {
     display: flex;
-    gap: 15px;
+    gap: var(--spacing-md);
     align-items: center;
 }
 
@@ -63,8 +68,8 @@
 }
 
 .ant-input {
-    background-color: #2C353D;
-    border-color: #2C353D;
+    background-color: var(--sub-contrast-color);
+    border-color: var(--sub-contrast-color);
 }
 
 .ant-input::placeholder {
@@ -72,16 +77,16 @@
 }
 
 .noti-icon > * {
-    padding: 10px;
-    font-size: 18px;
+    padding: var(--spacing-sm);
+    font-size: var(--fs-lg);
     color: white;
-    border-radius: 7px ;
-    background-color: #2C353D ;
+    border-radius: var(--bd-rad-md) ;
+    background-color: var(--sub-contrast-color) ;
 }
 
 .user-section {
     display: flex;
     align-items: center; 
-    gap: 10px;
+    gap: var(--spacing-sm);
     color: white;
 }
