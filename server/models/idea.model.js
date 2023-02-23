@@ -27,7 +27,11 @@ const IdeaSchema = new mongoose.Schema(
         }],
         dislikes: [{
             type: mongoose.Schema.Types.ObjectId, ref: "User",
-        }]
+        }],
+        termId: {
+            type: mongoose.Schema.Types.ObjectId, ref: "Term",
+            required: false
+        }
     },
     {
         timestamps: true,
