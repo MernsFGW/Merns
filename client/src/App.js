@@ -1,5 +1,6 @@
 import React from 'react';
 import { Home } from './page';
+import {Login} from './page/login-page';
 import {
   Routes,
   Route,
@@ -10,6 +11,7 @@ function App() {
     <div className='App'>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
     </div>
 
