@@ -1,6 +1,5 @@
 import React from 'react';
-import { Home } from './page';
-import {Login} from './page/login-page';
+import { Home, Login } from './page';
 import {
   Routes,
   Route,

@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Layout, ContentBox, Post, Filter } from '../component';
+import { Layout, ContentBox, Post, Filter, Modal, CreateIdeaForm } from '../component';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Input, Button, List } from 'antd';
 
 export const Home = () => {
-
+  const [isOpen, setIsOpen] = useState(false);
   const [ideaList, setIdeaList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/ideas')
-      .then(res => {setIdeaList(res.data); setIsLoading(false);});
+      .then(res => { setIdeaList(res.data); setIsLoading(false); });
   }, []);
 
- 
   return (
     <Layout>
       <div className='layout-panel extend'>
         <ContentBox>
           <Filter />
+          <button onClick={() => setIsOpen(true)}>
+            Click to Open Modal
+          </button>
+          <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+            <CreateIdeaForm />
+          </Modal>
         </ContentBox>
       </div>
       <div className='layout-panel primary'>
@@ -49,7 +54,7 @@ export const Home = () => {
           renderItem={(item) => (
             <List.Item>
               <ContentBox>
-                <Post item={{...item}} />
+                <Post item={{ ...item }} />
               </ContentBox>
             </List.Item>
           )}
@@ -66,4 +71,3 @@ export const Home = () => {
   );
 }
 
-export default Home;
