@@ -69,8 +69,8 @@
     font-size: 14px;
     line-height: 150%;
     border-radius: 50px;
-    background-color: rgb(108, 117, 125);
-    color: rgb(108, 117, 125);
+    /* background-color: rgb(108, 117, 125);    */
+    /* color: rgb(108, 117, 125); */
 }
  
 .login-form > button {
