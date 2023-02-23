@@ -1,0 +1,51 @@
+.post-filter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.post-filter-item {
+    background-color: #262D34;
+    border: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 7px; 
+    width: 100%;
+}
+
+.post-filter-item:hover {
+    background-color: #2C353D ;
+}
+
+.post-filter-item.active {
+    background-color: #2C353D ;
+}
+
+
+.post-filter-icon { 
+    padding: 7px;
+    background-color: #2C353D;
+    border-radius: 7px;
+}
+
+.filter-desciption {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+
+}
+
+.filter-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+}
+
+.filter-sub-title {
+    font-size: 11px;
+    color: white;
+}

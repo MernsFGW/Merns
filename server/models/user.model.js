@@ -16,16 +16,16 @@ const UserSchema = new mongoose.Schema(
         },
         roleId: {
             type: mongoose.Schema.Types.ObjectId, ref: "Role",
-            required: "Role is required"
+            required: false,
         },
         departmentId: {
             type: mongoose.Schema.Types.ObjectId, ref: "Department",
-            required: "Department is required"
+            required: false,
         }
     },
     {
-        timestamps: true,
+        timestamps: false,
     }
 );
 
-module.exports = mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);
