@@ -9,6 +9,7 @@ import createIdeaRoutes from './routes/idea.routes/create.routes';
 import updateIdeaRoutes from './routes/idea.routes/update.routes';
 import deleteIdeaRoutes from './routes/idea.routes/delete.routes';
 import listIdeaRoutes from './routes/idea.routes/list.routes';
+import createTermRoutes from './routes/term.routes/create.routes';
 
 import createUserRoutes from './routes/user.routes/create.routes';
 import updateUserRoutes from './routes/user.routes/update.routes';
