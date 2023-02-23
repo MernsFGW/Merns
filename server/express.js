@@ -9,12 +9,19 @@ import createIdeaRoutes from './routes/idea.routes/create.routes';
 import updateIdeaRoutes from './routes/idea.routes/update.routes';
 import deleteIdeaRoutes from './routes/idea.routes/delete.routes';
 import listIdeaRoutes from './routes/idea.routes/list.routes';
+import createTermRoutes from './routes/term.routes/create.routes';
 
 import createUserRoutes from './routes/user.routes/create.routes';
 import updateUserRoutes from './routes/user.routes/update.routes';
 import deleteUserRoutes from './routes/user.routes/delete.routes';
 import listUserRoutes from './routes/user.routes/list.routes';
 import loginUserRoutes from './routes/user.routes/login.routes';
+
+
+import createRoleRoutes from './routes/role.routes/create.routes';
+import updateRoleRoutes from './routes/role.routes/update.routes';
+import deleteRoleRoutes from './routes/role.routes/delete.routes';
+import listRoleRoutes from './routes/role.routes/list.routes';
 
 
 const CURRENT_WORKING_DIR = process.cwd();
@@ -43,6 +50,11 @@ app.use('/', updateUserRoutes);
 app.use('/', loginUserRoutes);
 app.use('/', deleteUserRoutes);
 app.use('/', listUserRoutes);
+
+app.use('/', createRoleRoutes);
+app.use('/', updateRoleRoutes);
+app.use('/', deleteRoleRoutes);
+app.use('/', listRoleRoutes);
 
 // Catch unauthorised errors
 app.use((err, req, res, next) => {
