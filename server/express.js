@@ -10,6 +10,13 @@ import updateIdeaRoutes from './routes/idea.routes/update.routes';
 import deleteIdeaRoutes from './routes/idea.routes/delete.routes';
 import listIdeaRoutes from './routes/idea.routes/list.routes';
 
+import categoryIdRoutes from './routes/category.routes/categoryId.routes';
+import createCategoryRoutes from './routes/category.routes/create.routes';
+import updateCategoryRoutes from './routes/category.routes/update.routes';
+import removeCategoryRoutes from './routes/category.routes/remove.routes';
+import listCategoryRoutes from './routes/category.routes/list.routes';
+
+
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
 
@@ -30,6 +37,13 @@ app.use('/', createIdeaRoutes);
 app.use('/', updateIdeaRoutes);
 app.use('/', deleteIdeaRoutes);
 app.use('/', listIdeaRoutes);
+
+app.use('/', categoryIdRoutes);
+app.use('/', createCategoryRoutes);
+app.use('/', updateCategoryRoutes);
+app.use('/', removeCategoryRoutes);
+app.use('/', listCategoryRoutes);
+
 // Catch unauthorised errors
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
