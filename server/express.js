@@ -17,6 +17,11 @@ import listUserRoutes from './routes/user.routes/list.routes';
 import loginUserRoutes from './routes/user.routes/login.routes';
 
 
+import createDepartmentRoutes from './routes/department.routes/create.routes';
+import updateDepartmentRoutes from './routes/department.routes/update.routes';
+import deleteDepartmentRoutes from './routes/department.routes/delete.routes';
+import listDepartmentRoutes from './routes/department.routes/list.routes';
+
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
 
@@ -43,6 +48,12 @@ app.use('/', updateUserRoutes);
 app.use('/', loginUserRoutes);
 app.use('/', deleteUserRoutes);
 app.use('/', listUserRoutes);
+
+app.use('/', createDepartmentRoutes);
+app.use('/', updateDepartmentRoutes);
+app.use('/', deleteDepartmentRoutes);
+app.use('/', listDepartmentRoutes);
+
 
 // Catch unauthorised errors
 app.use((err, req, res, next) => {
