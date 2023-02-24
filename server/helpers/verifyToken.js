@@ -11,7 +11,6 @@ const verifyToken = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, config.jwtSecret);
-        console.log(decoded)
         req.userId = decoded.id;
         let route = req.originalUrl.split('/')[2];
         if (["terms", "admin"].includes(route)){
