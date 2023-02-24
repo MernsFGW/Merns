@@ -22,10 +22,6 @@ const create = async (req, res) => {
             });
             idea.photo.public_id = photoResult.public_id;
             idea.photo.url = photoResult.secure_url;
-            // idea.photo.public_id = "asdf";
-            // idea.photo.url = "asdf";
-            // idea.photo.data = fs.readFileSync(files.photo.path);
-            // idea.photo.contentType = files.photo.type;
         }
         try {
             let ideaResult = await idea.save();
