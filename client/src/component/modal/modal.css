@@ -29,6 +29,39 @@
 }
 
 .modal-content {
-  background-color: aliceblue;
+  position: relative;
+  background-color: var(--contrast-color);
   border-radius: 16px;
+  box-shadow:
+      0 1px 1px hsla(0, 3%, 77%, 0.075),
+      0 2px 2px hsl(0, 3%, 77%, 0.075),
+      0 4px 4px hsl(0, 3%, 77%, 0.075),
+      0 8px 8px hsl(0, 3%, 77%, 0.075),
+      0 16px 16px hsl(0, 3%, 77%, 0.075)
+    ;
+}
+
+.modal-content * {
+  color: var(--white) !important ;
+}
+
+.modal-content .ant-input {
+  border-color: var(--white);
+}
+
+.close-modal-btn {
+  position: absolute;
+  right: 0;
+  margin: var(--spacing-sm);
+  border: none;
+  font-size: 16px;
+  background-color: var(--contrast-color);
+}
+
+.close-modal-btn:hover {
+  cursor: pointer;
+}
+
+.close-modal-btn:hover * {
+  color: var(--orange) !important;
 }

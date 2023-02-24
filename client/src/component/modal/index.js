@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { ReactPortal } from "../react-portal";
+import { CloseCircleOutlined } from '@ant-design/icons';
 import './modal.css';
 
 export function Modal({ children, isOpen, handleClose }) {
@@ -17,8 +18,8 @@ export function Modal({ children, isOpen, handleClose }) {
         <ReactPortal wrapperId="react-portal-modal-container">
             <div className="modal">
                 <div className="modal-content">
-                    <button onClick={handleClose} className="close-btn">
-                        Close
+                    <button onClick={handleClose} className="close-modal-btn">
+                        <CloseCircleOutlined />
                     </button>
                     {children}
                 </div>
