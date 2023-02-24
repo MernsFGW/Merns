@@ -7,13 +7,13 @@ import {
     Input
 } from 'antd';
 import axios from 'axios';
-import './createIdeaForm.css';
+import './form.css';
 
 const normFile = (e) => {
     if (Array.isArray(e)) {
         return e;
     }
-    return e?.file;
+    return e.file;
 };
 
 function getFormData(object) {
@@ -83,7 +83,6 @@ export const CreateIdeaForm = ({ handleClose, setIdeaList }) => {
                     </Upload.Dragger>
                 </Form.Item>
             </Form.Item>
-
             <Form.Item
                 style={{ alignSelf: 'center' }}
             >

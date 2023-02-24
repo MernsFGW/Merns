@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { ReactPortal } from "../react-portal";
 import { CloseCircleOutlined } from '@ant-design/icons';
 import './modal.css';
