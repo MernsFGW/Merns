@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import { Layout, ContentBox, Post, Filter, Modal, CreateIdeaForm } from '../component';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Input, Button, List } from 'antd';
+import { useSelector } from 'react-redux';
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [ideaList, setIdeaList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const userInfo = useSelector(state => state.user.value );
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/ideas')
@@ -32,7 +36,7 @@ export const Home = () => {
               disabled
               style={{ borderColor: 'var(--sub-contrast-color)', backgroundColor: 'var(--sub-contrast-color)' }}
               size='large' placeholder="Let's share what going on your mind..." />
-            <Button onClick={() => setIsOpen(true)} type="primary">Create Post</Button>
+            <Button onClick={userInfo ? (() => setIsOpen(true)) : (() => navigate("/login"))} type="primary">Create Post</Button>
           </div>
         </ContentBox>
         <List

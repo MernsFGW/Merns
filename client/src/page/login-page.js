@@ -1,9 +1,10 @@
 import React from "react";
-import {ContentBox} from "../component";
+import { ContentBox } from "../component";
 import axios from "axios";
 import { Input, Button, Typography } from 'antd';
-import { EyeTwoTone, EyeInvisibleOutlined} from '@ant-design/icons';
+import { EyeTwoTone, EyeInvisibleOutlined, CaretLeftOutlined } from '@ant-design/icons';
 import './login-page.css';
+import { Link } from "react-router-dom";
 
 const { Title, Text } = Typography;
 export const Login = () => {
@@ -23,6 +24,10 @@ export const Login = () => {
                         iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                     />
                     <Button type="primary">Sign in</Button>
+                </div>
+                <div className="login-navigate-section">
+                    <Link className="navigation-link" to="/"><CaretLeftOutlined /> Back to Home Page</Link>
+                    <Link className="navigation-link" to="#">Register page</Link>
                 </div>
             </ContentBox>
         </div>

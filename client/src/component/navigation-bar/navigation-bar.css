@@ -73,9 +73,13 @@
     background-color: var(--sub-contrast-color) ;
 }
 
-.user-section {
+.user-section, .login-register-section {
     display: flex;
     align-items: center; 
     gap: var(--spacing-sm);
     color: white;
+}
+
+.login-btn, .register-btn {
+    font-weight: 600;
 }

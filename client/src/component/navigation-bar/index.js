@@ -10,14 +10,17 @@ import {
 } from '@ant-design/icons';
 import {
     Input,
+    Button,
     Avatar,
     Dropdown,
     Space
 } from 'antd';
+import { useSelector } from 'react-redux';
 import './navigation-bar.css';
 
 export const NavBar = () => {
     const { Search } = Input;
+    const userInfo = useSelector((state) => state.user.value);
     const onSearch = (value) => console.log(value);
     const items = [
         {
@@ -62,26 +65,35 @@ export const NavBar = () => {
                 </div>
             </div>
             <div className='last-navbar-part'>
-                <div className='noti-icon'>
-                    <BellOutlined />
-                </div>
-                <div className='user-section'>
-                    <Avatar shape="square" size={38} icon={<UserOutlined />} />
-                    <Dropdown
-                        className=''
-                        trigger={['click']}
-                        menu={{
-                            items,
-                        }}
-                    >
-                        <a onClick={(e) => e.preventDefault()}>
-                            <Space>
-                                <h4>User Name</h4>
-                                <DownOutlined />
-                            </Space>
-                        </a>
-                    </Dropdown>
-                </div>
+                {userInfo
+                    ? (<>
+                        <div className='noti-icon'>
+                            <BellOutlined />
+                        </div>
+                        <div className='user-section'>
+                            <Avatar shape="square" size={38} icon={<UserOutlined />} />
+                            <Dropdown
+                                className=''
+                                trigger={['click']}
+                                menu={{
+                                    items,
+                                }}
+                            >
+                                <a onClick={(e) => e.preventDefault()}>
+                                    <Space>
+                                        <h4>User Name</h4>
+                                        <DownOutlined />
+                                    </Space>
+                                </a>
+                            </Dropdown>
+                        </div>
+                    </>)
+                    : <>
+                        <Button size='large' className='login-btn' type='primary'>Login</Button>
+                        <Button size='large' className='register-btn'>Register</Button>
+                    </>}
+
+
             </div>
         </div>
     )
