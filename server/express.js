@@ -56,6 +56,8 @@ app.use('/', updateRoleRoutes);
 app.use('/', deleteRoleRoutes);
 app.use('/', listRoleRoutes);
 
+app.use('/', createTermRoutes);
+
 // Catch unauthorised errors
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
