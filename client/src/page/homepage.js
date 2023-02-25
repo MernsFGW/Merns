@@ -10,7 +10,7 @@ export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [ideaList, setIdeaList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const userInfo = useSelector(state => state.user.value );
+  const userInfo = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
 
   useEffect(() => {

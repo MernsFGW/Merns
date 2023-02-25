@@ -1,0 +1,21 @@
+.post-detail-image {
+    width: 100%;
+    max-height: 450px;
+    border-radius: var(--bd-rad-lg);
+}
+
+.post-detail-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing);
+    padding: var(--spacing);
+}
+
+.social-info-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-detailt-text {
+    font-size: var(--fs-md);
+}

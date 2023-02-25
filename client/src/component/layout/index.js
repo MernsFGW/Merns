@@ -15,8 +15,9 @@ export const Layout = ({children}) => {
 
   useEffect(() => {
     axios.post("http://localhost:3000/api/login", userLoginInfo)
-      .then((res) => dispatch(loadingUser(res.data.user)))
+      .then((res) => {localStorage.setItem("user", JSON.stringify(res.data));})
   }, []);
+
 
   return (
     <div className='layout-wrapper'>

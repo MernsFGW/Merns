@@ -20,7 +20,7 @@ import './navigation-bar.css';
 
 export const NavBar = () => {
     const { Search } = Input;
-    const userInfo = useSelector((state) => state.user.value);
+    const userInfo = JSON.parse(localStorage.getItem('user'));
     const onSearch = (value) => console.log(value);
     const items = [
         {
