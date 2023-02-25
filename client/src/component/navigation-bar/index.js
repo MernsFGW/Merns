@@ -55,7 +55,7 @@ export const NavBar = () => {
             </div>
             <div className='middle-navbar-part'>
                 <div className='navigation-btn-grp'>
-                    <HomeFilled className='active' />
+                    <HomeFilled onClick={() => navigate("/")} className='active' />
                     <UsergroupAddOutlined />
                     <AudioOutlined />
                     <ProjectFilled />
