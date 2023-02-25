@@ -1,3 +1,12 @@
+h1, h2, h3, h4, p {
+    color: white;
+}
+
+h1 {
+    font-weight: 500;
+    font-size: 45px;
+}
+
 .post-detail-image {
     width: 100%;
     max-height: 450px;
@@ -18,4 +27,29 @@
 
 .post-detailt-text {
     font-size: var(--fs-md);
+}
+
+.detail-page-user {
+    display: flex;
+    gap: var(--spacing);
+    align-items: center;
+}
+
+.detail-page-content {
+    text-align: justify;
+}
+
+.ant-form-item .ant-form-item-label >label {
+    display: block;
+    height: 40px;
+}
+
+.comment-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing);
+}
+
+.create-comment-form > * {
+    margin: 0 !important;
 }
