@@ -15,11 +15,15 @@ import {
     Dropdown,
     Space
 } from 'antd';
-import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import './navigation-bar.css';
 
 export const NavBar = () => {
     const { Search } = Input;
+    const logoutUser = () => {
+        localStorage.removeItem("user");
+    }
+    const navigate = useNavigate();
     const userInfo = JSON.parse(localStorage.getItem('user'));
     const onSearch = (value) => console.log(value);
     const items = [
@@ -34,7 +38,7 @@ export const NavBar = () => {
         {
             key: '2',
             label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+                <a onClick={() => {logoutUser(); navigate("/")}} target="_blank" rel="noopener noreferrer">
                     Logout
                 </a>
             ),
@@ -81,7 +85,7 @@ export const NavBar = () => {
                             >
                                 <a onClick={(e) => e.preventDefault()}>
                                     <Space>
-                                        <h4>User Name</h4>
+                                        <h4>{userInfo.user.fullName}</h4>
                                         <DownOutlined />
                                     </Space>
                                 </a>
@@ -89,7 +93,7 @@ export const NavBar = () => {
                         </div>
                     </>)
                     : <>
-                        <Button size='large' className='login-btn' type='primary'>Login</Button>
+                        <Button onClick={() => navigate("/login")} size='large' className='login-btn' type='primary'>Login</Button>
                         <Button size='large' className='register-btn'>Register</Button>
                     </>}
 

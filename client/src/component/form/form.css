@@ -9,3 +9,8 @@
 .submit-form-btn {
     font-weight: 600;
 }
+
+
+.ant-select-selector {
+    background: none !important;
+}

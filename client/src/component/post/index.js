@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Avatar, Tag } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { formatDistance } from 'date-fns'
 import './post.css'
+import axios from 'axios';
 
 export const Post = ({item}) => {
+    const [category, setCategory] = useState({});
     const updateDate = formatDistance(new Date(item.createdAt), new Date(), { addSuffix: true });
     const upperCaseFirstLetter = (word) => {
         const firstLetter = word.charAt(0);
@@ -13,6 +15,10 @@ export const Post = ({item}) => {
         const capitalizedWord = firstLetterCap + remainingLetters
         return capitalizedWord;
     }
+    useEffect(() => {
+        axios.get(`http://localhost:3000/api/categories/${item.categoryId}`)
+            .then(res => setCategory(res.data));
+    }, [])
 
     return (
         <div className='post-wrapper'>
@@ -20,9 +26,7 @@ export const Post = ({item}) => {
             <div className='post-description'>
                 <p className='text-truncate post-title'>{item.title}</p>
                 <div className='post-tag-list'>
-                    <Tag className='tag-list-item' color='var(--sub-contrast-color)'>Schoolar</Tag>
-                    <Tag className='tag-list-item' color='var(--sub-contrast-color)'>Violent</Tag>
-                    <Tag className='tag-list-item' color='var(--sub-contrast-color)'>Drama</Tag>
+                    <Tag className='tag-list-item' color='var(--sub-contrast-color)'>{category.title}</Tag>
                 </div>
                 <div className='post-user-section'>
                     <div className='post-user-wrapper'>

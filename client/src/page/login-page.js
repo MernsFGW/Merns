@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 export const Login = () => {
-    const dispatch = useDispatch();
     const [values, setValues] = useState({
         username: '',
         password: '',
@@ -39,7 +38,7 @@ export const Login = () => {
             }
         }).then((res) => {
             console.log(res.data);
-            dispatch(loadingUser(res.data));
+            localStorage.setItem("user", JSON.stringify(res.data));
             setValues({...values, status:res.data.message, error: '', openNotification: true})
         }).catch(function (error) {
             if (error.response) {
