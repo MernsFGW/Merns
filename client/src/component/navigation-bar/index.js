@@ -75,7 +75,7 @@ export const NavBar = () => {
                             <BellOutlined />
                         </div>
                         <div className='user-section'>
-                            <Avatar shape="square" size={38} icon={<UserOutlined />} />
+                            <Avatar shape="square" size={38} src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`} />
                             <Dropdown
                                 className=''
                                 trigger={['click']}

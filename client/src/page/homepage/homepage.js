@@ -31,7 +31,7 @@ export const Home = () => {
             <CreateIdeaForm handleClose={() => {setIsOpen(false); setIsLoading(true)}} setIdeaList={setIdeaList} />
           </Modal>
           <div className='update-post'>
-            <Avatar size={38} icon={<UserOutlined />} />
+            <Avatar size={38} src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`} />
             <Input
               disabled
               style={{ borderColor: 'var(--sub-contrast-color)', backgroundColor: 'var(--sub-contrast-color)' }}
