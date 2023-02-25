@@ -16,6 +16,22 @@ import removeCategoryRoutes from './routes/category.routes/remove.routes';
 import updateCategoryRoutes from './routes/category.routes/update.routes';
 import getCategoryRoutes from './routes/category.routes/get.routes';
 
+import createUserRoutes from './routes/user.routes/create.routes';
+import updateUserRoutes from './routes/user.routes/update.routes';
+import deleteUserRoutes from './routes/user.routes/delete.routes';
+import listUserRoutes from './routes/user.routes/list.routes';
+import loginUserRoutes from './routes/user.routes/login.routes';
+
+import createDepartmentRoutes from './routes/department.routes/create.routes';
+import updateDepartmentRoutes from './routes/department.routes/update.routes';
+import deleteDepartmentRoutes from './routes/department.routes/delete.routes';
+import listDepartmentRoutes from './routes/department.routes/list.routes';
+
+import createRoleRoutes from './routes/role.routes/create.routes';
+import updateRoleRoutes from './routes/role.routes/update.routes';
+import deleteRoleRoutes from './routes/role.routes/delete.routes';
+import listRoleRoutes from './routes/role.routes/list.routes';
+
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
 
@@ -42,6 +58,24 @@ app.use('/', listCategoriesRoutes);
 app.use('/', removeCategoryRoutes);
 app.use('/', updateCategoryRoutes);
 app.use('/', getCategoryRoutes);
+
+app.use('/', createUserRoutes);
+app.use('/', updateUserRoutes);
+app.use('/', loginUserRoutes);
+app.use('/', deleteUserRoutes);
+app.use('/', listUserRoutes);
+
+app.use('/', createDepartmentRoutes);
+app.use('/', updateDepartmentRoutes);
+app.use('/', deleteDepartmentRoutes);
+app.use('/', listDepartmentRoutes);
+
+app.use('/', createRoleRoutes);
+app.use('/', updateRoleRoutes);
+app.use('/', deleteRoleRoutes);
+app.use('/', listRoleRoutes);
+
+app.use('/', createTermRoutes);
 
 // Catch unauthorised errors
 app.use((err, req, res, next) => {
