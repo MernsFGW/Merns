@@ -5,10 +5,12 @@ import cookieParser from 'cookie-parser';
 import compress from 'compression';
 import cors from 'cors';
 import helmet from 'helmet';
+
 import createIdeaRoutes from './routes/idea.routes/create.routes';
 import updateIdeaRoutes from './routes/idea.routes/update.routes';
 import deleteIdeaRoutes from './routes/idea.routes/delete.routes';
 import listIdeaRoutes from './routes/idea.routes/list.routes';
+import findIdeaByIdRoutes from './routes/idea.routes/id.routes';
 
 import createCategoryRoutes from './routes/category.routes/create.routes';
 import listCategoriesRoutes from './routes/category.routes/list.routes';
@@ -52,6 +54,7 @@ app.use('/', createIdeaRoutes);
 app.use('/', updateIdeaRoutes);
 app.use('/', deleteIdeaRoutes);
 app.use('/', listIdeaRoutes);
+app.use('/', findIdeaByIdRoutes)
 
 app.use('/', createCategoryRoutes);
 app.use('/', listCategoriesRoutes);
