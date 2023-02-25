@@ -21,6 +21,7 @@ import updateUserRoutes from './routes/user.routes/update.routes';
 import deleteUserRoutes from './routes/user.routes/delete.routes';
 import listUserRoutes from './routes/user.routes/list.routes';
 import loginUserRoutes from './routes/user.routes/login.routes';
+import searchUserRoutes from './routes/user.routes/search.routes';
 
 import createDepartmentRoutes from './routes/department.routes/create.routes';
 import updateDepartmentRoutes from './routes/department.routes/update.routes';
@@ -64,6 +65,7 @@ app.use('/', updateUserRoutes);
 app.use('/', loginUserRoutes);
 app.use('/', deleteUserRoutes);
 app.use('/', listUserRoutes);
+app.use('/', searchUserRoutes);
 
 app.use('/', createDepartmentRoutes);
 app.use('/', updateDepartmentRoutes);
