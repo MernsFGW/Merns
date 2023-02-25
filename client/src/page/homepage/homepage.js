@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import { Layout, ContentBox, Post, Filter, Modal, CreateIdeaForm } from '../component';
+import { Layout, ContentBox, Post, Filter, Modal, CreateIdeaForm } from '../../component';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Input, Button, List } from 'antd';
 import { useSelector } from 'react-redux';

@@ -2,12 +2,14 @@ import React, {useEffect, useState} from 'react'
 import { Avatar, Tag } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { formatDistance } from 'date-fns'
+import { useNavigate } from 'react-router-dom';
 import './post.css'
 import axios from 'axios';
 
 export const Post = ({item}) => {
     const [category, setCategory] = useState({});
     const updateDate = formatDistance(new Date(item.createdAt), new Date(), { addSuffix: true });
+    const navigate = useNavigate();
     const upperCaseFirstLetter = (word) => {
         const firstLetter = word.charAt(0);
         const firstLetterCap = firstLetter.toUpperCase()
@@ -21,7 +23,7 @@ export const Post = ({item}) => {
     }, [])
 
     return (
-        <div className='post-wrapper'>
+        <div onClick={() => navigate(`/ideas/${item._id}`)} className='post-wrapper'>
             <img alt='' className='post-image' src={item.photo.url} />
             <div className='post-description'>
                 <p className='text-truncate post-title'>{item.title}</p>

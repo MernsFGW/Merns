@@ -1,12 +1,12 @@
 import React, { useState, useEffect} from "react";
-import { ContentBox } from "../component";
+import { ContentBox } from "../../component";
 import axios from "axios";
 import { Input, Button, Typography, Modal } from 'antd';
 import { EyeTwoTone, EyeInvisibleOutlined, CaretLeftOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import './login-page.css';
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loadingUser } from '../redux/user';
+import { loadingUser } from '../../redux/user';
 import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;

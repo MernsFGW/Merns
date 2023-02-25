@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, ContentBox } from '../component';
+import { Layout, ContentBox } from '../../component';
 import { Tag } from 'antd';
 import './idea-detail-page.css';
 
