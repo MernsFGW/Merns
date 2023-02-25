@@ -9,15 +9,18 @@ import createIdeaRoutes from './routes/idea.routes/create.routes';
 import updateIdeaRoutes from './routes/idea.routes/update.routes';
 import deleteIdeaRoutes from './routes/idea.routes/delete.routes';
 import listIdeaRoutes from './routes/idea.routes/list.routes';
-import createTermRoutes from './routes/term.routes/create.routes';
+
+import createCategoryRoutes from './routes/category.routes/create.routes';
+import listCategoriesRoutes from './routes/category.routes/list.routes';
+import removeCategoryRoutes from './routes/category.routes/remove.routes';
+import updateCategoryRoutes from './routes/category.routes/update.routes';
+import getCategoryRoutes from './routes/category.routes/get.routes';
 
 import createUserRoutes from './routes/user.routes/create.routes';
 import updateUserRoutes from './routes/user.routes/update.routes';
 import deleteUserRoutes from './routes/user.routes/delete.routes';
 import listUserRoutes from './routes/user.routes/list.routes';
 import loginUserRoutes from './routes/user.routes/login.routes';
-
-
 
 import createDepartmentRoutes from './routes/department.routes/create.routes';
 import updateDepartmentRoutes from './routes/department.routes/update.routes';
@@ -50,6 +53,12 @@ app.use('/', updateIdeaRoutes);
 app.use('/', deleteIdeaRoutes);
 app.use('/', listIdeaRoutes);
 
+app.use('/', createCategoryRoutes);
+app.use('/', listCategoriesRoutes);
+app.use('/', removeCategoryRoutes);
+app.use('/', updateCategoryRoutes);
+app.use('/', getCategoryRoutes);
+
 app.use('/', createUserRoutes);
 app.use('/', updateUserRoutes);
 app.use('/', loginUserRoutes);
@@ -67,7 +76,6 @@ app.use('/', deleteRoleRoutes);
 app.use('/', listRoleRoutes);
 
 app.use('/', createTermRoutes);
-
 
 // Catch unauthorised errors
 app.use((err, req, res, next) => {
