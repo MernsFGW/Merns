@@ -1,7 +1,7 @@
 import errorHandler from '../../../helpers/dbErrorHandler.js';
 import extend from 'lodash/extend.js';
-import fs from 'fs';
 import formidable from 'formidable';
+import cloudinary from '../../../helpers/cloudinary.js';
 
 
 const update = (req, res) => {
@@ -17,8 +17,8 @@ const update = (req, res) => {
         idea = extend(idea, fields);
         idea.updatedAt = Date.now();
         if(files.photo){
-
             const photoResult = await cloudinary.uploader.upload(files.photo.path, {
+                overwrite: true,
                 folder: "Photo"
             });
             idea.photo.public_id = photoResult.public_id;

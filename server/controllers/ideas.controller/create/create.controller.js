@@ -1,7 +1,8 @@
 import Idea from './../../../models/idea.model';
 import errorHandler from '../../../helpers/dbErrorHandler.js';
-import fs from 'fs';
+// import fs from 'fs';
 import formidable from 'formidable';
+import cloudinary from '../../../helpers/cloudinary.js';
 
 const create = async (req, res) => {
     let form = new formidable.IncomingForm();
@@ -15,8 +16,12 @@ const create = async (req, res) => {
         let idea = new Idea(fields);
         idea.userId = req.profile;
         if(files.photo){
-            idea.photo.data = fs.readFileSync(files.photo.path);
-            idea.photo.contentType = files.photo.type;
+            
+            const photoResult = await cloudinary.uploader.upload(files.photo.path, {
+                folder: "Photo"
+            });
+            idea.photo.public_id = photoResult.public_id;
+            idea.photo.url = photoResult.secure_url;
         }
         try {
             let ideaResult = await idea.save();

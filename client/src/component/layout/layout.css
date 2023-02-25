@@ -23,6 +23,7 @@
     --fs-md: 14px;
     --fs-sm: 12px;
     --fs-xs: 10px;
+    --font-color: #858EAD;
 }
 
 h1, h2, h3, h4, h5, p, a {
@@ -109,4 +110,18 @@ h1, h2, h3, h4, h5, p, a {
 
 .post-list-pagination span {
     color: white !important;
+}
+
+.ant-btn-primary {
+    background-color: #FF4401;
+}
+
+.ant-input {
+    background-color: var(--sub-contrast-color);
+    border-color: var(--sub-contrast-color);
+    color: var(--font-color);
+}
+
+.ant-input::placeholder {
+    color: #858EAD;
 }

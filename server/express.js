@@ -9,6 +9,7 @@ import createIdeaRoutes from './routes/idea.routes/create.routes';
 import updateIdeaRoutes from './routes/idea.routes/update.routes';
 import deleteIdeaRoutes from './routes/idea.routes/delete.routes';
 import listIdeaRoutes from './routes/idea.routes/list.routes';
+import createTermRoutes from './routes/term.routes/create.routes';
 
 import createUserRoutes from './routes/user.routes/create.routes';
 import updateUserRoutes from './routes/user.routes/update.routes';
@@ -17,10 +18,16 @@ import listUserRoutes from './routes/user.routes/list.routes';
 import loginUserRoutes from './routes/user.routes/login.routes';
 
 
+
 import createDepartmentRoutes from './routes/department.routes/create.routes';
 import updateDepartmentRoutes from './routes/department.routes/update.routes';
 import deleteDepartmentRoutes from './routes/department.routes/delete.routes';
 import listDepartmentRoutes from './routes/department.routes/list.routes';
+
+import createRoleRoutes from './routes/role.routes/create.routes';
+import updateRoleRoutes from './routes/role.routes/update.routes';
+import deleteRoleRoutes from './routes/role.routes/delete.routes';
+import listRoleRoutes from './routes/role.routes/list.routes';
 
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
@@ -53,6 +60,13 @@ app.use('/', createDepartmentRoutes);
 app.use('/', updateDepartmentRoutes);
 app.use('/', deleteDepartmentRoutes);
 app.use('/', listDepartmentRoutes);
+
+app.use('/', createRoleRoutes);
+app.use('/', updateRoleRoutes);
+app.use('/', deleteRoleRoutes);
+app.use('/', listRoleRoutes);
+
+app.use('/', createTermRoutes);
 
 
 // Catch unauthorised errors

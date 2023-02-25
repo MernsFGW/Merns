@@ -5,7 +5,6 @@ import { formatDistance } from 'date-fns'
 import './post.css'
 
 export const Post = ({item}) => {
-    console.log(item.photo);
     const updateDate = formatDistance(new Date(item.createdAt), new Date(), { addSuffix: true });
     const upperCaseFirstLetter = (word) => {
         const firstLetter = word.charAt(0);
@@ -17,7 +16,7 @@ export const Post = ({item}) => {
 
     return (
         <div className='post-wrapper'>
-            <img alt='' className='post-image' src="https://img.freepik.com/premium-vector/open-folder-folder-with-documents-document-protection-concept_183665-104.jpg?w=2000" />
+            <img alt='' className='post-image' src={item.photo.url} />
             <div className='post-description'>
                 <p className='text-truncate post-title'>{item.title}</p>
                 <div className='post-tag-list'>

@@ -1,0 +1,67 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  z-index: 999;
+  padding: 40px;
+  overflow-y: auto;
+  flex-wrap: wrap;
+}
+
+.modal::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--main-bg-color);
+}
+
+.modal::-webkit-scrollbar-track {
+  border-radius: 5px;
+  border: 1px solid var(--main-bg-color);
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-left: 5px solid var(--main-bg-color);
+  background-clip: padding-box;
+}
+
+.modal-content {
+  position: relative;
+  background-color: var(--contrast-color);
+  border-radius: 16px;
+  box-shadow:
+      0 1px 1px hsla(0, 3%, 77%, 0.075),
+      0 2px 2px hsl(0, 3%, 77%, 0.075),
+      0 4px 4px hsl(0, 3%, 77%, 0.075),
+      0 8px 8px hsl(0, 3%, 77%, 0.075),
+      0 16px 16px hsl(0, 3%, 77%, 0.075)
+    ;
+}
+
+.modal-content * {
+  color: var(--white) !important ;
+}
+
+.modal-content .ant-input {
+  border-color: var(--white);
+}
+
+.close-modal-btn {
+  position: absolute;
+  right: 0;
+  margin: var(--spacing-sm);
+  border: none;
+  font-size: 16px;
+  background-color: var(--contrast-color);
+}
+
+.close-modal-btn:hover {
+  cursor: pointer;
+}
+
+.close-modal-btn:hover * {
+  color: var(--orange) !important;
+}

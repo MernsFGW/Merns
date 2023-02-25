@@ -17,7 +17,10 @@ Example:
 
 Quoc is backend developer, he is working on login API and he is going to push his code to develop branch. So he should do the following steps:
 
+<<<<<<< HEAD
+=======
 FROM LOCAL
+>>>>>>> f354f31b424a1c9e0dfbe23ae365edf2c7fa1d4b
 ```
 1. at "develop" in your local: git checkout -b <branch's name>
 2. branch's name: feature/quocvm/login-api
@@ -26,6 +29,8 @@ FROM LOCAL
 5. Wait for me to check your code and merge it into develop branch.
 ```
 
+<<<<<<< HEAD
+=======
 FROM JIRA:
 ```
 1. At your work => click on "Create branch"
@@ -33,18 +38,27 @@ FROM JIRA:
 3. Add => Commit => Push
 ```
 
+>>>>>>> f354f31b424a1c9e0dfbe23ae365edf2c7fa1d4b
 <b>How to run this project</b>
 
 START FRONT-END
 ```
 1. cd client
+<<<<<<< HEAD
+2. npm i --force / yarn install
+=======
 2. npm i --force or yarn
+>>>>>>> f354f31b424a1c9e0dfbe23ae365edf2c7fa1d4b
 3. npm start
 ```
 
 START BACK-END
 ```
 1. cd server
+<<<<<<< HEAD
+2. npm i --force / yarn install
+3. npm start
+=======
 2. npm i --force or yarn
 ```
 ```
@@ -53,6 +67,7 @@ START BACK-END
     npm run build
     npm start
 ```
+>>>>>>> f354f31b424a1c9e0dfbe23ae365edf2c7fa1d4b
 ```
 
 P/S: If you get something like: NODE_ENV, then you just delete `SET` in front of it in package.json file.

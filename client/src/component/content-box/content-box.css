@@ -8,10 +8,6 @@
     padding: var(--spacing-sm);
 }
 
-.box-content-loading {
-    width: 190px;
-}
-
 .update-post {
     display: flex;
     gap: var(--spacing);
@@ -31,3 +27,4 @@
 .update-post > button > span {
     font-weight: bold;
 }
+

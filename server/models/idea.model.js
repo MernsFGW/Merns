@@ -15,8 +15,12 @@ const IdeaSchema = new mongoose.Schema(
             required: "User is required",
         },
         photo:{
-            data: Buffer,
-            contentType: String
+            public_id: {
+                type: String,
+            },
+            url: {
+                type: String,
+            }
         },
         categoryId: {
             type: mongoose.Schema.Types.ObjectId, ref: "Category",
@@ -27,7 +31,11 @@ const IdeaSchema = new mongoose.Schema(
         }],
         dislikes: [{
             type: mongoose.Schema.Types.ObjectId, ref: "User",
-        }]
+        }],
+        termId: {
+            type: mongoose.Schema.Types.ObjectId, ref: "Term",
+            required: false
+        }
     },
     {
         timestamps: true,
