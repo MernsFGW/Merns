@@ -36,6 +36,12 @@ import updateRoleRoutes from './routes/role.routes/update.routes';
 import deleteRoleRoutes from './routes/role.routes/delete.routes';
 import listRoleRoutes from './routes/role.routes/list.routes';
 
+import createTermRoutes from './routes/term.routes/create.routes';
+import listTermsRoutes from './routes/term.routes/list.routes';
+import getTermRoutes from './routes/term.routes/getId.routes';
+import removeTermRoutes from './routes/term.routes/remove.routes';
+import updateTermRoutes from './routes/term.routes/update.routes';
+
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
 
@@ -82,6 +88,11 @@ app.use('/', updateRoleRoutes);
 app.use('/', deleteRoleRoutes);
 app.use('/', listRoleRoutes);
 
+app.use('/', createTermRoutes);
+app.use('/', listTermsRoutes);
+app.use('/', getTermRoutes);
+app.use('/', removeTermRoutes);
+app.use('/', updateTermRoutes);
 
 // Catch unauthorised errors
 app.use((err, req, res, next) => {
