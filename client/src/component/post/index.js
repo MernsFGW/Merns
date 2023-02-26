@@ -1,11 +1,13 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Avatar, Tag } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { formatDistance } from 'date-fns'
+import { useNavigate } from 'react-router-dom';
 import './post.css'
 
 export const Post = ({item}) => {
     const updateDate = formatDistance(new Date(item.createdAt), new Date(), { addSuffix: true });
+    const navigate = useNavigate();
     const upperCaseFirstLetter = (word) => {
         const firstLetter = word.charAt(0);
         const firstLetterCap = firstLetter.toUpperCase()
@@ -15,20 +17,18 @@ export const Post = ({item}) => {
     }
 
     return (
-        <div className='post-wrapper'>
+        <div onClick={() => navigate(`/ideas/${item._id}`)} className='post-wrapper'>
             <img alt='' className='post-image' src={item.photo.url} />
             <div className='post-description'>
                 <p className='text-truncate post-title'>{item.title}</p>
                 <div className='post-tag-list'>
-                    <Tag className='tag-list-item' color='var(--sub-contrast-color)'>Schoolar</Tag>
-                    <Tag className='tag-list-item' color='var(--sub-contrast-color)'>Violent</Tag>
-                    <Tag className='tag-list-item' color='var(--sub-contrast-color)'>Drama</Tag>
+                    <Tag className='tag-list-item' color='var(--sub-contrast-color)'>{item.categoryId.title}</Tag>
                 </div>
                 <div className='post-user-section'>
                     <div className='post-user-wrapper'>
-                        <Avatar size={38} icon={<UserOutlined />} />
+                        <Avatar size={38} src={`https://ui-avatars.com/api/?name=${item.userId.fullName}`}/>
                         <div className='post-user-information'>
-                            <h5>UserName</h5>
+                            <h5>{item.userId.fullName}</h5>
                             <p>{upperCaseFirstLetter(updateDate)}</p>
                         </div>
                     </div>

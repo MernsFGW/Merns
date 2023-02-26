@@ -15,7 +15,7 @@
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 10px;
-    width: 500px;
+    max-width: 500px;
 }
 
 .post-tag-list .tag-list-item {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import { Layout, ContentBox, Post, Filter, Modal, CreateIdeaForm } from '../component';
+import { Layout, ContentBox, Post, Filter, Modal, CreateIdeaForm } from '../../component';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Input, Button, List } from 'antd';
 import { useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [ideaList, setIdeaList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const userInfo = useSelector(state => state.user.value );
+  const userInfo = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,7 +31,10 @@ export const Home = () => {
             <CreateIdeaForm handleClose={() => {setIsOpen(false); setIsLoading(true)}} setIdeaList={setIdeaList} />
           </Modal>
           <div className='update-post'>
-            <Avatar size={38} icon={<UserOutlined />} />
+            {userInfo 
+              ? <Avatar size={38} src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`} />
+              : <Avatar size={38} icon={<UserOutlined />} />
+            }
             <Input
               disabled
               style={{ borderColor: 'var(--sub-contrast-color)', backgroundColor: 'var(--sub-contrast-color)' }}

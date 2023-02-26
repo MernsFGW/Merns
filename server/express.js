@@ -5,10 +5,13 @@ import cookieParser from 'cookie-parser';
 import compress from 'compression';
 import cors from 'cors';
 import helmet from 'helmet';
+
 import createIdeaRoutes from './routes/idea.routes/create.routes';
 import updateIdeaRoutes from './routes/idea.routes/update.routes';
 import deleteIdeaRoutes from './routes/idea.routes/delete.routes';
 import listIdeaRoutes from './routes/idea.routes/list.routes';
+import findIdeaByIdRoutes from './routes/idea.routes/id.routes';
+import sortIdeaRoutes from './routes/idea.routes/sort.routes';
 
 import createCategoryRoutes from './routes/category.routes/create.routes';
 import listCategoriesRoutes from './routes/category.routes/list.routes';
@@ -21,6 +24,7 @@ import updateUserRoutes from './routes/user.routes/update.routes';
 import deleteUserRoutes from './routes/user.routes/delete.routes';
 import listUserRoutes from './routes/user.routes/list.routes';
 import loginUserRoutes from './routes/user.routes/login.routes';
+import searchUserRoutes from './routes/user.routes/search.routes';
 
 import createDepartmentRoutes from './routes/department.routes/create.routes';
 import updateDepartmentRoutes from './routes/department.routes/update.routes';
@@ -31,6 +35,12 @@ import createRoleRoutes from './routes/role.routes/create.routes';
 import updateRoleRoutes from './routes/role.routes/update.routes';
 import deleteRoleRoutes from './routes/role.routes/delete.routes';
 import listRoleRoutes from './routes/role.routes/list.routes';
+
+import createTermRoutes from './routes/term.routes/create.routes';
+import listTermsRoutes from './routes/term.routes/list.routes';
+import getTermRoutes from './routes/term.routes/getId.routes';
+import removeTermRoutes from './routes/term.routes/remove.routes';
+import updateTermRoutes from './routes/term.routes/update.routes';
 
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
@@ -52,6 +62,8 @@ app.use('/', createIdeaRoutes);
 app.use('/', updateIdeaRoutes);
 app.use('/', deleteIdeaRoutes);
 app.use('/', listIdeaRoutes);
+app.use('/', findIdeaByIdRoutes)
+app.use('/', sortIdeaRoutes);
 
 app.use('/', createCategoryRoutes);
 app.use('/', listCategoriesRoutes);
@@ -64,6 +76,7 @@ app.use('/', updateUserRoutes);
 app.use('/', loginUserRoutes);
 app.use('/', deleteUserRoutes);
 app.use('/', listUserRoutes);
+app.use('/', searchUserRoutes);
 
 app.use('/', createDepartmentRoutes);
 app.use('/', updateDepartmentRoutes);
@@ -76,6 +89,10 @@ app.use('/', deleteRoleRoutes);
 app.use('/', listRoleRoutes);
 
 app.use('/', createTermRoutes);
+app.use('/', listTermsRoutes);
+app.use('/', getTermRoutes);
+app.use('/', removeTermRoutes);
+app.use('/', updateTermRoutes);
 
 // Catch unauthorised errors
 app.use((err, req, res, next) => {

@@ -19,7 +19,7 @@ const remove = async (req, res) => {
         );
         let deletedIdea = await idea.remove();
         res.status(200).json({
-            idea: deletedIdea,
+            idea: deletedIdea._id,
             image: image,
             message: "Deleted idea Successfully"
         });
