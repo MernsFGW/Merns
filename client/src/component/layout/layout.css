@@ -86,6 +86,10 @@ h1, h2, h3, h4, h5, p, a {
     flex: 3;
 }
 
+.new-secondary {
+    flex: 4;
+}
+
 /* overwrire antd */
 
 .post-list ul.ant-list-items {

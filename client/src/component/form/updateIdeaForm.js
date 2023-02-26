@@ -6,7 +6,10 @@ import {
     Upload,
     message,
     Input,
-    Select
+    Select,
+    Image,
+    Switch,
+    Divider
 } from 'antd';
 import axios from 'axios';
 import './form.css';
@@ -27,6 +30,7 @@ function getFormData(object) {
 export const UpdateIdeaForm = ({ handleClose, setData, initialIdea }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [categoryList, setCategoryList] = useState([]);
+    const [changeImage, setChangeImage] = useState(false);
     useEffect(() => {
         axios.get('http://localhost:3000/api/categories')
             .then(res => setCategoryList(res.data));
@@ -40,20 +44,23 @@ export const UpdateIdeaForm = ({ handleClose, setData, initialIdea }) => {
     })
 
     const onFinish = (values) => {
-        // setIsLoading(true);
-        // axios.put(`http://localhost:3000/api/${initialIdea.id}`, getFormData(values))
-        //     .then(res => {
-        //         handleClose();
-        //         setData(res.data);
-        //         message.success(`${res.data.idea.title} updated success!`);
-        //         setIsLoading(false);
-        //     })
-        console.log(values)
+        setIsLoading(true);
+        axios.put(`http://localhost:3000/api/ideas/${initialIdea._id}`, getFormData(values))
+            .then(res => {
+                handleClose();
+                setData(res.data.idea);
+                message.success(`${res.data.idea.title} updated success!`);
+                setIsLoading(false);
+            })
     };
 
     return (
         <Form
-            initialValues={initialIdea.idea}
+            initialValues={{
+                title: initialIdea.title,
+                content: initialIdea.content,
+                categoryId: initialIdea.categoryId._id,
+            }}
             layout='vertical'
             name="validate_other"
             onFinish={onFinish}
@@ -82,7 +89,7 @@ export const UpdateIdeaForm = ({ handleClose, setData, initialIdea }) => {
             </Form.Item>
             <Form.Item
                 label={<p><b>Category</b></p>}
-                name="category"
+                name="categoryId"
                 rules={[{ required: true, message: 'Please select idea category!' }]}
             >
                 <Select
@@ -95,29 +102,40 @@ export const UpdateIdeaForm = ({ handleClose, setData, initialIdea }) => {
                     options={options}
                 />
             </Form.Item>
-            <Form.Item
-                rules={[{ required: true, message: 'Please input idea image!' }]}
-                label={<p><b>Image</b></p>}
-            >
-                <Form.Item
-                    name="photo" valuePropName="photo"
-                    getValueFromEvent={normFile}
-                    noStyle
+            <p>--------------- Switch to change the image -------------</p>
+            {changeImage
+                ? <Form.Item
+                    rules={[{ required: true, message: 'Please input idea image!' }]}
+                    label={<p><b>Image &nbsp;&nbsp;<Switch size='small' defaultChecked onChange={() => setChangeImage(oldValue => !oldValue)} /></b></p>}
                 >
-                    <Upload.Dragger
-                        name='file'
-                        beforeUpload={() => false}
+                    <Form.Item
+                        name="photo" valuePropName="photo"
+                        getValueFromEvent={normFile}
+                        noStyle
                     >
-                        <p className="ant-upload-drag-icon">
-                            <InboxOutlined />
-                        </p>
-                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                        <p className="ant-upload-hint">
-                            Support for a single or bulk upload.
-                        </p>
-                    </Upload.Dragger>
+                        <Upload.Dragger
+                            name='file'
+                            beforeUpload={() => false}
+                        >
+                            <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                            </p>
+                            <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                            <p className="ant-upload-hint">
+                                Support for a single or bulk upload.
+                            </p>
+                        </Upload.Dragger>
+                    </Form.Item>
                 </Form.Item>
-            </Form.Item>
+                : <Form.Item
+                    style={{width: '338.4px'}}
+                    label={<p><b>Image &nbsp;&nbsp;<Switch size='small' defaultChecked onChange={() => setChangeImage(oldValue => !oldValue)} /></b></p>}
+                >
+                    <div className='update-image-preview'>
+                        <Image height={147.14} src={initialIdea.photo.url} />
+                    </div>
+                </Form.Item>
+            }
             <Form.Item
                 style={{ alignSelf: 'center' }}
             >

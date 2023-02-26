@@ -49,6 +49,7 @@ export const CreateIdeaForm = ({ handleClose, setIdeaList }) => {
                 message.success(`${res.data.idea.title} created success!`);
                 setIsLoading(false);
             })
+        console.log(values);
     };
 
     return (

@@ -40,7 +40,7 @@ export const IdeaDetail = () => {
 
     useEffect(() => {
         axios.get(`http://localhost:3000/api/ideas/${id}`)
-            .then(res => { setData(res.data); setLoading(false); })
+            .then(res => { setData(res.data.idea); setLoading(false); })
     }, [loading])
 
     if (loading) return <Spin />
@@ -50,30 +50,30 @@ export const IdeaDetail = () => {
             <div className='layout-panel extend'></div>
             <div className='layout-panel primary'>
                 <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-                    <UpdateIdeaForm initialIdea={data} setData={setData} handleClose={() => { setIsOpen(false)}}/>
+                    <UpdateIdeaForm initialIdea={data} setData={setData} handleClose={() => { setIsOpen(false); setLoading(true)}}/>
                 </Modal>
                 <ContentBox>
                     <div className='post-detail-wrapper'>
                         <div className='image-container'>
-                            <img className='post-detail-image' src={data.idea.photo.url} />
+                            <img className='post-detail-image' src={data.photo.url} />
                         </div>
                         <div className='social-info-wrapper'>
                             <div className='post-tag-list'>
-                                <Tag className='tag-list-item post-detailt-text' color='var(--sub-contrast-color)'>{data.idea.category}</Tag>
+                                <Tag className='tag-list-item post-detailt-text' color='var(--sub-contrast-color)'>{data.categoryId.title}</Tag>
                             </div>
                             <div className='post-action-information'>
-                                <p className='post-detailt-text'>{format(new Date(data.idea.createdAt), "MMM dd, yyyy")}</p>
+                                <p className='post-detailt-text'>{format(new Date(data.createdAt), "MMM dd, yyyy")}</p>
                                 <p className='post-detailt-text'>-</p>
                                 <p className='post-detailt-text'>651,000 View</p>
                                 <p className='post-detailt-text'>-</p>
                                 <p className='post-detailt-text'>53,000 Like</p>
                             </div>
                         </div>
-                        <h1 className='post-detail-title'>{data.idea.title}</h1>
+                        <h1 className='post-detail-title'>{data.title}</h1>
                         <div className='detail-page-user-action'>
                             <div className='detail-page-user'>
-                                <Avatar shape='square' size={40} src={`https://ui-avatars.com/api/?name=${data.user.fullName}`} />
-                                <p>by {data.user.fullName}</p>
+                                <Avatar shape='square' size={40} src={`https://ui-avatars.com/api/?name=${data.userId.fullName}`} />
+                                <p>by {data.userId.fullName}</p>
                             </div>
                             <Dropdown
                                 arrow={true}
@@ -89,7 +89,7 @@ export const IdeaDetail = () => {
                             </Dropdown>
                         </div>
                         <p className='detail-page-content'>
-                            {data.idea.content}
+                            {data.content}
                         </p>
                     </div>
                 </ContentBox>
