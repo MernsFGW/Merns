@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Layout, ContentBox } from '../../component';
 import { Tag, Avatar, Form, Input, Button, Spin, Dropdown, message, Space } from 'antd';
 import { UserOutlined, EllipsisOutlined } from '@ant-design/icons'
-import { CommentBox } from '../../component';
+import { CommentBox, Modal, UpdateIdeaForm } from '../../component';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns'
@@ -13,18 +13,19 @@ export const IdeaDetail = () => {
     let { id } = useParams();
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const userInfo = JSON.parse(localStorage.getItem("user"));
 
     const onClick = ({ key }) => {
-        message.info(`Click on item ${key}`);
+        setIsOpen(true);
     };
     const items = [
         {
-            label: '1st menu item',
+            label: 'Edit idea',
             key: '1',
         },
         {
-            label: '2nd menu item',
+            label: 'Remove idea',
             key: '2',
         },
         {
@@ -48,6 +49,9 @@ export const IdeaDetail = () => {
         <Layout>
             <div className='layout-panel extend'></div>
             <div className='layout-panel primary'>
+                <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+                    <UpdateIdeaForm initialIdea={data} setData={setData} handleClose={() => { setIsOpen(false)}}/>
+                </Modal>
                 <ContentBox>
                     <div className='post-detail-wrapper'>
                         <div className='image-container'>

@@ -4,5 +4,5 @@ export {ContentBox} from "./content-box";
 export {Post} from "./post";
 export {Filter} from "./filter";
 export {Modal} from "./modal";
-export {CreateIdeaForm} from "./form";
+export {CreateIdeaForm, UpdateIdeaForm} from "./form";
 export {CommentBox} from "./comment-box";
