@@ -31,12 +31,18 @@ h1 {
 
 .detail-page-user {
     display: flex;
-    gap: var(--spacing);
+    gap: var(--spacing-sm);
     align-items: center;
 }
 
 .detail-page-content {
     text-align: justify;
+}
+
+.detail-page-user-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .ant-form-item .ant-form-item-label >label {
@@ -52,4 +58,9 @@ h1 {
 
 .create-comment-form > * {
     margin: 0 !important;
+}
+
+.post-action-dropdown:hover {
+    cursor: pointer;
+    color: var(--orange);
 }
