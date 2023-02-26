@@ -4,5 +4,5 @@ import termCtrl from "../../controllers/terms.controller/remove/remove.controlle
 
 const router = express.Router();
 
-router.route("/api/terms/remove/:id").delete(termCtrl.removeTerm);
+router.route("/api/terms/remove/:id").delete(verifyToken, termCtrl.removeTerm);
 export default router;

@@ -4,5 +4,5 @@ import termCtrl from "../../controllers/terms.controller/update/update.controlle
 
 const router = express.Router();
 
-router.route("/api/terms/update/:id").patch(termCtrl.updateTerm);
+router.route("/api/terms/update/:id").patch(verifyToken, termCtrl.updateTerm);
 export default router;
