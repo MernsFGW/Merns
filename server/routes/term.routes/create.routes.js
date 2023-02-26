@@ -4,5 +4,5 @@ import termCtrl from "../../controllers/terms.controller/create/create.controlle
 
 const router = express.Router();
 
-router.route("/api/terms/new").post(termCtrl.create);
+router.route("/api/terms/new").post(verifyToken, termCtrl.create);
 export default router;

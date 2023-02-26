@@ -1,15 +1,17 @@
 import Category from '../../../models/category.model';
-import mongoose from "mongoose";
+import errorHandler from '../../../helpers/dbErrorHandler.js';
 
 const getCategoryById = async (req, res) => {
-    const { id } = req.params;
+    try {
+        const { id } = req.params;
 
-    const category = await Category.findById(id);
+        const category = await Category.findById(id);
 
-    if (category) {
+        if(!category) return res(404).json({ message: 'No category with that id'});
+
         res.status(200).json(category);
-    } else {
-        res.status(404).send('No category with that id');
+    } catch (error) {
+        res.status(400).json( { error: errorHandler.getErrorMessage(error) } );
     }
 }
 

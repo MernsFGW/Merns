@@ -1,16 +1,17 @@
 import Category from '../../../models/category.model';
+import errorHandler from '../../../helpers/dbErrorHandler.js';
 
 const createCategory = async (req, res) => {
-    const category = req.body;
-
-    const newCategory = new Category(category);
-
     try {
+        const category = req.body;
+
+        const newCategory = new Category(category);
+
         await newCategory.save();
 
         res.status(201).json(newCategory);
     } catch (error) {
-        res.status(409).json( { message: error.message } );
+        res.status(400).json( { error: errorHandler.getErrorMessage(error) } );
     }
 }
 
