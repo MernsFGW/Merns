@@ -3,6 +3,15 @@ import Idea from '../../../models/idea.model';
 
 const sortIdea = async (req, res) => {
     try {
+        let sortObj = {}
+        // check params in req
+        const { like, feedback } = req.query;
+        if(like === 'true'){
+            sortObj["likes"] = -1;
+        }
+        if(feedback === 'true'){
+            sortObj["feedbackCount"] = -1;
+        }
         // join the Idea and Feedback collections
         let ideas = await Idea.aggregate([
             {
