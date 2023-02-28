@@ -30,6 +30,7 @@ import createDepartmentRoutes from './routes/department.routes/create.routes';
 import updateDepartmentRoutes from './routes/department.routes/update.routes';
 import deleteDepartmentRoutes from './routes/department.routes/delete.routes';
 import listDepartmentRoutes from './routes/department.routes/list.routes';
+import getDepartmentRoutes from './routes/department.routes/getId.routes';
 
 import createRoleRoutes from './routes/role.routes/create.routes';
 import updateRoleRoutes from './routes/role.routes/update.routes';
@@ -82,6 +83,7 @@ app.use('/', createDepartmentRoutes);
 app.use('/', updateDepartmentRoutes);
 app.use('/', deleteDepartmentRoutes);
 app.use('/', listDepartmentRoutes);
+app.use('/', getDepartmentRoutes);
 
 app.use('/', createRoleRoutes);
 app.use('/', updateRoleRoutes);

@@ -1,14 +1,16 @@
 import Department from './../../../models/department.model';
 
-const departmentById = async (req, res, next, id) => {
+const departmentById = async (req, res) => {
     try {
-        let department = await Department.findById(id).exec();
+        const { id } = req.params;
+        const department = await Department.findById(id);
+
         if (!department) 
             return res.status(400).json({
                 error: "Department not found"
             }) 
-        req.information = department
-        next()
+            res.status(200).json(department);
+
     } catch (err) {
         return res.status(400).json({
             error: "Could not retrieve department"
