@@ -3,8 +3,12 @@ import Idea from './../../../models/idea.model';
 
 const list = async (req, res) => {
     try {
-      let ideas = await Idea.find();
-      res.json(ideas)
+      let ideas = await Idea.find()
+                  .populate('like')
+                  .populate('dislike')
+                  .populate('categoryId', 'title')
+                  .populate('userId', 'fullName avatar').exec();
+      res.json(ideas);
     } catch (err) {
       return res.status(400).json({
         error: errorHandler.getErrorMessage(err)

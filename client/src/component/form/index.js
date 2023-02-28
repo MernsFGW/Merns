@@ -1,1 +1,2 @@
-export {CreateIdeaForm} from './createIdeaForm';
+export { CreateIdeaForm } from './createIdeaForm';
+export { UpdateIdeaForm } from './updateIdeaForm'

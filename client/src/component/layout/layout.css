@@ -37,17 +37,17 @@ h1, h2, h3, h4, h5, p, a {
     overflow: auto;
 }
 
-.layout-wrapper::-webkit-scrollbar {
+*::-webkit-scrollbar {
     width: 10px;
     background-color: var(--main-bg-color);
 }
 
-.layout-wrapper::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
     border-radius: 5px;
     border: 1px solid var(--main-bg-color);
 }
 
-.layout-wrapper::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     background-color: white;
     border-left: 5px solid var(--main-bg-color);
     background-clip: padding-box;
@@ -84,6 +84,10 @@ h1, h2, h3, h4, h5, p, a {
 
 .secondary {
     flex: 3;
+}
+
+.new-secondary {
+    flex: 4;
 }
 
 /* overwrire antd */

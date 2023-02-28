@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { InboxOutlined } from '@ant-design/icons';
 import {
     Button,
     Form,
     Upload,
     message,
-    Input
+    Input,
+    Select
 } from 'antd';
 import axios from 'axios';
 import './form.css';
@@ -24,13 +25,31 @@ function getFormData(object) {
 }
 
 export const CreateIdeaForm = ({ handleClose, setIdeaList }) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [categoryList, setCategoryList] = useState([]);
+    const user = JSON.parse(localStorage.getItem("user")).user;
+    useEffect(() => {
+        axios.get('http://localhost:3000/api/categories')
+            .then(res => setCategoryList(res.data));
+    }, [])
+
+    const options = categoryList.map(item => {
+        return {
+            label: item.title,
+            value: item._id,
+        }
+    })
+
     const onFinish = (values) => {
-        axios.post(`http://localhost:3000/api/ideas/new/63f83b5bca99671d249f8cb7`, getFormData(values))
+        setIsLoading(true);
+        axios.post(`http://localhost:3000/api/ideas/new/${user.id}`, getFormData(values))
             .then(res => {
                 handleClose();
                 setIdeaList(oldArray => [...oldArray, res.data.idea]);
                 message.success(`${res.data.idea.title} created success!`);
+                setIsLoading(false);
             })
+        console.log(values);
     };
 
     return (
@@ -62,6 +81,21 @@ export const CreateIdeaForm = ({ handleClose, setIdeaList }) => {
                 <Input.TextArea placeholder="Enter your wonderfull iead content..." allowClear />
             </Form.Item>
             <Form.Item
+                label={<p><b>Category</b></p>}
+                name="categoryId"
+                rules={[{ required: true, message: 'Please select idea category!' }]}
+            >
+                <Select
+                    showSearch
+                    placeholder="Select a category"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                        option.label.toLowerCase().includes(input.toLowerCase())
+                    }
+                    options={options}
+                />
+            </Form.Item>
+            <Form.Item
                 rules={[{ required: true, message: 'Please input idea image!' }]}
                 label={<p><b>Image</b></p>}
             >
@@ -87,7 +121,7 @@ export const CreateIdeaForm = ({ handleClose, setIdeaList }) => {
             <Form.Item
                 style={{ alignSelf: 'center' }}
             >
-                <Button className='submit-form-btn' type="primary" htmlType="submit">
+                <Button disabled={isLoading} className='submit-form-btn' type="primary" htmlType="submit">
                     Submit
                 </Button>
             </Form.Item>
