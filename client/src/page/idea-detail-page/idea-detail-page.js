@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, ContentBox } from '../../component';
-import { Tag, Avatar, Form, Input, Button, Spin, Dropdown, message, Space } from 'antd';
+import { Tag, Avatar, Form, Input, Button, Spin, Dropdown, Modal as AntModal, message } from 'antd';
 import { UserOutlined, EllipsisOutlined } from '@ant-design/icons'
 import { CommentBox, Modal, UpdateIdeaForm } from '../../component';
+import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns'
@@ -14,23 +15,23 @@ export const IdeaDetail = () => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [confirmLoading, setConfirmLoading] = useState(false);
     const userInfo = JSON.parse(localStorage.getItem("user"));
+    const navigate = useNavigate();
 
     const onClick = ({ key }) => {
-        setIsOpen(true);
+        key === "Edit" ? setIsOpen(true) : setModalOpen(true);
     };
+
     const items = [
         {
             label: 'Edit idea',
-            key: '1',
+            key: 'Edit',
         },
         {
             label: 'Remove idea',
-            key: '2',
-        },
-        {
-            label: '3rd menu item',
-            key: '3',
+            key: 'Remove',
         },
     ];
 
@@ -43,6 +44,15 @@ export const IdeaDetail = () => {
             .then(res => { setData(res.data.idea); setLoading(false); })
     }, [loading])
 
+    const handleDelete = async () => {
+        setConfirmLoading(true);
+        await axios.delete(`http://localhost:3000/api/ideas/${id}`)
+            .then(res => {message.success(res.data.message); setConfirmLoading(false);})
+            .then(navigate("/"));
+        
+    }
+
+
     if (loading) return <Spin />
 
     return (
@@ -50,8 +60,17 @@ export const IdeaDetail = () => {
             <div className='layout-panel extend'></div>
             <div className='layout-panel primary'>
                 <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-                    <UpdateIdeaForm initialIdea={data} setData={setData} handleClose={() => { setIsOpen(false); setLoading(true)}}/>
+                    <UpdateIdeaForm initialIdea={data} setData={setData} handleClose={() => { setIsOpen(false); setLoading(true) }} />
                 </Modal>
+                <AntModal
+                    title="Delete confirm"
+                    open={modalOpen}
+                    onOk={handleDelete}
+                    confirmLoading={confirmLoading}
+                    onCancel={() => setModalOpen(false)}
+                >
+                    Do you really want to delete this idea? This process cannot be undone.
+                </AntModal>
                 <ContentBox>
                     <div className='post-detail-wrapper'>
                         <div className='image-container'>

@@ -1,22 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Layout, ContentBox, Post, Filter, Modal, CreateIdeaForm } from '../../component';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Input, Button, List } from 'antd';
-import { useSelector } from 'react-redux';
+import { loadingIdea } from '../../redux/idea';
+import { useSelector, useDispatch } from 'react-redux';
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [ideaList, setIdeaList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const userInfo = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const shouldFetch = useRef(true);
+  const ideaList = useSelector(state => state.idea.value);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/ideas')
-      .then(res => { setIdeaList(res.data); setIsLoading(false); });
-  }, [isLoading]);
+    if(shouldFetch.current){
+      shouldFetch.current = false;
+      axios.get('http://localhost:3000/api/ideas')
+        .then(res => { dispatch(loadingIdea(res.data))})
+        .catch(error => console.log(error));
+    }
+    setIsLoading(false);
+  }, [ideaList.length, dispatch]);
 
   return (
     <Layout>
@@ -28,7 +36,7 @@ export const Home = () => {
       <div className='layout-panel primary'>
         <ContentBox>
           <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-            <CreateIdeaForm handleClose={() => {setIsOpen(false); setIsLoading(true)}} setIdeaList={setIdeaList} />
+            <CreateIdeaForm handleClose={() => {setIsOpen(false); setIsLoading(true)}} />
           </Modal>
           <div className='update-post'>
             {userInfo 

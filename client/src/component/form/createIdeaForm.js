@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { InboxOutlined } from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
 import {
     Button,
     Form,
@@ -8,6 +9,8 @@ import {
     Input,
     Select
 } from 'antd';
+import { addIdea } from '../../redux/idea';
+
 import axios from 'axios';
 import './form.css';
 
@@ -24,10 +27,11 @@ function getFormData(object) {
     return formData;
 }
 
-export const CreateIdeaForm = ({ handleClose, setIdeaList }) => {
+export const CreateIdeaForm = ({ handleClose }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [categoryList, setCategoryList] = useState([]);
     const user = JSON.parse(localStorage.getItem("user")).user;
+    const dispatch = useDispatch();
     useEffect(() => {
         axios.get('http://localhost:3000/api/categories')
             .then(res => setCategoryList(res.data));
@@ -45,11 +49,11 @@ export const CreateIdeaForm = ({ handleClose, setIdeaList }) => {
         axios.post(`http://localhost:3000/api/ideas/new/${user.id}`, getFormData(values))
             .then(res => {
                 handleClose();
-                setIdeaList(oldArray => [...oldArray, res.data.idea]);
+                dispatch(addIdea(res.data.idea));
                 message.success(`${res.data.idea.title} created success!`);
                 setIsLoading(false);
             })
-        console.log(values);
+            .catch(error => console.log(error));
     };
 
     return (
@@ -96,15 +100,16 @@ export const CreateIdeaForm = ({ handleClose, setIdeaList }) => {
                 />
             </Form.Item>
             <Form.Item
-                rules={[{ required: true, message: 'Please input idea image!' }]}
                 label={<p><b>Image</b></p>}
             >
                 <Form.Item
                     name="photo" valuePropName="photo"
                     getValueFromEvent={normFile}
+                    rules={[{ required: true, message: 'Please input idea image!' }]}
                     noStyle
                 >
                     <Upload.Dragger
+                        required
                         name='file'
                         beforeUpload={() => false}
                     >
