@@ -10,6 +10,15 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: "Password is required"
         },
+        avatar: {
+            public_id: {
+                type: String,
+            },
+            url: {
+                type: String,
+            },
+            required: false
+        },
         fullName: {
             type: String,
             required: "Full name is required"

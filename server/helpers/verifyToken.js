@@ -12,6 +12,15 @@ const verifyToken = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, config.jwtSecret);
         req.userId = decoded.id;
+        let route = req.originalUrl.split('/')[2];
+        if (["terms", "admin"].includes(route)){
+            if (!["admin"].includes(decoded.role?.title?.toLowerCase())){
+                return res.status(401).json({ message: 'Only admin can do this' });
+            }
+            else{
+                req.role = decoded.role;
+            }
+        }
         next();
     } catch (err) {
         res.status(401).json({ message: 'Unauthorized' });

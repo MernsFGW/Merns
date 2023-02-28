@@ -10,14 +10,21 @@ import {
 } from '@ant-design/icons';
 import {
     Input,
+    Button,
     Avatar,
     Dropdown,
     Space
 } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import './navigation-bar.css';
 
 export const NavBar = () => {
     const { Search } = Input;
+    const logoutUser = () => {
+        localStorage.removeItem("user");
+    }
+    const navigate = useNavigate();
+    const userInfo = JSON.parse(localStorage.getItem('user'));
     const onSearch = (value) => console.log(value);
     const items = [
         {
@@ -31,7 +38,7 @@ export const NavBar = () => {
         {
             key: '2',
             label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+                <a onClick={() => {logoutUser(); navigate("/")}} target="_blank" rel="noopener noreferrer">
                     Logout
                 </a>
             ),
@@ -48,7 +55,7 @@ export const NavBar = () => {
             </div>
             <div className='middle-navbar-part'>
                 <div className='navigation-btn-grp'>
-                    <HomeFilled className='active' />
+                    <HomeFilled onClick={() => navigate("/")} className='active' />
                     <UsergroupAddOutlined />
                     <AudioOutlined />
                     <ProjectFilled />
@@ -62,26 +69,35 @@ export const NavBar = () => {
                 </div>
             </div>
             <div className='last-navbar-part'>
-                <div className='noti-icon'>
-                    <BellOutlined />
-                </div>
-                <div className='user-section'>
-                    <Avatar shape="square" size={38} icon={<UserOutlined />} />
-                    <Dropdown
-                        className=''
-                        trigger={['click']}
-                        menu={{
-                            items,
-                        }}
-                    >
-                        <a onClick={(e) => e.preventDefault()}>
-                            <Space>
-                                <h4>User Name</h4>
-                                <DownOutlined />
-                            </Space>
-                        </a>
-                    </Dropdown>
-                </div>
+                {userInfo
+                    ? (<>
+                        <div className='noti-icon'>
+                            <BellOutlined />
+                        </div>
+                        <div className='user-section'>
+                            <Avatar shape="square" size={38} src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`} />
+                            <Dropdown
+                                className=''
+                                trigger={['click']}
+                                menu={{
+                                    items,
+                                }}
+                            >
+                                <a onClick={(e) => e.preventDefault()}>
+                                    <Space>
+                                        <h4>{userInfo.user.fullName}</h4>
+                                        <DownOutlined />
+                                    </Space>
+                                </a>
+                            </Dropdown>
+                        </div>
+                    </>)
+                    : <>
+                        <Button onClick={() => navigate("/login")} size='large' className='login-btn' type='primary'>Login</Button>
+                        <Button size='large' className='register-btn'>Register</Button>
+                    </>}
+
+
             </div>
         </div>
     )

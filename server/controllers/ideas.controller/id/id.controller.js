@@ -2,11 +2,15 @@ import Idea from './../../../models/idea.model.js';
 
 const ideaById = async (req, res, next, id) => {
     try {
-        let idea = await Idea.findById(id).exec();
+        let idea = await Idea.findById(id)
+                            .populate('likes')
+                            .populate('dislikes')
+                            .populate('categoryId', 'title')
+                            .populate('userId', 'fullName avatar').exec();
         if (!idea) 
             return res.status(400).json({
                 error: "Idea not found"
-            }) 
+            })
         req.information = idea
         next()
     } catch (err) {

@@ -23,6 +23,7 @@
     --fs-md: 14px;
     --fs-sm: 12px;
     --fs-xs: 10px;
+    --font-color: #858EAD;
 }
 
 h1, h2, h3, h4, h5, p, a {
@@ -36,17 +37,17 @@ h1, h2, h3, h4, h5, p, a {
     overflow: auto;
 }
 
-.layout-wrapper::-webkit-scrollbar {
+*::-webkit-scrollbar {
     width: 10px;
     background-color: var(--main-bg-color);
 }
 
-.layout-wrapper::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
     border-radius: 5px;
     border: 1px solid var(--main-bg-color);
 }
 
-.layout-wrapper::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     background-color: white;
     border-left: 5px solid var(--main-bg-color);
     background-clip: padding-box;
@@ -85,6 +86,10 @@ h1, h2, h3, h4, h5, p, a {
     flex: 3;
 }
 
+.new-secondary {
+    flex: 4;
+}
+
 /* overwrire antd */
 
 .post-list ul.ant-list-items {
@@ -109,4 +114,18 @@ h1, h2, h3, h4, h5, p, a {
 
 .post-list-pagination span {
     color: white !important;
+}
+
+.ant-btn-primary {
+    background-color: #FF4401;
+}
+
+.ant-input {
+    background-color: var(--sub-contrast-color);
+    border-color: var(--sub-contrast-color);
+    color: var(--font-color);
+}
+
+.ant-input::placeholder {
+    color: #858EAD;
 }

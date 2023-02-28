@@ -8,21 +8,20 @@
     height: 150px;
     border-radius: var(--bd-rad-lg);
     object-fit: cover;
-
 }
 
 .post-title {
     color: white;
-    font-size: var(--fs-lg);
+    font-size: 18px;
     font-weight: 500;
-    margin-bottom: var(--spacing-sm);
-    width: 500px;
+    margin-bottom: 10px;
+    max-width: 500px;
 }
 
 .post-tag-list .tag-list-item {
     color: #858EAD;
     border-radius: var(--spacing);
-    padding: 4px var(--spacing-sm);
+    padding: 4px 10px;
     font-weight: 600;
 }
 
@@ -47,13 +46,13 @@
 }
 
 .post-user-information > p {
-    font-size: var(--fs-xs);
+    font-size: 10px;
 }
 
 .post-user-wrapper {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: 10px;
 }
 
 .post-action-information {
@@ -61,5 +60,5 @@
     color: white;
     align-items: center;
     gap: var(--spacing);
-    font-size: var(--fs-sm);
+    font-size: 12px;
 }

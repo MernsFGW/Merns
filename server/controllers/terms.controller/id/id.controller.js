@@ -1,14 +1,17 @@
-import Term from './../../../models/term.model.is';
+import Term from './../../../models/term.model.js';
 
-const termById = async (req, res, next, id) => {
+const termById = async (req, res) => {
     try {
-        let term = await Term.findById(id).exec();
-        if (!term) 
+        const { id } = req.params;
+        const term = await Term.findById(id);
+
+        if (!term) {
             return res.status(400).json({
                 error: "Term not found"
             }) 
-        req.information = term
-        next()
+        }
+
+        res.status(200).json(term);
     } catch (err) {
         return res.status(400).json({
             error: "Could not retrieve term"

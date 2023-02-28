@@ -1,12 +1,8 @@
-import express from 'express';
-import termCtrl from '../../controllers/terms.controller/update/update.controllers';
-import termIdCtrl from '../../controllers/terms.controller/id/id.controller'
+import express from "express";
+import verifyToken from '../../helpers/verifyToken'
+import termCtrl from "../../controllers/terms.controller/update/update.controller.js";
 
 const router = express.Router();
 
-router.route('/api/terms/:termId')
-    .put(termCtrl.update);
-
-router.param('termId', termIdCtrl.termById)
-
+router.route("/api/terms/update/:id").patch(verifyToken, termCtrl.updateTerm);
 export default router;

@@ -63,18 +63,7 @@
     align-items: center;
 }
 
-.ant-btn-primary {
-    background-color: #FF4401;
-}
 
-.ant-input {
-    background-color: var(--sub-contrast-color);
-    border-color: var(--sub-contrast-color);
-}
-
-.ant-input::placeholder {
-    color: #858EAD;
-}
 
 .noti-icon > * {
     padding: var(--spacing-sm);
@@ -84,9 +73,13 @@
     background-color: var(--sub-contrast-color) ;
 }
 
-.user-section {
+.user-section, .login-register-section {
     display: flex;
     align-items: center; 
     gap: var(--spacing-sm);
     color: white;
+}
+
+.login-btn, .register-btn {
+    font-weight: 600;
 }

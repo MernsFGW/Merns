@@ -1,15 +1,18 @@
-import errorHandler from '../../../helpers/dbErrorHandler.js';
+import Term from './../../../models/term.model.js';
+import mongoose from "mongoose";
 
-const remove = async (req, res) => {
+const removeTerm = async (req, res) => {
     try {
-        let term = req.term;
-        let deletedTerm = await term.remove();
-        res.json(deletedTerm);
-    } catch (err) {
-        return res.status(400).json({
-            error: errorHandler.getErrorMessage(err)
-        })
+        const { id } = req.params;
+
+        if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No term with that id');
+
+        await Term.findByIdAndRemove(id);
+
+        res.status(200).json({ message: 'Term deleted successfully' });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
 }
 
-export default {remove}
+export default { removeTerm }
