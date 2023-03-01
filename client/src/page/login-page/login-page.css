@@ -83,6 +83,9 @@
     font-size: var(--fs-md);
     font-weight: 500;
 }
+.check-box{
+    color: var(--font-color) !important;
+}
 
 .error {
     color: var(--orange);

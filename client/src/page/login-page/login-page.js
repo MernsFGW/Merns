@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import { ContentBox } from "../../component";
 import axios from "axios";
-import { Input, Button, Typography, Modal } from 'antd';
+import { Input, Button, Typography, Modal, Checkbox } from 'antd';
 import { EyeTwoTone, EyeInvisibleOutlined, CaretLeftOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import './login-page.css';
 import { Link } from "react-router-dom";
@@ -19,6 +19,7 @@ export const Login = () => {
         openNotification: false,
         redirectToHome: false
     });
+    const [disabledButton, setDisableButton] = useState(true);
     const navigate = useNavigate()
 
     const handleChange = name => event => {
@@ -61,6 +62,13 @@ export const Login = () => {
     const handleCancel = () => {
         setValues({...values, openNotification: false, redirectToHome: true})
     };
+    const onChange = (e) => {
+        if (e.target.checked){
+            setDisableButton(false);
+        } else {
+            setDisableButton(true);
+        }
+    };
 
     if (values.redirectToHome) {
       return navigate("/");
@@ -93,7 +101,8 @@ export const Login = () => {
                             <ExclamationCircleOutlined className="error"/>  {values.error}
                         </Typography>)
                     }
-                    <Button type="primary" onClick={clickSubmit}>Sign in</Button>
+                    <Checkbox className="check-box" onChange={onChange}><a to="/policy">Accept User Policy</a></Checkbox>
+                    <Button type="primary" disabled={disabledButton} onClick={clickSubmit}>Sign in</Button>
                 </form>
                 <Modal title="Basic Modal" open={values.openNotification} onOk={handleOk} onCancel={handleCancel}>
                     <p>{values.status}</p>
