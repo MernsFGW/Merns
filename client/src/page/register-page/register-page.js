@@ -6,19 +6,15 @@ import { EyeTwoTone, EyeInvisibleOutlined, CaretLeftOutlined, ExclamationCircleO
 import './register-page.css';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { loadingDepartment } from '../../redux/department';
-import { useSelector, useDispatch } from 'react-redux';
 
 const { Title, Text } = Typography;
 export const Register = () => {
-    // const dispatch = useDispatch();
-    // const shouldFetch = useRef(true);
-    // const departmentList = useSelector(state => state.department.value);
     const [values, setValues] = useState({
         fullName: '',
         username: '',
         password: '',
         departmentId: '',
+        roleId: '',
         status:'',
         error: '',
         openNotification: false,
@@ -26,6 +22,9 @@ export const Register = () => {
     });
 
     const [departmentValues, setDepartmentValues] = useState([]);
+    const [roleValues, setRoleValues] = useState([]);
+
+    const loginUser = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
         axios.get('http://localhost:3000/api/departments')
@@ -34,7 +33,25 @@ export const Register = () => {
             })
     }, []);
 
-    const options = departmentValues.map(item => {
+    useEffect(() => {
+        axios.get('http://localhost:3000/api/roles',{
+            headers: {
+                'Authorization': loginUser.token,
+            }
+        })
+            .then((res) => {
+                setRoleValues(res.data);
+            })
+    }, []);
+
+    const departmentOptions = departmentValues.map(item => {
+        return {
+            label: item.title,
+            value: item._id,
+        }
+    })
+
+    const roleOptions = roleValues.map(item => {
         return {
             label: item.title,
             value: item._id,
@@ -47,18 +64,19 @@ export const Register = () => {
         setValues({...values, [name]: event.target.value})
     };
 
-
     const clickSubmit = async () => {
         const user = {
             fullName: values.fullName || undefined,
             username: values.username || undefined,
             password: values.password || undefined,
-            departmentId: values.departmentId || undefined
+            departmentId: values.departmentId || undefined,
+            roleId: values.roleId || undefined,
         }
         await axios.post("http://localhost:3000/api/users/new", user,
         {
             headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': loginUser.token,
             }
         }).then((res) => {
             console.log(res.data);
@@ -128,9 +146,18 @@ export const Register = () => {
                         filterOption={(input, option) =>
                             option.label.toLowerCase().includes(input.toLowerCase())
                         }
-                        options={options}
-                        fieldNames={{label: "department", value: values.departmentId}}
-                        onChange={handleChange('departmentId')}
+                        options={departmentOptions}
+                        onChange={value => setValues({...values, departmentId: value})}
+                    />
+                    <Select
+                        showSearch
+                        placeholder="Select a department"
+                        optionFilterProp="children"
+                        filterOption={(input, option) =>
+                            option.label.toLowerCase().includes(input.toLowerCase())
+                        }
+                        options={roleOptions}
+                        onChange={value => setValues({...values, roleId: value})}
                     />
                     {
                         values.error && (<Typography component="p">
