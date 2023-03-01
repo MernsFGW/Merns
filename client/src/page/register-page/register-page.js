@@ -103,6 +103,9 @@ export const Register = () => {
     const handleCancel = () => {
         setValues({...values, openNotification: false, redirectToLogin: true})
     };
+    const onChange = (e) => {
+        console.log(`checked = ${e.target.checked}`);
+      };
 
     if (values.redirectToLogin) {
       return navigate("/login");
@@ -140,8 +143,9 @@ export const Register = () => {
                         iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                     />
                     <Select
+                        className="select"
                         showSearch
-                        placeholder="Select a department"
+                        placeholder="Select a department..."
                         optionFilterProp="children"
                         filterOption={(input, option) =>
                             option.label.toLowerCase().includes(input.toLowerCase())
@@ -150,8 +154,9 @@ export const Register = () => {
                         onChange={value => setValues({...values, departmentId: value})}
                     />
                     <Select
+                        className="select"
                         showSearch
-                        placeholder="Select a department"
+                        placeholder="Select a role..."
                         optionFilterProp="children"
                         filterOption={(input, option) =>
                             option.label.toLowerCase().includes(input.toLowerCase())
@@ -164,14 +169,14 @@ export const Register = () => {
                             <ExclamationCircleOutlined className="error"/>  {values.error}
                         </Typography>)
                     }
-                    <Button type="primary" onClick={clickSubmit}>Sign up</Button>
+                    <Button type="primary" onClick={clickSubmit}>Create account</Button>
                 </form>
                 <Modal open={values.openNotification} onOk={handleOk} onCancel={handleCancel}>
                     {values.status}!! Click OK or Cancel to go to login page
                 </Modal>
                 <div className="register-navigate-section">
                     <Link className="navigation-link" to="/"><CaretLeftOutlined /> Back to Home Page</Link>
-                    <Link className="navigation-link" to="/login">Login page</Link>
+                    <Link className="navigation-link" to="/login">Accept</Link>
                 </div>
             </ContentBox>
         </div>

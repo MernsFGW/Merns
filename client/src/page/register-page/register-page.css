@@ -29,7 +29,6 @@
     margin-bottom: 30px;
     font-size: 23px;
     font-weight:300;
-    color: rgb(108, 117, 125);
 }
 
 .register-form > input {
@@ -77,11 +76,31 @@
 
 .register-form > p {
     margin-bottom: 0px;
-    /* margin-right: px; */
     display: block;
     color: var(--orange);
     font-size: var(--fs-md);
-    font-weight: 500;
+}
+
+.select{
+    margin-bottom: 10px;
+    margin-top: 20px;
+    width: 470px;
+}
+
+.ant-select-selector {
+    height: 55px !important;
+    border-radius: 50px !important;
+    background-color: var(--sub-contrast-color) !important;
+    border-color:  var(--sub-contrast-color) !important;
+}
+.ant-select-selection-search{
+    width: 0px;
+}
+.ant-select-selection-placeholder{
+    padding-top: 10px !important;
+    font-size: 14px !important;
+    color: var(--font-color) !important;
+    font-weight: 10 !important;
 }
 
 .error {
