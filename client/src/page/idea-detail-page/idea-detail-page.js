@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, ContentBox } from '../../component';
+import { Loading } from '../loading-page/loading-page'
 import { Tag, Avatar, Form, Input, Button, Spin, Dropdown, Modal as AntModal, message } from 'antd';
-import { UserOutlined, EllipsisOutlined } from '@ant-design/icons'
+import { EllipsisOutlined } from '@ant-design/icons'
 import { CommentBox, Modal, UpdateIdeaForm } from '../../component';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 import { format } from 'date-fns'
+import { removeIdea } from '../../redux/idea';
+import {useDispatch} from 'react-redux';
+import axios from 'axios';
 import './idea-detail-page.css';
 
 export const IdeaDetail = () => {
@@ -19,6 +21,7 @@ export const IdeaDetail = () => {
     const [confirmLoading, setConfirmLoading] = useState(false);
     const userInfo = JSON.parse(localStorage.getItem("user"));
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const onClick = ({ key }) => {
         key === "Edit" ? setIsOpen(true) : setModalOpen(true);
@@ -41,19 +44,19 @@ export const IdeaDetail = () => {
 
     useEffect(() => {
         axios.get(`http://localhost:3000/api/ideas/${id}`)
-            .then(res => { setData(res.data.idea); setLoading(false); })
+            .then(res => {setData(res.data.idea); setLoading(false); })
     }, [loading])
 
     const handleDelete = async () => {
         setConfirmLoading(true);
         await axios.delete(`http://localhost:3000/api/ideas/${id}`)
-            .then(res => {message.success(res.data.message); setConfirmLoading(false);})
-            .then(navigate("/"));
-        
+            .then(res => {dispatch(removeIdea(res.data)); message.success(res.data.message); setConfirmLoading(false);});
+           
+        navigate("/");
     }
 
 
-    if (loading) return <Spin />
+    if (loading) return <Loading />;
 
     return (
         <Layout>
@@ -69,7 +72,8 @@ export const IdeaDetail = () => {
                     confirmLoading={confirmLoading}
                     onCancel={() => setModalOpen(false)}
                 >
-                    Do you really want to delete this idea? This process cannot be undone.
+                    Do you really want to delete this idea? 
+                    This process cannot be undone.
                 </AntModal>
                 <ContentBox>
                     <div className='post-detail-wrapper'>
