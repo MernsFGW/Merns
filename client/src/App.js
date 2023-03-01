@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, IdeaDetail, Login } from './page';
+import { Home, IdeaDetail, Login, Register } from './page';
 import {
   Routes,
   Route,
@@ -12,6 +12,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/ideas/:id' element={<IdeaDetail />} />
       </Routes>
     </div>

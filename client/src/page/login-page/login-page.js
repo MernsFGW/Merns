@@ -100,7 +100,7 @@ export const Login = () => {
                 </Modal>
                 <div className="login-navigate-section">
                     <Link className="navigation-link" to="/"><CaretLeftOutlined /> Back to Home Page</Link>
-                    <Link className="navigation-link" to="#">Register page</Link>
+                    <Link className="navigation-link" to="/register">Register page</Link>
                 </div>
             </ContentBox>
         </div>

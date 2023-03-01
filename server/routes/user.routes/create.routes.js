@@ -4,6 +4,6 @@ import userCtrl from '../../controllers/users.controller/create/create.controlle
 const router = express.Router();
 
 router.route('/api/users/new')
-    .post(verifyToken,userCtrl.create);
+    .post(userCtrl.create);
 
 export default router;
