@@ -24,7 +24,8 @@ export const Home = () => {
         .catch(error => console.log(error));
     }
     setIsLoading(false);
-  }, [ideaList.length, dispatch]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ideaList.length]);
 
   return (
     <Layout>
