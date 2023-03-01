@@ -26,12 +26,14 @@ const IdeaSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId, ref: "Category",
             required: false
         },
-        likes: [{
-            type: mongoose.Schema.Types.ObjectId, ref: "User",
-        }],
-        dislikes: [{
-            type: mongoose.Schema.Types.ObjectId, ref: "User",
-        }],
+        likes: {
+            type: Number,
+            default: 0,
+        },
+        dislikes: {
+            type: Number,
+            default: 0,
+        },
         termId: {
             type: mongoose.Schema.Types.ObjectId, ref: "Term",
             required: false
