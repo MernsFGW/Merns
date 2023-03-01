@@ -7,11 +7,16 @@ const dislikeIdea = async (req, res) => {
     try {
         const { id } = req.params;
 
+        if(!req.params.userId) return res.status(404).json({ message: "Unauthenticated" });
+
         if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No idea with that id');
 
         const idea = await Idea.findById(id);
 
-        const updatedIdea = await Idea.findByIdAndUpdate(id, { dislikes: idea.dislikes + 1 }, { new: true });
+        idea.dislikes.push(req.params.userId);
+
+        // const updatedIdea = await Idea.findByIdAndUpdate(id, { likes: idea.likes + 1 }, { new: true });
+        const updatedIdea = await Idea.findByIdAndUpdate(id, idea, { new: true });
 
         res.status(200).json(updatedIdea);
     } catch (error) {

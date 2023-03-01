@@ -27,12 +27,12 @@ const IdeaSchema = new mongoose.Schema(
             required: false
         },
         likes: {
-            type: Number,
-            default: 0,
+            type: [String],
+            default: [],
         },
         dislikes: {
-            type: Number,
-            default: 0,
+            type: [String],
+            default: [],
         },
         termId: {
             type: mongoose.Schema.Types.ObjectId, ref: "Term",
