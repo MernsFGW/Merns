@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import { Avatar, Tag } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
 import { formatDistance } from 'date-fns'
 import { useNavigate } from 'react-router-dom';
 import './post.css'
 
-export const Post = ({item}) => {
+export const Post = ({item, currentTerm}) => {
     const updateDate = formatDistance(new Date(item.createdAt), new Date(), { addSuffix: true });
     const navigate = useNavigate();
     const upperCaseFirstLetter = (word) => {
@@ -16,13 +15,39 @@ export const Post = ({item}) => {
         return capitalizedWord;
     }
 
+    const checkTerm = (termId) => {
+        if(termId === '63fefa350cc2a320980338b3') {
+            return "Spring Term";
+        } else if(termId === '63fefa5b0cc2a320980338b5'){
+            return "Summer Term";
+        } else if(termId === '63fefa740cc2a320980338b7'){
+            return "Fall Term";
+        }else {
+            return "Winter Term";
+        }
+    }
+
+    // const checkStatus = (termId) => {
+    //     // console.log(currentTermId);
+    //     if(termId === currentTerm){
+    //         return "Active";
+    //     }else {
+    //         return "Deactive";
+    //     }
+    // }
+
+    console.log(currentTerm);
+
     return (
-        <div onClick={() => navigate(`/ideas/${item._id}`)} className='post-wrapper'>
-            <img alt='' className='post-image' src={item.photo.url} />
+        <div className='post-wrapper'>
+            <img onClick={() => navigate(`/ideas/${item._id}`)} alt='' className='post-image' src={item.photo.url} />
             <div className='post-description'>
-                <p className='text-truncate post-title'>{item.title}</p>
+                <p onClick={() => navigate(`/ideas/${item._id}`)} className='text-truncate post-title'>{item.title}</p>
                 <div className='post-tag-list'>
                     <Tag className='tag-list-item' color='var(--sub-contrast-color)'>{item.categoryId.title}</Tag>
+                    <Tag className='tag-list-item' color='var(--sub-contrast-color)'>{checkTerm(item.termId)}</Tag>
+                    {/* <Tag className='tag-list-item' color='var(--sub-contrast-color)'>{checkStatus(item.termId)}</Tag> */}
+
                 </div>
                 <div className='post-user-section'>
                     <div className='post-user-wrapper'>
@@ -34,7 +59,7 @@ export const Post = ({item}) => {
                     </div>
                     <div className='post-action-information'>
                         <p>651,000 View</p>
-                        <p>{item.likes.length} Like</p>
+                        <p>{item.likes.length} Upvote</p>
                         <p>651,000 Comment</p>
                     </div>
                 </div>

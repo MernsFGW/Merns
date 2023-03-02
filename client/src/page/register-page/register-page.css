@@ -1,4 +1,4 @@
-.login-page-container {
+.register-page-container {
     width: 100vw;
     height: 100vh;
     background-color: var(--main-bg-color);
@@ -12,27 +12,26 @@
     border-color:  var(--sub-contrast-color);
 }
 
-.login-form {
+.register-form {
     padding: var(--spacing);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
 }
-.login-form > h1 {
+.register-form > h1 {
     margin-top: 50px;
     margin-bottom: 0px;
     font-size: 40px;
     color: white;
 }
-.login-form > span {
+.register-form > span {
     margin-bottom: 30px;
     font-size: 23px;
     font-weight:300;
-    color: rgb(108, 117, 125);
 }
 
-.login-form > input {
+.register-form > input {
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
@@ -43,7 +42,7 @@
     border-radius: 50px;
 }
 
-.login-form > span:last-of-type {
+.register-form > span:last-of-type {
     width: 470px;
     height: 55px;
     font-size: 14px;
@@ -52,7 +51,7 @@
     margin-bottom: 10px;
 }
  
-.login-form > button {
+.register-form > button {
     height: 45px;
     width: 470px;
     font-size: var(--fs);
@@ -61,7 +60,7 @@
     margin-top: 25px;
 }
 
-.login-navigate-section {
+.register-navigate-section {
     display: flex;
     justify-content: space-between;
     padding: var(--spacing);
@@ -75,16 +74,33 @@
     text-decoration: none;
 }
 
-.login-form > p {
+.register-form > p {
     margin-bottom: 0px;
-    /* margin-right: px; */
     display: block;
     color: var(--orange);
     font-size: var(--fs-md);
-    font-weight: 500;
 }
-.check-box{
+
+.select{
+    margin-bottom: 10px;
+    margin-top: 20px;
+    width: 470px;
+}
+
+.ant-select-selector {
+    height: 55px !important;
+    border-radius: 50px !important;
+    background-color: var(--sub-contrast-color) !important;
+    border-color:  var(--sub-contrast-color) !important;
+}
+.ant-select-selection-search{
+    width: 0px;
+}
+.ant-select-selection-placeholder{
+    padding-top: 10px !important;
+    font-size: 14px !important;
     color: var(--font-color) !important;
+    font-weight: 10 !important;
 }
 
 .error {

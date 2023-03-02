@@ -63,3 +63,21 @@ h1 {
     cursor: pointer;
     color: var(--orange);
 }
+
+.like-btn , .dislike-btn {
+    font-size: 18px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+.like-btn:hover {
+    color: #537FE7;
+}
+
+.dislike-btn:hover {
+    color: #FF597B;
+}
+
+.post-action-information.detail-page-action {
+    font-weight: 500;
+}

@@ -24,7 +24,7 @@ const IdeaSchema = new mongoose.Schema(
         },
         categoryId: {
             type: mongoose.Schema.Types.ObjectId, ref: "Category",
-            required: false
+            required: "Category is required",
         },
         likes: {
             type: [String],
