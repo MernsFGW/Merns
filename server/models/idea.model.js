@@ -26,12 +26,14 @@ const IdeaSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId, ref: "Category",
             required: "Category is required",
         },
-        likes: [{
-            type: mongoose.Schema.Types.ObjectId, ref: "User",
-        }],
-        dislikes: [{
-            type: mongoose.Schema.Types.ObjectId, ref: "User",
-        }],
+        likes: {
+            type: [String],
+            default: [],
+        },
+        dislikes: {
+            type: [String],
+            default: [],
+        },
         termId: {
             type: mongoose.Schema.Types.ObjectId, ref: "Term",
             required: false
