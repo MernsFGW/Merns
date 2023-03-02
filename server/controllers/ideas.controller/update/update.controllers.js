@@ -1,6 +1,5 @@
 import errorHandler from '../../../helpers/dbErrorHandler.js';
 import extend from 'lodash/extend.js';
-import fs from 'fs';
 import formidable from 'formidable';
 
 

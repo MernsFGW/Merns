@@ -60,13 +60,13 @@ app.use(cors());
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
 
+app.use('/', sortIdeaRoutes);
+app.use('/', filterIdeaRoutes);
 app.use('/', createIdeaRoutes);
 app.use('/', updateIdeaRoutes);
 app.use('/', deleteIdeaRoutes);
 app.use('/', listIdeaRoutes);
 app.use('/', findIdeaByIdRoutes)
-app.use('/', sortIdeaRoutes);
-app.use('/', filterIdeaRoutes);
 
 app.use('/', createCategoryRoutes);
 app.use('/', listCategoriesRoutes);
