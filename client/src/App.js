@@ -1,10 +1,10 @@
 import React from 'react';
-import { Home, IdeaDetail, Login } from './page';
+import { Home, IdeaDetail, Login, Register } from './page';
 import {
   Routes,
   Route,
+  Navigate
 } from 'react-router-dom'
-
 
 function App() {
   return (
@@ -12,7 +12,12 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/ideas/:id' element={<IdeaDetail />} />
+        <Route
+          path="/aboutus"
+          element={<Navigate to="/aboutpage.html" />}
+        />
       </Routes>
     </div>
 

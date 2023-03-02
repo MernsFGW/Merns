@@ -25,6 +25,7 @@ const create = async (req, res) => {
         }
         try {
             let ideaResult = await idea.save();
+            ideaResult = await ideaResult.execPopulate('categoryId');
             res.status(200).json({
                 idea: ideaResult,
                 message: "Created idea successfully"

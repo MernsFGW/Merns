@@ -27,15 +27,20 @@ function getFormData(object) {
     return formData;
 }
 
-export const CreateIdeaForm = ({ handleClose }) => {
+export const CreateIdeaForm = ({ handleClose, termList }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [categoryList, setCategoryList] = useState([]);
-    const user = JSON.parse(localStorage.getItem("user")).user;
+    const user = JSON.parse(localStorage.getItem("user"));
     const dispatch = useDispatch();
+
     useEffect(() => {
         axios.get('http://localhost:3000/api/categories')
             .then(res => setCategoryList(res.data));
     }, [])
+
+    const currentDate = new Date();
+
+    const ideaTerm = termList.find(term => new Date(term.startDate) < currentDate && currentDate <= new Date(term.endDate));
 
     const options = categoryList.map(item => {
         return {
@@ -46,7 +51,7 @@ export const CreateIdeaForm = ({ handleClose }) => {
 
     const onFinish = (values) => {
         setIsLoading(true);
-        axios.post(`http://localhost:3000/api/ideas/new/${user.id}`, getFormData(values))
+        axios.post(`http://localhost:3000/api/ideas/new/${user.user.id}`, getFormData({...values, termId: ideaTerm._id}))
             .then(res => {
                 handleClose();
                 dispatch(addIdea(res.data.idea));
