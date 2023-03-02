@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [termList, setTermList] = useState([]);
   const userInfo = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -17,15 +18,37 @@ export const Home = () => {
   const ideaList = useSelector(state => state.idea.value);
 
   useEffect(() => {
-    if(shouldFetch.current){
+    if (userInfo) {
+      axios.get('http://localhost:3000/api/terms', {
+        headers: {
+          'Authorization': userInfo.token,
+        }
+      })
+        .then(res => setTermList(res.data));
+    }
+  }, [])
+
+  useEffect(() => {
+    if (shouldFetch.current) {
       shouldFetch.current = false;
       axios.get('http://localhost:3000/api/ideas')
-        .then(res => { dispatch(loadingIdea(res.data))})
+        .then(res => { dispatch(loadingIdea(res.data)) })
         .catch(error => console.log(error));
     }
     setIsLoading(false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ideaList.length]);
+
+  // const getCurrentTerm = () => {
+  //   const currentDate = new Date();
+  //   let currentTerm;
+  //   if(termList){
+  //     currentTerm = termList.find(term => new Date(term.startDate) < currentDate && currentDate <= new Date(term.endDate));
+  //   } else {
+  //     currentTerm = 'asdasd';
+  //   }
+  //   return currentTerm;
+  // }
 
   return (
     <Layout>
@@ -37,10 +60,10 @@ export const Home = () => {
       <div className='layout-panel primary'>
         <ContentBox>
           <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-            <CreateIdeaForm handleClose={() => {setIsOpen(false); setIsLoading(true)}} />
+            <CreateIdeaForm handleClose={() => { setIsOpen(false); setIsLoading(true) }} termList={termList} />
           </Modal>
           <div className='update-post'>
-            {userInfo 
+            {userInfo
               ? <Avatar size={38} src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`} />
               : <Avatar size={38} icon={<UserOutlined />} />
             }

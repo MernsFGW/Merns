@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, ContentBox } from '../../component';
 import { Loading } from '../loading-page/loading-page'
-import { Tag, Avatar, Form, Input, Button, Spin, Dropdown, Modal as AntModal, message } from 'antd';
+import { Tag, Avatar, Form, Input, Button, Dropdown, Modal as AntModal, message } from 'antd';
+import {LikeFilled, DislikeFilled} from '@ant-design/icons';
 import { EllipsisOutlined } from '@ant-design/icons'
 import { CommentBox, Modal, UpdateIdeaForm } from '../../component';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -22,11 +23,9 @@ export const IdeaDetail = () => {
     const userInfo = JSON.parse(localStorage.getItem("user"));
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
     const onClick = ({ key }) => {
         key === "Edit" ? setIsOpen(true) : setModalOpen(true);
     };
-
     const items = [
         {
             label: 'Edit idea',
@@ -37,15 +36,19 @@ export const IdeaDetail = () => {
             key: 'Remove',
         },
     ];
-
     const onFinish = (values) => {
         console.log('Success:', values);
     };
+    
+    const likeIdea = () =>{
+        data.likes.push(userInfo.user.id);
+        console.log(data.likes);
+    }
 
     useEffect(() => {
         axios.get(`http://localhost:3000/api/ideas/${id}`)
             .then(res => {setData(res.data.idea); setLoading(false); })
-    }, [loading])
+    }, [loading, data.likes])
 
     const handleDelete = async () => {
         setConfirmLoading(true);
@@ -54,7 +57,6 @@ export const IdeaDetail = () => {
            
         navigate("/");
     }
-
 
     if (loading) return <Loading />;
 
@@ -84,12 +86,12 @@ export const IdeaDetail = () => {
                             <div className='post-tag-list'>
                                 <Tag className='tag-list-item post-detailt-text' color='var(--sub-contrast-color)'>{data.categoryId.title}</Tag>
                             </div>
-                            <div className='post-action-information'>
+                            <div className='post-action-information detail-page-action'>
                                 <p className='post-detailt-text'>{format(new Date(data.createdAt), "MMM dd, yyyy")}</p>
                                 <p className='post-detailt-text'>-</p>
                                 <p className='post-detailt-text'>651,000 View</p>
-                                <p className='post-detailt-text'>-</p>
-                                <p className='post-detailt-text'>53,000 Like</p>
+                                <p className='post-detailt-text'>{data.likes.length} <LikeFilled onClick={likeIdea} className='like-btn' /></p>
+                                <p className='post-detailt-text'>{data.dislikes.length} <DislikeFilled className='dislike-btn' /></p>
                             </div>
                         </div>
                         <h1 className='post-detail-title'>{data.title}</h1>
