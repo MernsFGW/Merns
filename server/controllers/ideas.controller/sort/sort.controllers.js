@@ -5,14 +5,16 @@ const sortIdea = async (req, res) => {
     try {
         let sortObj = {}
         // check params in req
-        const { like, feedback } = req.query;
+        const { like, dislike, feedback } = req.query;
         if(like === 'true'){
-            sortObj["likes"] = -1;
+            sortObj["likesCount"] = -1;
+        }
+        if(dislike === 'true'){
+            sortObj["dislikesCount"] = -1;
         }
         if(feedback === 'true'){
             sortObj["feedbackCount"] = -1;
         }
-        // join the Idea and Feedback collections
         let ideas = await Idea.aggregate([
             {
                 $lookup: {
@@ -34,11 +36,15 @@ const sortIdea = async (req, res) => {
                     termId: 1,
                     feedbacks: 1,
                     // count the number of feedbacks
-                    feedbackCount: { $size: "$feedbacks" }
+                    feedbackCount: { $size: "$feedbacks" },
+                    // count the number of likes
+                    likesCount: { $size: "$likes" },
+                    // count the number of dislikes
+                    dislikesCount: { $size: "$dislikes" }
                 }
             },
             // sort by the feedbackCount and likes
-            { $sort: { feedbackCount: -1, likes: -1 } }
+            { $sort: sortObj }
         ]);
         res.json(ideas)
     } catch (err) {

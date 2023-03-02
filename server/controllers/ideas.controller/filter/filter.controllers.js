@@ -2,54 +2,34 @@ import errorHandler from "../../../helpers/dbErrorHandler.js";
 import Idea from "../../../models/idea.model";
 
 const filterIdea = async (req, res) => {
-  try {
-    let categoryId = req.query.categoryId;
+    try {
+        const { categoryId, termId, userId } = req.query;
+        const filterCriteria = {};
 
-    const response = await Idea.aggregate([
-      {
-        $match: {
-          category: categoryId,
-        },
-      },
-      {
-        $lookup: {
-          from: "categories",
-          localField: "category",
-          foreignField: "_id",
-          as: "category",
-        },
-      },
-      {
-        $unwind: "$category",
-      },
-      {
-        $lookup: {
-          from: "users",
-          localField: "postedBy",
-          foreignField: "_id",
-          as: "postedBy",
-        },
-      },
-      {
-        $unwind: "$postedBy",
-      },
-      {
-        $project: {
-          title: 1,
-          description: 1,
-          category: "$category.name",
-          postedBy: "$postedBy.name",
-          created: 1,
-        },
-      },
-    ]);
+        if (categoryId) {
+            filterCriteria.categoryId = categoryId;
+        }
 
-    res.json(response);
-  } catch (err) {
-    return res.status(400).json({
-      error: errorHandler.getErrorMessage(err),
-    });
-  }
+        if (termId) {
+            filterCriteria.termId = termId;
+        }
+
+        if (userId) {
+            filterCriteria.userId = userId;
+        }
+
+        const ideas = await Idea.find(filterCriteria);
+
+        const response = {
+            ideas,
+            count: ideas.length,
+        };
+        res.json(response);
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err),
+        });
+    }
 };
 
 export default { filterIdea };
