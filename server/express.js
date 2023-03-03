@@ -14,6 +14,9 @@ import findIdeaByIdRoutes from './routes/idea.routes/id.routes';
 import sortIdeaRoutes from './routes/idea.routes/sort.routes';
 import likeIdeaRoutes from './routes/idea.routes/like.routes';
 import dislikeIdeaRoutes from './routes/idea.routes/dislike.routes';
+
+import unlikeIdeaRoutes from './routes/idea.routes/unlike.routes';
+import undislikeIdeaRoutes from './routes/idea.routes/undislike.routes';
 import filterIdeaRoutes from './routes/idea.routes/filter.routes';
 
 
@@ -70,6 +73,13 @@ app.use('/', updateIdeaRoutes);
 app.use('/', deleteIdeaRoutes);
 app.use('/', listIdeaRoutes);
 app.use('/', findIdeaByIdRoutes)
+app.use('/', sortIdeaRoutes);
+app.use('/', likeIdeaRoutes);
+app.use('/', dislikeIdeaRoutes);
+app.use('/', unlikeIdeaRoutes);
+app.use('/', undislikeIdeaRoutes);
+app.use('/', filterIdeaRoutes);
+
 
 app.use('/', createCategoryRoutes);
 app.use('/', listCategoriesRoutes);
