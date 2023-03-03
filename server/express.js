@@ -14,13 +14,11 @@ import findIdeaByIdRoutes from './routes/idea.routes/id.routes';
 import sortIdeaRoutes from './routes/idea.routes/sort.routes';
 import likeIdeaRoutes from './routes/idea.routes/like.routes';
 import dislikeIdeaRoutes from './routes/idea.routes/dislike.routes';
-<<<<<<< HEAD
+
 import unlikeIdeaRoutes from './routes/idea.routes/unlike.routes';
 import undislikeIdeaRoutes from './routes/idea.routes/undislike.routes';
-=======
 import filterIdeaRoutes from './routes/idea.routes/filter.routes';
 
->>>>>>> 074f4012c2fd3406c4c8d5ae897e08f229fe3c48
 
 import createCategoryRoutes from './routes/category.routes/create.routes';
 import listCategoriesRoutes from './routes/category.routes/list.routes';
@@ -68,6 +66,8 @@ app.use(cors());
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
 
+app.use('/', sortIdeaRoutes);
+app.use('/', filterIdeaRoutes);
 app.use('/', createIdeaRoutes);
 app.use('/', updateIdeaRoutes);
 app.use('/', deleteIdeaRoutes);
@@ -76,12 +76,10 @@ app.use('/', findIdeaByIdRoutes)
 app.use('/', sortIdeaRoutes);
 app.use('/', likeIdeaRoutes);
 app.use('/', dislikeIdeaRoutes);
-<<<<<<< HEAD
 app.use('/', unlikeIdeaRoutes);
 app.use('/', undislikeIdeaRoutes);
-=======
 app.use('/', filterIdeaRoutes);
->>>>>>> 074f4012c2fd3406c4c8d5ae897e08f229fe3c48
+
 
 app.use('/', createCategoryRoutes);
 app.use('/', listCategoriesRoutes);

@@ -7,7 +7,7 @@ const remove = async (req, res) => {
             if (err) {
                 res.status(400).json({ message: err.message });
             } else {
-                res.status(200).json({ message: "User deleted successfully", user: user });
+                res.status(200).json({ message: "Deleted user successfully", user: user });
             }
         }).exec();
     } catch (err) {
