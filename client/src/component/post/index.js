@@ -27,6 +27,8 @@ export const Post = ({item, currentTerm}) => {
         }
     }
 
+    console.log(item);
+
     // const checkStatus = (termId) => {
     //     // console.log(currentTermId);
     //     if(termId === currentTerm){
@@ -35,8 +37,6 @@ export const Post = ({item, currentTerm}) => {
     //         return "Deactive";
     //     }
     // }
-
-    console.log(currentTerm);
 
     return (
         <div className='post-wrapper'>

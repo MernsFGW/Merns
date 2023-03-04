@@ -154,7 +154,7 @@ export const Register = () => {
                         onChange={value => setValues({...values, departmentId: value})}
                     />
                     <Select
-                        className="select"
+                        className="select "
                         showSearch
                         placeholder="Select a role..."
                         optionFilterProp="children"

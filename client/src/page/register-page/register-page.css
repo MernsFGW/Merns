@@ -81,22 +81,22 @@
     font-size: var(--fs-md);
 }
 
-.select{
+.select {
     margin-bottom: 10px;
     margin-top: 20px;
     width: 470px;
 }
 
-.ant-select-selector {
+.select .ant-select-selector {
     height: 55px !important;
     border-radius: 50px !important;
     background-color: var(--sub-contrast-color) !important;
     border-color:  var(--sub-contrast-color) !important;
 }
-.ant-select-selection-search{
+.select .ant-select-selection-search{
     width: 0px;
 }
-.ant-select-selection-placeholder{
+.select .ant-select-selection-placeholder{
     padding-top: 10px !important;
     font-size: 14px !important;
     color: var(--font-color) !important;

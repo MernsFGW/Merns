@@ -72,7 +72,7 @@ export const UpdateIdeaForm = ({ handleClose, setData, initialIdea }) => {
                 padding: '0 30px',
             }}
         >
-            <h2 className='form-title'>Create new Idea</h2>
+            <h2 className='form-title'>Update your Idea</h2>
             <Form.Item
                 label={<p><b>Title</b></p>}
                 name="title"

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Layout, ContentBox, Post, Filter, Modal, CreateIdeaForm } from '../../component';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Input, Button, List } from 'antd';
@@ -11,11 +11,20 @@ export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [termList, setTermList] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
   const userInfo = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const shouldFetch = useRef(true);
   const ideaList = useSelector(state => state.idea.value);
+
+  const getParam = (searchParam) => {
+    const getSearchParam = searchParams.get(searchParam);
+    if (getSearchParam) {
+      return `${searchParam}=${getSearchParam}`;
+    }
+    return getSearchParam;
+  }
 
   useEffect(() => {
     if (userInfo) {
@@ -29,7 +38,7 @@ export const Home = () => {
   }, [])
 
   useEffect(() => {
-    if (shouldFetch.current) {
+    if (shouldFetch.current && !getParam('sort')) {
       shouldFetch.current = false;
       axios.get('http://localhost:3000/api/ideas')
         .then(res => { dispatch(loadingIdea(res.data)) })
@@ -39,16 +48,14 @@ export const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ideaList.length]);
 
-  // const getCurrentTerm = () => {
-  //   const currentDate = new Date();
-  //   let currentTerm;
-  //   if(termList){
-  //     currentTerm = termList.find(term => new Date(term.startDate) < currentDate && currentDate <= new Date(term.endDate));
-  //   } else {
-  //     currentTerm = 'asdasd';
-  //   }
-  //   return currentTerm;
-  // }
+  useEffect(() => {
+    setIsLoading(true);
+    if (getParam('sort')) {
+      axios.get(`http://localhost:3000/api/ideas/sort?${getParam('sort')}`)
+        .then(res => { dispatch(loadingIdea(res.data)) })
+    }
+    setIsLoading(false);
+  }, [getParam('sort')])
 
   return (
     <Layout>
