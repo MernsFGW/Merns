@@ -27,16 +27,10 @@ function getFormData(object) {
     return formData;
 }
 
-export const CreateIdeaForm = ({ handleClose, termList }) => {
+export const CreateIdeaForm = ({ handleClose, termList, categoryList }) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [categoryList, setCategoryList] = useState([]);
     const user = JSON.parse(localStorage.getItem("user"));
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        axios.get('http://localhost:3000/api/categories')
-            .then(res => setCategoryList(res.data));
-    }, [])
 
     const currentDate = new Date();
 

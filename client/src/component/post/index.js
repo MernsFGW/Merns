@@ -4,7 +4,7 @@ import { formatDistance } from 'date-fns'
 import { useNavigate } from 'react-router-dom';
 import './post.css'
 
-export const Post = ({item, currentTerm}) => {
+export const Post = ({item}) => {
     const updateDate = formatDistance(new Date(item.createdAt), new Date(), { addSuffix: true });
     const navigate = useNavigate();
     const upperCaseFirstLetter = (word) => {
@@ -27,17 +27,6 @@ export const Post = ({item, currentTerm}) => {
         }
     }
 
-    console.log(item);
-
-    // const checkStatus = (termId) => {
-    //     // console.log(currentTermId);
-    //     if(termId === currentTerm){
-    //         return "Active";
-    //     }else {
-    //         return "Deactive";
-    //     }
-    // }
-
     return (
         <div className='post-wrapper'>
             <img onClick={() => navigate(`/ideas/${item._id}`)} alt='' className='post-image' src={item.photo.url} />
@@ -46,8 +35,6 @@ export const Post = ({item, currentTerm}) => {
                 <div className='post-tag-list'>
                     <Tag className='tag-list-item' color='var(--sub-contrast-color)'>{item.categoryId.title}</Tag>
                     <Tag className='tag-list-item' color='var(--sub-contrast-color)'>{checkTerm(item.termId)}</Tag>
-                    {/* <Tag className='tag-list-item' color='var(--sub-contrast-color)'>{checkStatus(item.termId)}</Tag> */}
-
                 </div>
                 <div className='post-user-section'>
                     <div className='post-user-wrapper'>

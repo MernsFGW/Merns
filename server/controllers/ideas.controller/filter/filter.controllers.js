@@ -18,13 +18,10 @@ const filterIdea = async (req, res) => {
             filterCriteria.userId = userId;
         }
 
-        const ideas = await Idea.find(filterCriteria);
-
-        const response = {
-            ideas,
-            count: ideas.length,
-        };
-        res.json(response);
+        const ideas = await Idea.find(filterCriteria)
+                                .populate('categoryId', 'title')
+                                .populate('userId', 'fullName avatar').exec();
+        res.json(ideas);
     } catch (err) {
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err),

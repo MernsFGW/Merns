@@ -98,8 +98,6 @@ export const IdeaDetail = () => {
         return isDislike;
     }
 
-    console.log(checkLiked());
-
     if (loading) return <Loading />;
 
     return (

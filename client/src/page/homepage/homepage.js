@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Layout, ContentBox, Post, Filter, Modal, CreateIdeaForm } from '../../component';
+import { Layout, ContentBox, Post, Filter, Modal, CreateIdeaForm, CategoryFilter } from '../../component';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Input, Button, List } from 'antd';
 import { loadingIdea } from '../../redux/idea';
@@ -11,6 +11,7 @@ export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [termList, setTermList] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const userInfo = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
@@ -38,7 +39,12 @@ export const Home = () => {
   }, [])
 
   useEffect(() => {
-    if (shouldFetch.current && !getParam('sort')) {
+    axios.get('http://localhost:3000/api/categories')
+      .then(res => setCategoryList(res.data));
+  }, [])
+
+  useEffect(() => {
+    if (shouldFetch.current && !getParam('sort') && !getParam('categoryId')) {
       shouldFetch.current = false;
       axios.get('http://localhost:3000/api/ideas')
         .then(res => { dispatch(loadingIdea(res.data)) })
@@ -57,17 +63,32 @@ export const Home = () => {
     setIsLoading(false);
   }, [getParam('sort')])
 
+  useEffect(() => {
+    setIsLoading(true);
+    if (getParam('categoryId')){
+      axios.get(`http://localhost:3000/api/ideas/filter?${getParam('categoryId')}`)
+      .then(res => { dispatch(loadingIdea(res.data)); console.log(res.data) })
+    }
+    setIsLoading(false);
+  }, [getParam('categoryId')])
+
   return (
     <Layout>
       <div className='layout-panel extend'>
-        <ContentBox>
-          <Filter />
-        </ContentBox>
+        <div className='filter-panel'>
+          <ContentBox>
+            <Filter />
+          </ContentBox>
+          <h4>#Categories</h4>
+          <ContentBox>
+            <CategoryFilter categoryList={categoryList} />
+          </ContentBox>
+        </div>
       </div>
       <div className='layout-panel primary'>
         <ContentBox>
           <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-            <CreateIdeaForm handleClose={() => { setIsOpen(false); setIsLoading(true) }} termList={termList} />
+            <CreateIdeaForm handleClose={() => { setIsOpen(false); setIsLoading(true) }} categoryList={categoryList} termList={termList} />
           </Modal>
           <div className='update-post'>
             {userInfo
@@ -105,10 +126,6 @@ export const Home = () => {
 
       </div>
       <div className='layout-panel secondary'>
-        <ContentBox />
-        <ContentBox />
-        <ContentBox />
-        <ContentBox />
       </div>
     </Layout>
   );
