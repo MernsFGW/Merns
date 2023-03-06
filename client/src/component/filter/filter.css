@@ -56,7 +56,25 @@
     flex-direction: column;
     gap: var(--spacing-md);
     position: sticky;
-    top: var(--spacing);
-    height: 90vh;
+    top: 85px;
+    height: calc(100vh - 105px);
     overflow: auto;
+}
+
+.filter-panel-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    border-bottom: 1px dashed var(--white);
+    padding-bottom: 5px;
+}
+
+.filter-panel-title > p {
+    font-size: var(--fs-sm);
+    color: var(--orange);
+    cursor: pointer;
+}
+
+.filter-panel-title > h3 {
+    padding-left: 5px;
 }

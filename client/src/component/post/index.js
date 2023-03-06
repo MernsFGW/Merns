@@ -45,8 +45,8 @@ export const Post = ({item}) => {
                         </div>
                     </div>
                     <div className='post-action-information'>
-                        <p>651,000 View</p>
                         <p>{item.likes.length} Upvote</p>
+                        <p>{item.dislikes.length} Downvote</p>
                         <p>651,000 Comment</p>
                     </div>
                 </div>

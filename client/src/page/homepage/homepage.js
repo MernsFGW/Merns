@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Layout, ContentBox, Post, Filter, Modal, CreateIdeaForm, CategoryFilter } from '../../component';
+import { Layout, ContentBox, Post, Filter, Modal, CreateIdeaForm, CategoryFilter, FilterPanel } from '../../component';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Input, Button, List } from 'antd';
 import { loadingIdea } from '../../redux/idea';
 import { useSelector, useDispatch } from 'react-redux';
+
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,7 @@ export const Home = () => {
   const userInfo = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const shouldFetch = useRef(true);
+  // const shouldFetch = useRef(true);
   const ideaList = useSelector(state => state.idea.value);
 
   const getParam = (searchParam) => {
@@ -27,13 +28,11 @@ export const Home = () => {
     return getSearchParam;
   }
 
+  const [key] = searchParams.entries();
+  
   useEffect(() => {
     if (userInfo) {
-      axios.get('http://localhost:3000/api/terms', {
-        headers: {
-          'Authorization': userInfo.token,
-        }
-      })
+      axios.get('http://localhost:3000/api/terms')
         .then(res => setTermList(res.data));
     }
   }, [])
@@ -44,46 +43,27 @@ export const Home = () => {
   }, [])
 
   useEffect(() => {
-    if (shouldFetch.current && !getParam('sort') && !getParam('categoryId')) {
-      shouldFetch.current = false;
+    if (getParam('categoryId')){
+      axios.get(`http://localhost:3000/api/ideas/filter?${getParam('categoryId')}`)
+      .then(res => { dispatch(loadingIdea(res.data));})
+    } else if (getParam('sort')) {
+   
+      axios.get(`http://localhost:3000/api/ideas/sort?${getParam('sort')}`)
+        .then(res => { dispatch(loadingIdea(res.data)) })
+    } else{
       axios.get('http://localhost:3000/api/ideas')
         .then(res => { dispatch(loadingIdea(res.data)) })
         .catch(error => console.log(error));
     }
     setIsLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ideaList.length]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    if (getParam('sort')) {
-      axios.get(`http://localhost:3000/api/ideas/sort?${getParam('sort')}`)
-        .then(res => { dispatch(loadingIdea(res.data)) })
-    }
-    setIsLoading(false);
-  }, [getParam('sort')])
-
-  useEffect(() => {
-    setIsLoading(true);
-    if (getParam('categoryId')){
-      axios.get(`http://localhost:3000/api/ideas/filter?${getParam('categoryId')}`)
-      .then(res => { dispatch(loadingIdea(res.data)); console.log(res.data) })
-    }
-    setIsLoading(false);
-  }, [getParam('categoryId')])
+  }, [ideaList.length, getParam('sort'), getParam('categoryId'), typeof key ]);
+  
 
   return (
     <Layout>
       <div className='layout-panel extend'>
-        <div className='filter-panel'>
-          <ContentBox>
-            <Filter />
-          </ContentBox>
-          <h4>#Categories</h4>
-          <ContentBox>
-            <CategoryFilter categoryList={categoryList} />
-          </ContentBox>
-        </div>
+        <FilterPanel categoryList={categoryList} />
       </div>
       <div className='layout-panel primary'>
         <ContentBox>

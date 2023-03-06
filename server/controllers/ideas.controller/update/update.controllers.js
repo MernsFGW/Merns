@@ -1,7 +1,7 @@
 import errorHandler from '../../../helpers/dbErrorHandler.js';
 import extend from 'lodash/extend.js';
 import formidable from 'formidable';
-
+import cloudinary from '../../../helpers/cloudinary.js';
 
 const update = (req, res) => {
     let form = new formidable.IncomingForm();

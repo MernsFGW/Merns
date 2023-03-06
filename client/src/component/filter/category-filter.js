@@ -1,24 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TagsFilled } from '@ant-design/icons';
 import { useSearchParams } from 'react-router-dom';
 import './filter.css';
 
-export const CategoryFilter = ({ categoryList }) => {
-  const [active, setActive] = useState('');
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const setQueryParams = (searchParam, searchParamValue) => {
-    removeQueryParams(searchParam);
-    setSearchParams(prev => ([...prev.entries(), [searchParam, searchParamValue]]));
-  }
-
-  const removeQueryParams = (searchParam) => {
-    const param = searchParams.get(searchParam);
-    if (param) {
-      searchParams.delete(searchParam);
-      setSearchParams(searchParams);
-    }
-  };
+export const CategoryFilter = ({ categoryList, setQueryParams, removeQueryParams }) => {
 
   return (
     <div className='post-filter-container'>
