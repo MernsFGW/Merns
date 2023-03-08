@@ -7,7 +7,8 @@ import {
     Upload,
     message,
     Input,
-    Select
+    Select,
+    Switch
 } from 'antd';
 import { addIdea } from '../../redux/idea';
 
@@ -23,7 +24,14 @@ const normFile = (e) => {
 
 function getFormData(object) {
     const formData = new FormData();
-    Object.keys(object).forEach(key => formData.append(key, object[key]));
+    Object.keys(object).forEach(key => {
+        if (key === 'incognito' && typeof object[key] === 'undefined') {
+            formData.append(key, false)
+        }
+        else{
+            formData.append(key, object[key])
+        }
+    });
     return formData;
 }
 
@@ -31,9 +39,7 @@ export const CreateIdeaForm = ({ handleClose, termList, categoryList }) => {
     const [isLoading, setIsLoading] = useState(false);
     const user = JSON.parse(localStorage.getItem("user"));
     const dispatch = useDispatch();
-
     const currentDate = new Date();
-
     const ideaTerm = termList.find(term => new Date(term.startDate) < currentDate && currentDate <= new Date(term.endDate));
 
     const options = categoryList.map(item => {
@@ -45,7 +51,7 @@ export const CreateIdeaForm = ({ handleClose, termList, categoryList }) => {
 
     const onFinish = (values) => {
         setIsLoading(true);
-        axios.post(`http://localhost:3000/api/ideas/new/${user.user.id}`, getFormData({...values, termId: ideaTerm._id}))
+        axios.post(`http://localhost:3000/api/ideas/new/${user.user.id}`, getFormData({ ...values, termId: ideaTerm._id }))
             .then(res => {
                 handleClose();
                 dispatch(addIdea(res.data.idea));
@@ -54,6 +60,7 @@ export const CreateIdeaForm = ({ handleClose, termList, categoryList }) => {
             })
             .catch(error => console.log(error));
     };
+
 
     return (
         <Form
@@ -69,6 +76,14 @@ export const CreateIdeaForm = ({ handleClose, termList, categoryList }) => {
             }}
         >
             <h2 className='form-title'>Create new Idea</h2>
+            <Form.Item
+                valuePropName="checked"
+                className='incognito-mode'
+                label={<p><b>Post as Anonymous</b></p>}
+                name="incognito"
+            >
+                <Switch size='small' />
+            </Form.Item>
             <Form.Item
                 label={<p><b>Title</b></p>}
                 name="title"
@@ -100,11 +115,13 @@ export const CreateIdeaForm = ({ handleClose, termList, categoryList }) => {
             </Form.Item>
             <Form.Item
                 label={<p><b>Image</b></p>}
+                required
+                rules={[{ message: 'Please input idea image!' }]}
             >
                 <Form.Item
+                    required
                     name="photo" valuePropName="photo"
                     getValueFromEvent={normFile}
-                    rules={[{ required: true, message: 'Please input idea image!' }]}
                     noStyle
                 >
                     <Upload.Dragger

@@ -133,6 +133,6 @@ h1, h2, h3, h4, h5, p, a {
 .layout-header {
     position: sticky;
     top: 0;
-    z-index: 999;
+    z-index: 99;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

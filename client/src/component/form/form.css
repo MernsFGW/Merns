@@ -23,3 +23,19 @@
     border: 1px dashed #d9d9d9;
     border-radius: 8px;
 }
+
+.incognito-mode > div {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+}
+
+.incognito-mode {
+    margin: 0;
+}
+
+.incognito-mode > div > div {
+    padding-top: 3px;
+    padding-left: 20px;
+    width: unset !important;
+}

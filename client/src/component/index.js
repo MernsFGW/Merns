@@ -6,3 +6,4 @@ export {Filter, CategoryFilter, FilterPanel} from "./filter";
 export {Modal} from "./modal";
 export {CreateIdeaForm, UpdateIdeaForm} from "./form";
 export {CommentBox} from "./comment-box";
+export {MyChart} from "./graph";

@@ -29,8 +29,6 @@ export const FilterPanel = ({categoryList}) => {
         }
     }
 
-    console.log(searchParams.get('sort'));
-
     return (
         <div className='filter-panel'>
             <div className='filter-panel-title'>

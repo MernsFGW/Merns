@@ -106,7 +106,7 @@ export const UpdateIdeaForm = ({ handleClose, setData, initialIdea }) => {
             {changeImage
                 ? <Form.Item
                     rules={[{ required: true, message: 'Please input idea image!' }]}
-                    label={<p><b>Image &nbsp;&nbsp;<Switch size='small' defaultChecked onChange={() => setChangeImage(oldValue => !oldValue)} /></b></p>}
+                    label={<p><b>Image &nbsp;&nbsp;<Switch size='small' onChange={() => setChangeImage(oldValue => !oldValue)} /></b></p>}
                 >
                     <Form.Item
                         name="photo" valuePropName="photo"
@@ -129,7 +129,7 @@ export const UpdateIdeaForm = ({ handleClose, setData, initialIdea }) => {
                 </Form.Item>
                 : <Form.Item
                     style={{width: '338.4px'}}
-                    label={<p><b>Image &nbsp;&nbsp;<Switch size='small' defaultChecked onChange={() => setChangeImage(oldValue => !oldValue)} /></b></p>}
+                    label={<p><b>Image &nbsp;&nbsp;<Switch size='small' onChange={() => setChangeImage(oldValue => !oldValue)} /></b></p>}
                 >
                     <div className='update-image-preview'>
                         <Image height={147.14} src={initialIdea.photo.url} />

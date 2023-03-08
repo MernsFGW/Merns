@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Layout, ContentBox, Post, Filter, Modal, CreateIdeaForm, CategoryFilter, FilterPanel } from '../../component';
+import { Layout, ContentBox, Post, Modal, CreateIdeaForm, FilterPanel, MyChart } from '../../component';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Input, Button, List } from 'antd';
 import { loadingIdea } from '../../redux/idea';
@@ -106,6 +106,7 @@ export const Home = () => {
 
       </div>
       <div className='layout-panel secondary'>
+         <MyChart />
       </div>
     </Layout>
   );

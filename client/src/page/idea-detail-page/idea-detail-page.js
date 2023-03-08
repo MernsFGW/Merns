@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Layout, ContentBox } from '../../component';
 import { Loading } from '../loading-page/loading-page'
 import { Tag, Avatar, Form, Input, Button, Dropdown, Modal as AntModal, message } from 'antd';
-import { LikeFilled, DislikeFilled } from '@ant-design/icons';
-import { EllipsisOutlined } from '@ant-design/icons'
+import { LikeFilled, DislikeFilled, UserOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { CommentBox, Modal, UpdateIdeaForm } from '../../component';
 import { useNavigate, useParams } from 'react-router-dom';
 import { format } from 'date-fns'
@@ -69,11 +68,10 @@ export const IdeaDetail = () => {
                 .then(res => setLike(res.data.likes));
         } else {
             await axios.patch(`http://localhost:3000/api/ideas/${userInfo.user.id}/undislike/${data._id}`)
-            .then(res => setDislike(res.data.dislikes));
+                .then(res => setDislike(res.data.dislikes));
             await axios.patch(`http://localhost:3000/api/ideas/${userInfo.user.id}/like/${data._id}`)
                 .then(res => setLike(res.data.likes));
         }
-
     }
 
     const dislikeIdea = async () => {
@@ -130,15 +128,23 @@ export const IdeaDetail = () => {
                                 <p className='post-detailt-text'>{format(new Date(data.createdAt), "MMM dd, yyyy")}</p>
                                 <p className='post-detailt-text'>-</p>
                                 <p className='post-detailt-text'>651,000 View</p>
-                                <p className='post-detailt-text'>{like.length} <LikeFilled onClick={likeIdea} style={{color: checkLiked() && '#537FE7'}} className='like-btn' /></p>
-                                <p className='post-detailt-text'>{dislike.length} <DislikeFilled onClick={dislikeIdea} style={{color: checkDisliked() && '#FF597B'}} className='dislike-btn' /></p>
+                                <p className='post-detailt-text'>{like.length} <LikeFilled onClick={likeIdea} style={{ color: checkLiked() && '#537FE7' }} className='like-btn' /></p>
+                                <p className='post-detailt-text'>{dislike.length} <DislikeFilled onClick={dislikeIdea} style={{ color: checkDisliked() && '#FF597B' }} className='dislike-btn' /></p>
                             </div>
                         </div>
                         <h1 className='post-detail-title'>{data.title}</h1>
                         <div className='detail-page-user-action'>
                             <div className='detail-page-user'>
-                                <Avatar shape='square' size={40} src={`https://ui-avatars.com/api/?name=${data.userId.fullName}`} />
-                                <p>by {data.userId.fullName}</p>
+                                {data.incognito
+                                    ? <>
+                                        <Avatar shape='square' size={40} icon={<UserOutlined />} />
+                                        <p>by Anonymous</p>
+                                    </>
+                                    : <>
+                                        <Avatar shape='square' size={40} src={`https://ui-avatars.com/api/?name=${data.userId.fullName}`} />
+                                        <p>by {data.userId.fullName}</p>
+                                    </>
+                                }
                             </div>
                             <Dropdown
                                 arrow={true}

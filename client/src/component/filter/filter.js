@@ -25,7 +25,7 @@ export const Filter = ({setQueryParams, removeQueryParams}) => {
   return (
     <div className='post-filter-container'>
       {sortList.map(item => (
-          <button onClick={() =>{ removeQueryParams('categoryId'); setQueryParams('sort', item.type)}} className='post-filter-item'> 
+          <button key={item.type} onClick={() =>{ removeQueryParams('categoryId'); setQueryParams('sort', item.type)}} className='post-filter-item'> 
           {item.icon}
           <div className='filter-desciption'>
             <p className='filter-title'>Most {item.content} post</p>

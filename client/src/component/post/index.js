@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import { Avatar, Tag } from 'antd';
 import { formatDistance } from 'date-fns'
 import { useNavigate } from 'react-router-dom';
+import { UserOutlined } from '@ant-design/icons';
 import './post.css'
 
 export const Post = ({item}) => {
@@ -38,9 +39,12 @@ export const Post = ({item}) => {
                 </div>
                 <div className='post-user-section'>
                     <div className='post-user-wrapper'>
-                        <Avatar size={38} src={`https://ui-avatars.com/api/?name=${item.userId.fullName}`}/>
+                        {item.incognito
+                            ? <Avatar size={38} icon={ <UserOutlined /> } />
+                            : <Avatar size={38} src={`https://ui-avatars.com/api/?name=${item.userId.fullName}`}/>
+                        }
                         <div className='post-user-information'>
-                            <h5>{item.userId.fullName}</h5>
+                            {item.incognito ? <h5>Anonymous</h5> : <h5>{item.userId.fullName}</h5>}
                             <p>{upperCaseFirstLetter(updateDate)}</p>
                         </div>
                     </div>
