@@ -10,6 +10,9 @@ const IdeaSchema = new mongoose.Schema(
             type: String,
             required: "Content is required",
         },
+        incognito: {
+            type: Boolean,
+        },
         userId: {
             type: mongoose.Schema.Types.ObjectId, ref: "User",
             required: "User is required",
