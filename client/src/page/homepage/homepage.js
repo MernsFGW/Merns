@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Layout, ContentBox, Post, Modal, CreateIdeaForm, FilterPanel, MyChart } from '../../component';
+import { Layout, ContentBox, Post, Modal, CreateIdeaForm, FilterPanel, MyChart, Slider } from '../../component';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Input, Button, List } from 'antd';
 import { loadingIdea } from '../../redux/idea';
@@ -17,7 +17,6 @@ export const Home = () => {
   const userInfo = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const shouldFetch = useRef(true);
   const ideaList = useSelector(state => state.idea.value);
 
   const getParam = (searchParam) => {
@@ -29,7 +28,7 @@ export const Home = () => {
   }
 
   const [key] = searchParams.entries();
-  
+
   useEffect(() => {
     if (userInfo) {
       axios.get('http://localhost:3000/api/terms')
@@ -43,22 +42,22 @@ export const Home = () => {
   }, [])
 
   useEffect(() => {
-    if (getParam('categoryId')){
+    if (getParam('categoryId')) {
       axios.get(`http://localhost:3000/api/ideas/filter?${getParam('categoryId')}`)
-      .then(res => { dispatch(loadingIdea(res.data));})
+        .then(res => { dispatch(loadingIdea(res.data)); })
     } else if (getParam('sort')) {
-   
+
       axios.get(`http://localhost:3000/api/ideas/sort?${getParam('sort')}`)
         .then(res => { dispatch(loadingIdea(res.data)) })
-    } else{
+    } else {
       axios.get('http://localhost:3000/api/ideas')
         .then(res => { dispatch(loadingIdea(res.data)) })
         .catch(error => console.log(error));
     }
     setIsLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ideaList.length, getParam('sort'), getParam('categoryId'), typeof key ]);
-  
+  }, [ideaList.length, getParam('sort'), getParam('categoryId'), typeof key]);
+
 
   return (
     <Layout>
@@ -106,7 +105,10 @@ export const Home = () => {
 
       </div>
       <div className='layout-panel secondary'>
-         <MyChart />
+        <div className='monthly-event'>
+          <h3>Monthly Event</h3>
+          <Slider />
+        </div>
       </div>
     </Layout>
   );
