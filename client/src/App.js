@@ -1,9 +1,8 @@
 import React from 'react';
-import { Home, IdeaDetail, Login, Register } from './page';
+import { Home, IdeaDetail, Login, Register, About } from './page';
 import {
   Routes,
-  Route,
-  Navigate
+  Route
 } from 'react-router-dom'
 
 function App() {
@@ -15,8 +14,8 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/ideas/:id' element={<IdeaDetail />} />
         <Route
-          path="/aboutus"
-          element={<Navigate to="/aboutpage.html" />}
+          path="/about"
+          element={<About />}
         />
       </Routes>
     </div>

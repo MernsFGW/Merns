@@ -3,7 +3,6 @@ import {
     UsergroupAddOutlined,
     AudioOutlined,
     BellOutlined,
-    UserOutlined,
     DownOutlined,
     ProjectFilled,
     HomeFilled,
@@ -26,6 +25,7 @@ export const NavBar = () => {
     const navigate = useNavigate();
     const userInfo = JSON.parse(localStorage.getItem('user'));
     const onSearch = (value) => console.log(value);
+    
     const items = [
         {
             key: '1',
@@ -37,6 +37,14 @@ export const NavBar = () => {
         },
         {
             key: '2',
+            label: (
+                <a onClick={() => {navigate("/admin")}} target="_blank" rel="noopener noreferrer">
+                    Admin Page
+                </a>
+            )
+        },
+        {
+            key: '3',
             label: (
                 <a onClick={() => {logoutUser(); navigate("/")}} target="_blank" rel="noopener noreferrer">
                     Logout
