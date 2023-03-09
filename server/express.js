@@ -50,6 +50,12 @@ import getTermRoutes from './routes/term.routes/getId.routes';
 import removeTermRoutes from './routes/term.routes/remove.routes';
 import updateTermRoutes from './routes/term.routes/update.routes';
 
+import createFeedbackRoutes from './routes/feedback.routes/create.routes';
+import updateFeedbackRoutes from './routes/feedback.routes/update.routes';
+import deleteFeedbackRoutes from './routes/feedback.routes/remove.routes';
+import listFeedbackRoutes from './routes/feedback.routes/list.routes';
+import getFeedbackRoutes from './routes/feedback.routes/id.routes';
+
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
 
@@ -110,6 +116,12 @@ app.use('/', listTermsRoutes);
 app.use('/', getTermRoutes);
 app.use('/', removeTermRoutes);
 app.use('/', updateTermRoutes);
+
+app.use('/', createFeedbackRoutes);
+app.use('/', updateFeedbackRoutes);
+app.use('/', deleteFeedbackRoutes);
+app.use('/', listFeedbackRoutes);
+app.use('/', getFeedbackRoutes);
 
 // Catch unauthorised errors
 app.use((err, req, res, next) => {
