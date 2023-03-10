@@ -5,9 +5,9 @@ const list = async (req, res) => {
   try {
     const feedbacks = await Feedback.find();
     res.status(200).json(feedbacks);
-  } catch (error) {
+  } catch (err) {
     return res.status(400).json({
-      error: errorHandler.getErrorMessage(error),
+      error: errorHandler.getErrorMessage(err),
     });
   }
 };

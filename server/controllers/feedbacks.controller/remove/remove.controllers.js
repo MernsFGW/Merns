@@ -3,17 +3,14 @@ import Feedback from "./../../../models/feedback.model.js";
 
 const remove = async (req, res) => {
   try {
-    const feedback = await Feedback.findByIdAndDelete(req.params.id);
+    const feedback = await Feedback.findByIdAndDelete(feedbackId);
     if (!feedback) {
-      return res.status(404).send();
+      return res.status(404).json({ message: "Feedback not found" });
     }
-    res.status(200).json({
-      feedback: feedback._id,
-      message: "Deleted feedback Successfully",
-    });
-  } catch (err) {
+    res.json({ message: "Feedback removed successfully" });
+  } catch (error) {
     return res.status(400).json({
-      error: errorHandler.getErrorMessage(err),
+      error: errorHandler.getErrorMessage(error),
     });
   }
 };

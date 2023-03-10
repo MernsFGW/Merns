@@ -2,19 +2,18 @@ import Feedback from "./../../../models/feedback.model.js";
 
 const feedbackById = async (req, res, next, id) => {
   try {
-    const feedback = await Feedback.findById(req.params.id)
-      .populate("author", "-password")
+    const feedback = await Feedback.findById(feedbackId)
+      .populate("ideaId")
+      .populate("author")
       .populate("parentFeedbackId");
     if (!feedback) {
-      return res.status(400).json({
-        error: "Feedback not found",
-      });
+      return res.status(404).send();
     }
-    req.information = feedback;
+    req.feedback = feedback;
     next();
   } catch (err) {
     return res.status(400).json({
-      error: "Could not retrieve feedback",
+      error: errorHandler.getErrorMessage(err),
     });
   }
 };
