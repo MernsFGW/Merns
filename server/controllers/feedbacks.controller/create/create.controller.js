@@ -3,7 +3,7 @@ import errorHandler from "../../../helpers/dbErrorHandler.js";
 
 const create = async (req, res) => {
   try {
-    const feedback = new Feedback({ ideaId, author, parentFeedbackId });
+    const feedback = new Feedback(req.body);
     const savedFeedback = await feedback.save();
     res.status(200).json(savedFeedback);
   } catch (err) {
