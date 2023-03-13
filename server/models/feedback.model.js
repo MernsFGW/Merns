@@ -18,6 +18,10 @@ const FeedbackSchema = new mongoose.Schema({
       required: false,
     },
   ],
+  content: {
+    type: String,
+    required: true,
+  },
 });
 
 export default mongoose.model("Feedback", FeedbackSchema);
