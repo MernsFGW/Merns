@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, IdeaDetail, Login, Register } from './page';
+import { Home, IdeaDetail, Login, Register, Admin } from './page';
 import {
   Routes,
   Route,
@@ -14,6 +14,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/ideas/:id' element={<IdeaDetail />} />
+        <Route path='/admin' element={<Admin />} />
         <Route
           path="/aboutus"
           element={<Navigate to="/aboutpage.html" />}
