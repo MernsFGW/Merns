@@ -75,8 +75,9 @@ export const Home = () => {
               : <Avatar size={38} icon={<UserOutlined />} />
             }
             <Input
-              disabled
-              style={{ borderColor: 'var(--sub-contrast-color)', backgroundColor: 'var(--sub-contrast-color)' }}
+              
+              onClick={userInfo ? (() => setIsOpen(true)) : (() => navigate("/login"))} type="primary"
+              style={{ borderColor: 'var(--sub-contrast-color)', backgroundColor: 'var(--sub-contrast-color)', cursor: 'pointer' }}
               size='large' placeholder="Let's share what going on your mind..." />
             <Button onClick={userInfo ? (() => setIsOpen(true)) : (() => navigate("/login"))} type="primary">Create Post</Button>
           </div>

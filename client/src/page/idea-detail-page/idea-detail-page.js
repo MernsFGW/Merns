@@ -87,13 +87,19 @@ export const IdeaDetail = () => {
     }
 
     const checkLiked = () => {
-        const isLike = like.find(like => like === userInfo.user.id);
-        return isLike;
+        if(userInfo) {
+            const isLike = like.find(like => like === userInfo.user.id);
+            return isLike;
+        }
+        return undefined;
     };
 
     const checkDisliked = () => {
-        const isDislike = dislike.find(dislike => dislike === userInfo.user.id);
-        return isDislike;
+        if(userInfo) {
+            const isDislike = dislike.find(dislike => dislike === userInfo.user.id);
+            return isDislike;
+        }
+        return undefined;
     }
 
     if (loading) return <Loading />;
