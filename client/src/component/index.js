@@ -9,3 +9,4 @@ export {CommentBox} from "./comment-box";
 export {MyChart} from "./graph";
 export {NavigationAdmin} from "./navigation-admin";
 export {Profile} from "./profile";
+export {PolicyModal} from "./modal/policy";
