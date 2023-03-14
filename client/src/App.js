@@ -1,9 +1,8 @@
 import React from 'react';
-import { Home, IdeaDetail, Login, Register, Admin } from './page';
+import { Home, IdeaDetail, Login, Register, About, Admin, UserProfile } from './page';
 import {
   Routes,
-  Route,
-  Navigate
+  Route
 } from 'react-router-dom'
 
 function App() {
@@ -15,10 +14,8 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/ideas/:id' element={<IdeaDetail />} />
         <Route path='/admin' element={<Admin />} />
-        <Route
-          path="/aboutus"
-          element={<Navigate to="/aboutpage.html" />}
-        />
+        <Route path="/about" element={<About />} />
+        <Route path='/users/:id' element={<UserProfile /> } />
       </Routes>
     </div>
 

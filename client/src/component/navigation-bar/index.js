@@ -1,9 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import {
     UsergroupAddOutlined,
     AudioOutlined,
     BellOutlined,
-    UserOutlined,
     DownOutlined,
     ProjectFilled,
     HomeFilled,
@@ -26,17 +26,26 @@ export const NavBar = () => {
     const navigate = useNavigate();
     const userInfo = JSON.parse(localStorage.getItem('user'));
     const onSearch = (value) => console.log(value);
+    
     const items = [
         {
             key: '1',
             label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+                <a onClick={() => {navigate(`/users/${userInfo.user.id}`)}} target="_blank" rel="noopener noreferrer">
                     User Profile
                 </a>
             ),
         },
         {
             key: '2',
+            label: (
+                <a onClick={() => {navigate("/admin")}} target="_blank" rel="noopener noreferrer">
+                    Admin Page
+                </a>
+            )
+        },
+        {
+            key: '3',
             label: (
                 <a onClick={() => {logoutUser(); navigate("/")}} target="_blank" rel="noopener noreferrer">
                     Logout

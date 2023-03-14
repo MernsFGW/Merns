@@ -10,11 +10,11 @@ export const Profile = () => {
   return (
     <>
       <Row>
-        <Col span={9}>
+        <Col span={7}>
           <div className='user-avatar'>
               {userInfo
-              ? <Avatar size={200} src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`} />
-              : <Avatar size={200} icon={<UserOutlined />} />
+              ? <Avatar size={170} src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`} />
+              : <Avatar size={170} icon={<UserOutlined />} />
               }
           </div>
         </Col>
@@ -23,8 +23,8 @@ export const Profile = () => {
             <div className='user-infomation'>
               <h1>{userInfo.user.fullName}</h1>
               <h3>
-              <TeamOutlined /> 
-              {userInfo.user.department.title}
+              <TeamOutlined />&nbsp;&nbsp;
+              {userInfo.user.department.title} department
               </h3>
             </div>
           </Row>
@@ -34,7 +34,7 @@ export const Profile = () => {
             <Col span={8}>
               <div style={{display: 'flex'}}>
                 <div style={{padding: '3px 10px 0 0'}}>
-                  <ClockCircleOutlined style={{fontSize: '32px'}} />
+                  <ClockCircleOutlined style={{fontSize: '30px', color: 'white'}} />
                 </div>
                 <div>
                   <p><strong>3+ Years Job</strong></p>
@@ -45,7 +45,7 @@ export const Profile = () => {
             <Col span={8}>
               <div style={{display: 'flex'}}>
                 <div style={{padding: '3px 10px 0 0'}}>
-                  <TrophyOutlined style={{fontSize: '32px'}} />
+                  <TrophyOutlined style={{fontSize: '30px', color: 'white'}} />
                 </div>
                 <div>
                   <p><strong>5 Certificates</strong></p>
@@ -56,7 +56,7 @@ export const Profile = () => {
             <Col span={8}>
               <div style={{display: 'flex'}}>
                 <div style={{padding: '3px 10px 0 0'}} >
-                  <ReconciliationOutlined style={{fontSize: '32px'}} />
+                  <ReconciliationOutlined style={{fontSize: '30px', color: 'white'}} />
                 </div>
                 <div>
                   <p><strong>2 Intership</strong></p>
