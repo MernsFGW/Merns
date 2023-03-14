@@ -22,6 +22,9 @@ const FeedbackSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  incognito: {
+    type: Boolean,
+  },
 });
 
 export default mongoose.model("Feedback", FeedbackSchema);

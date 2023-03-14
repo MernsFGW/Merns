@@ -14,11 +14,10 @@ import findIdeaByIdRoutes from './routes/idea.routes/id.routes';
 import sortIdeaRoutes from './routes/idea.routes/sort.routes';
 import likeIdeaRoutes from './routes/idea.routes/like.routes';
 import dislikeIdeaRoutes from './routes/idea.routes/dislike.routes';
-
 import unlikeIdeaRoutes from './routes/idea.routes/unlike.routes';
 import undislikeIdeaRoutes from './routes/idea.routes/undislike.routes';
 import filterIdeaRoutes from './routes/idea.routes/filter.routes';
-
+import listbyUserIdRoutes from './routes/idea.routes/listbyuserid.routes';
 
 import createCategoryRoutes from './routes/category.routes/create.routes';
 import listCategoriesRoutes from './routes/category.routes/list.routes';
@@ -59,7 +58,6 @@ import getFeedbackRoutes from './routes/feedback.routes/id.routes';
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
 
-
 // parse body params and attache them to req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -85,6 +83,7 @@ app.use('/', dislikeIdeaRoutes);
 app.use('/', unlikeIdeaRoutes);
 app.use('/', undislikeIdeaRoutes);
 app.use('/', filterIdeaRoutes);
+app.use('/', listbyUserIdRoutes);
 
 
 app.use('/', createCategoryRoutes);

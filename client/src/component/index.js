@@ -8,3 +8,5 @@ export {CreateIdeaForm, UpdateIdeaForm} from "./form";
 export {CommentBox} from "./comment-box";
 export {MyChart} from "./graph";
 export {Slider} from "./carousel";
+export {NavigationAdmin} from "./navigation-admin";
+export {Profile} from "./profile";

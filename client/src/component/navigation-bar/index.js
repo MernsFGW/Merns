@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import {
     UsergroupAddOutlined,
@@ -30,7 +31,7 @@ export const NavBar = () => {
         {
             key: '1',
             label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+                <a onClick={() => {navigate(`/users/${userInfo.user.id}`)}} target="_blank" rel="noopener noreferrer">
                     User Profile
                 </a>
             ),

@@ -124,7 +124,7 @@ export const IdeaDetail = () => {
                 <ContentBox>
                     <div className='post-detail-wrapper'>
                         <div className='image-container'>
-                            <img className='post-detail-image' src={data.photo.url} />
+                            <img alt='' className='post-detail-image' src={data.photo.url} />
                         </div>
                         <div className='social-info-wrapper'>
                             <div className='post-tag-list'>
