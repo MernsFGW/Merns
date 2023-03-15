@@ -6,10 +6,10 @@ const FeedbackSchema = new mongoose.Schema({
     ref: "Idea",
     required: true,
   },
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
+  userId: {
+    type: Object,
     ref: "User",
-    required: true,
+    required: false,
   },
   parentFeedbackId: [
     {

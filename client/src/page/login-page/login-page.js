@@ -1,16 +1,15 @@
 import React, { useState, useEffect} from "react";
-import { ContentBox } from "../../component";
+import { ContentBox, PolicyModal } from "../../component";
 import axios from "axios";
 import { Input, Button, Typography, Modal, Checkbox } from 'antd';
 import { EyeTwoTone, EyeInvisibleOutlined, CaretLeftOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import './login-page.css';
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { loadingUser } from '../../redux/user';
 import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 export const Login = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [values, setValues] = useState({
         username: '',
         password: '',
@@ -25,7 +24,6 @@ export const Login = () => {
     const handleChange = name => event => {
         setValues({...values, [name]: event.target.value})
     };
-
 
     const clickSubmit = async () => {
         const user = {
@@ -101,7 +99,8 @@ export const Login = () => {
                             <ExclamationCircleOutlined className="error"/>  {values.error}
                         </Typography>)
                     }
-                    <Checkbox className="check-box" onChange={onChange}><a to="/policy">Accept User Policy</a></Checkbox>
+                    <Checkbox className="check-box" onChange={onChange}><a onClick={() => setIsModalOpen(true)}>Accept User Policy</a></Checkbox>
+                    <PolicyModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} /> 
                     <Button type="primary" disabled={disabledButton} onClick={clickSubmit}>Sign in</Button>
                 </form>
                 <Modal title="Basic Modal" open={values.openNotification} onOk={handleOk} onCancel={handleCancel}>

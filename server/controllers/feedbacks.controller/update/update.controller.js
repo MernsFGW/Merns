@@ -2,7 +2,7 @@ import errorHandler from "../../../helpers/dbErrorHandler.js";
 import Feedback from "../../../models/feedback.model.js";
 
 const update = async (req, res) => {
-  const feedbackId = req.params.id;
+  const feedbackId = req.params.feedbackId;
   const { content } = req.body;
 
   try {

@@ -1,10 +1,10 @@
 import Feedback from "./../../../models/feedback.model.js";
 
-const feedbackById = async (req, res, next, id) => {
+const feedbackById = async (req, res, next, feedbackId) => {
   try {
     const feedback = await Feedback.findById(feedbackId)
       .populate("ideaId")
-      .populate("author")
+      .populate("userId")
       .populate("parentFeedbackId");
     if (!feedback) {
       return res.status(404).send();

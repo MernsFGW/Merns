@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { InboxOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import {
