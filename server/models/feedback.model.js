@@ -6,8 +6,8 @@ const FeedbackSchema = new mongoose.Schema({
     ref: "Idea",
     required: true,
   },
-  author: {
-    type: string,
+  userId: {
+    type: Object,
     ref: "User",
     required: false,
   },
@@ -21,6 +21,9 @@ const FeedbackSchema = new mongoose.Schema({
   content: {
     type: String,
     required: true,
+  },
+  incognito: {
+    type: Boolean,
   },
 });
 

@@ -1,70 +1,113 @@
 import { VegaLite } from 'react-vega';
 
-const data = {
-  values: [
-    { department: 'Marketing', users: 10 },
-    { department: 'Sales', users: 15 },
-    { department: 'Engineering', users: 20 },
-    { department: 'Product', users: 12 },
-    { department: 'Design', users: 8 },
-  ],
-  total_users: null,
-};
+export const MyChart = () => {
 
-// Calculate the total number of users
-data.total_users = data.values.reduce((total, { users }) => total + users, 0);
-
-const pieSpec = {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "A simple pie chart that shows the number of users in each department",
-  "data": data,
-  "mark": { "type": "arc", "innerRadius": 0, "outerRadius": 120 },
-  "encoding": {
-    "theta": { "field": "users", "type": "quantitative", "title": "Users" },
-    "color": { "field": "department", "type": "nominal", "title": "Department" },
-    "tooltip": [
-      { "field": "users", "type": "quantitative", "title": "Users" },
-      { "field": "percentage", "type": "quantitative", "title": "Percentage of Total Users", "format": ".1%" }
-    ]
-  }
-};
-
-const labelSpec = {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Labels for a pie chart",
-  "data": data,
-  "mark": {
-    "type": "text",
-    "radius": 120,
-    "theta": "mid",
-    "align": "center",
-    "baseline": "middle",
-    "dx": 5
-  },
-  "encoding": {
-    "text": { "field": "department", "type": "nominal", "title": "Department" },
-    "theta": {
-      "field": "users",
-      "type": "quantitative",
-      "aggregate": "sum",
-      "stack": true,
-      "title": "Percentage",
-      "format": ".1%"
-    },
-    "color": { "value": "black" },
-    "tooltip": [
-      { "field": "users", "type": "quantitative", "title": "Users" },
-      { "as": "percentage", "calculate": "datum.users / data.total_users * 100", "format": ".1%", "title": "Percentage of Total Users" }
-    ]
-  }
-};
-
-const spec = {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "layer": [
-    pieSpec,
-    labelSpec
+  const data = [
+    { "Department": "Marketing", "Members": 23 },
+    { "Department": "Sales", "Members": 32 },
+    { "Department": "Human Resources", "Members": 17 },
+    { "Department": "Finance", "Members": 28 },
+    { "Department": "Operations", "Members": 100 }
   ]
-};
 
-export const MyChart = () => <VegaLite spec={spec} />;
+  const spec = {
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "description": "A basic bar chart example, with value labels shown upon mouse hover.",
+    "width": 400,
+    "height": 200,
+    "padding": 5,
+
+    "data": [
+      {
+        "name": "table",
+        "values": [
+          { "category": "A", "amount": 28 },
+          { "category": "B", "amount": 55 },
+          { "category": "C", "amount": 43 },
+          { "category": "D", "amount": 91 },
+          { "category": "E", "amount": 81 },
+          { "category": "F", "amount": 53 },
+          { "category": "G", "amount": 19 },
+          { "category": "H", "amount": 87 }
+        ]
+      }
+    ],
+
+    "signals": [
+      {
+        "name": "tooltip",
+        "value": {},
+        "on": [
+          { "events": "rect:mouseover", "update": "datum" },
+          { "events": "rect:mouseout", "update": "{}" }
+        ]
+      }
+    ],
+
+    "scales": [
+      {
+        "name": "xscale",
+        "type": "band",
+        "domain": { "data": "table", "field": "category" },
+        "range": "width",
+        "padding": 0.05,
+        "round": true
+      },
+      {
+        "name": "yscale",
+        "domain": { "data": "table", "field": "amount" },
+        "nice": true,
+        "range": "height"
+      }
+    ],
+
+    "axes": [
+      { "orient": "bottom", "scale": "xscale" },
+      { "orient": "left", "scale": "yscale" }
+    ],
+
+    "marks": [
+      {
+        "type": "rect",
+        "from": { "data": "table" },
+        "encode": {
+          "enter": {
+            "x": { "scale": "xscale", "field": "category" },
+            "width": { "scale": "xscale", "band": 1 },
+            "y": { "scale": "yscale", "field": "amount" },
+            "y2": { "scale": "yscale", "value": 0 }
+          },
+          "update": {
+            "fill": { "value": "steelblue" }
+          },
+          "hover": {
+            "fill": { "value": "#FF4401" }
+          }
+        }
+      },
+      {
+        "type": "text",
+        "encode": {
+          "enter": {
+            "align": { "value": "center" },
+            "baseline": { "value": "bottom" },
+            "fill": { "value": "#fff" }
+          },
+          "update": {
+            "x": { "scale": "xscale", "signal": "tooltip.category", "band": 0.5 },
+            "y": { "scale": "yscale", "signal": "tooltip.amount", "offset": -2 },
+            "text": { "signal": "tooltip.amount" },
+            "fillOpacity": [
+              { "test": "datum === tooltip", "value": 0 },
+              { "value": 1 }
+            ]
+          }
+        }
+      }
+    ]
+  };
+
+  return (
+    <VegaLite spec={spec} />
+  )
+} 

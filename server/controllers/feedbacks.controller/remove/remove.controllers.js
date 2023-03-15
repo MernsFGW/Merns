@@ -3,6 +3,7 @@ import Feedback from "./../../../models/feedback.model.js";
 
 const remove = async (req, res) => {
   try {
+    const feedbackId = req.params.feedbackId;
     const feedback = await Feedback.findByIdAndDelete(feedbackId);
     if (!feedback) {
       return res.status(404).json({ message: "Feedback not found" });

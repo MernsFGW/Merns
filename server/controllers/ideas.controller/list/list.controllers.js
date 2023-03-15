@@ -4,6 +4,7 @@ import Idea from './../../../models/idea.model';
 const list = async (req, res) => {
     try {
       let ideas = await Idea.find()
+                  .sort({"createdAt": -1})
                   .populate('like')
                   .populate('dislike')
                   .populate('categoryId', 'title')

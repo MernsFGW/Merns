@@ -4,7 +4,7 @@ import errorHandler from "../../../helpers/dbErrorHandler.js";
 
 const create = async (req, res) => {
   try {
-    const { ideaId, content, userId } = req.body;
+    const { ideaId, content, userId, incognito } = req.body;
 
     const user = await User.findById(userId);
 
@@ -14,12 +14,13 @@ const create = async (req, res) => {
       });
     }
 
-    const { fullName, departmentId, roleId } = user;
+    const { fullName, departmentId, roleId, _id } = user;
 
     let feedback = new Feedback({
       ideaId,
-      author: { _id: userId, fullName, departmentId, roleId },
+      userId: { _id , fullName, departmentId, roleId },
       content,
+      incognito,
     });
 
     const savedFeedback = await feedback.save();

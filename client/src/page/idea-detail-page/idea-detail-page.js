@@ -1,9 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
 import { Layout, ContentBox } from '../../component';
 import { Loading } from '../loading-page/loading-page'
-import { Tag, Avatar, Form, Input, Button, Dropdown, Modal as AntModal, message } from 'antd';
+import { Tag, Avatar, Dropdown, Modal as AntModal, message } from 'antd';
 import { LikeFilled, DislikeFilled, UserOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { CommentBox, Modal, UpdateIdeaForm } from '../../component';
+import { CommentBox, Modal, UpdateIdeaForm, CommentForm } from '../../component';
 import { useNavigate, useParams } from 'react-router-dom';
 import { format } from 'date-fns'
 import { removeIdea } from '../../redux/idea';
@@ -36,9 +37,6 @@ export const IdeaDetail = () => {
             key: 'Remove',
         },
     ];
-    const onFinish = (values) => {
-        console.log('Success:', values);
-    };
 
     useEffect(() => {
         axios.get(`http://localhost:3000/api/ideas/${id}`)
@@ -87,13 +85,19 @@ export const IdeaDetail = () => {
     }
 
     const checkLiked = () => {
-        const isLike = like.find(like => like === userInfo.user.id);
-        return isLike;
+        if (userInfo) {
+            const isLike = like.find(like => like === userInfo.user.id);
+            return isLike;
+        }
+        return undefined;
     };
 
     const checkDisliked = () => {
-        const isDislike = dislike.find(dislike => dislike === userInfo.user.id);
-        return isDislike;
+        if (userInfo) {
+            const isDislike = dislike.find(dislike => dislike === userInfo.user.id);
+            return isDislike;
+        }
+        return undefined;
     }
 
     if (loading) return <Loading />;
@@ -118,7 +122,7 @@ export const IdeaDetail = () => {
                 <ContentBox>
                     <div className='post-detail-wrapper'>
                         <div className='image-container'>
-                            <img className='post-detail-image' src={data.photo.url} />
+                            <img alt='' className='post-detail-image' src={data.photo.url} />
                         </div>
                         <div className='social-info-wrapper'>
                             <div className='post-tag-list'>
@@ -127,7 +131,7 @@ export const IdeaDetail = () => {
                             <div className='post-action-information detail-page-action'>
                                 <p className='post-detailt-text'>{format(new Date(data.createdAt), "MMM dd, yyyy")}</p>
                                 <p className='post-detailt-text'>-</p>
-                                <p className='post-detailt-text'>651,000 View</p>
+                                <p className='post-detailt-text'>651,000 Feedbacks</p>
                                 <p className='post-detailt-text'>{like.length} <LikeFilled onClick={likeIdea} style={{ color: checkLiked() && '#537FE7' }} className='like-btn' /></p>
                                 <p className='post-detailt-text'>{dislike.length} <DislikeFilled onClick={dislikeIdea} style={{ color: checkDisliked() && '#FF597B' }} className='dislike-btn' /></p>
                             </div>
@@ -167,29 +171,7 @@ export const IdeaDetail = () => {
                 <ContentBox>
                     <div className='comment-section'>
                         <h3>Feedbacks</h3>
-                        {userInfo
-                            ? <Form
-                                className='create-comment-form'
-                                onFinish={onFinish}
-                                style={{ width: '100%', gap: 20 }}
-                                layout='inline'
-                            >
-                                <Form.Item
-                                    colon={false}
-                                    label={<Avatar size={40} src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`} />}
-                                    name="comment"
-                                    style={{ flex: '2' }}
-                                >
-                                    <Input size='large' placeholder='Leave your comment here...' />
-                                </Form.Item>
-                                <Form.Item>
-                                    <Button size='large' type="primary" htmlType="submit">
-                                        Comment
-                                    </Button>
-                                </Form.Item>
-                            </Form>
-                            : ''
-                        }
+                        {userInfo ? <CommentForm userInfo={userInfo} ideaId={id} /> : ''}
                         <CommentBox></CommentBox>
                     </div>
                 </ContentBox>

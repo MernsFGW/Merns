@@ -64,7 +64,7 @@
 .filter-panel-title {
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: flex-end;
     border-bottom: 1px dashed var(--white);
     padding-bottom: 5px;
 }
