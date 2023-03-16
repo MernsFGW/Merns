@@ -6,7 +6,7 @@ const ideaById = async (req, res, next, id) => {
                             .populate('likes')
                             .populate('dislikes')
                             .populate('categoryId', 'title')
-                            .populate('userId', 'fullName avatar').exec();
+                            .populate('userId', 'username fullName avatar').exec();
         if (!idea) 
             return res.status(400).json({
                 error: "Idea not found"
