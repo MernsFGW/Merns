@@ -1,6 +1,6 @@
 import errorHandler from "../../../helpers/dbErrorHandler.js";
 import Feedback from "../../../models/feedback.model";
-import createCsvWriter from "csv-writer";
+import {Blob} from 'buffer';
 
 const download = async (req, res) => {
     const { ideaId, parentId } = req.params;
@@ -17,24 +17,28 @@ const download = async (req, res) => {
         }
         const feedbacks = await Feedback.find(conditions)
             .populate("userId", "username")
-            .populate("parentFeedbackId");
-        const fileName = `data_feedbacks.csv`;
-        const csvWriter = createCsvWriter.createObjectCsvWriter({
-            path: fileName,
-            header: [
-                { id: "content", title: "Content" },
-                { id: "createdAt", title: "Created At" },
-                { id: "updatedAt", title: "Updated At" },
-                { id: "incognito", title: "Incognito" },
-                { id: "userId", title: "User ID" },
-                { id: "parentFeedbackId", title: "Parent Feedback ID" },
-            ],
+            .populate("parentFeedbackId")
+            .lean();
+        const records = feedbacks.map((feedback) => {
+            return {
+                content: feedback.content,
+                incognito: feedback.incognito,
+                userId: feedback.userId._id,
+                userName: feedback.userId.username,
+                parentFeedbackId: feedback.parentFeedbackId[0]?._id,
+            };
         });
-        await csvWriter.writeRecords(feedbacks);
-        res.download(fileName);
+        const header = Object.keys(records[0]).toString();
+        const main = records.map(record => Object.values(record).toString());
+        const csv = [header, ...main].join("\n");
+        const blob = new Blob([csv], {type: "application/csv"});
+        res.setHeader("Content-Disposition", "attachment; filename=feedbacks.csv");
+        res.set("Content-Type", "text/csv");
+        res.status(200).send(blob);
     } catch (error) {
+        console.log(error)
         return res.status(400).json({
-            error: errorHandler.getErrorMessage(err),
+            error: errorHandler.getErrorMessage(error),
         });
     }
 }

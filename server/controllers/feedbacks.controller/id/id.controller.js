@@ -1,3 +1,4 @@
+import errorHandler from "../../../helpers/dbErrorHandler.js";
 import Feedback from "./../../../models/feedback.model.js";
 
 const feedbackById = async (req, res, next, feedbackId) => {

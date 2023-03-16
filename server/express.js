@@ -117,12 +117,12 @@ app.use('/', getTermRoutes);
 app.use('/', removeTermRoutes);
 app.use('/', updateTermRoutes);
 
+app.use('/', downloadFeedbackRoutes);
 app.use('/', createFeedbackRoutes);
 app.use('/', updateFeedbackRoutes);
 app.use('/', deleteFeedbackRoutes);
 app.use('/', listFeedbackRoutes);
 app.use('/', getFeedbackRoutes);
-app.use('/', downloadFeedbackRoutes);
 
 // Catch unauthorised errors
 app.use((err, req, res, next) => {

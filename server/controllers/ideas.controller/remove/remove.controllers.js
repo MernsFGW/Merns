@@ -4,22 +4,24 @@ import cloudinary from '../../../helpers/cloudinary.js';
 const remove = async (req, res) => {
     try {
         let idea = req.information;
-        let public_id = idea.photo.public_id;
-        let url = idea.photo.url;
-        let image;
-        const photoResult = await cloudinary.uploader
-            .destroy(public_id, (err, result) => {
-                if (err) {
-                    throw errorHandler.getErrorMessage(err)
-                } else {
-                    image = result;
+        if(Object.keys(idea.photo).length > 0){
+            let public_id = idea.photo.public_id;
+            let url = idea.photo.url;
+            let image;
+            const photoResult = await cloudinary.uploader
+                .destroy(public_id, (err, result) => {
+                    if (err) {
+                        throw errorHandler.getErrorMessage(err)
+                    } else {
+                        image = result;
+                    }
                 }
-            }
             );
+        }
         let deletedIdea = await idea.remove();
         res.status(200).json({
             idea: deletedIdea._id,
-            image: image,
+            image: image?image:undefined,
             message: "Deleted idea Successfully"
         });
     } catch (err) {
