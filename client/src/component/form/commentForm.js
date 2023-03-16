@@ -19,7 +19,11 @@ export const CommentForm = ({ userInfo, ideaId }) => {
     const onFinish = (values) => {
         setIsLoading(true);
         axios.post('http://localhost:3000/api/new/feedbacks', mutateData(values))
-            .then(res => { message.success('Comment success!'); setIsLoading(false); form.resetFields(); });
+            .then(res => { 
+                console.log(res.status);
+                console.log(res.data);
+                message.success('Comment success!'); setIsLoading(false); form.resetFields(); 
+            });
 
     };
 
