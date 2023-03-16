@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Avatar, Input, Button, Switch, message } from 'antd';
 import axios from 'axios';
 
-export const CommentForm = ({ userInfo, ideaId }) => {
+export const CommentForm = ({ userInfo, ideaId, setList }) => {
     const [incognito, setIncognito] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [form] = Form.useForm();
@@ -19,7 +19,7 @@ export const CommentForm = ({ userInfo, ideaId }) => {
     const onFinish = (values) => {
         setIsLoading(true);
         axios.post('http://localhost:3000/api/new/feedbacks', mutateData(values))
-            .then(res => { message.success('Comment success!'); setIsLoading(false); form.resetFields(); });
+            .then(res => { message.success('Comment success!'); setIsLoading(false); setList(oldArray => [...oldArray, res.data]); form.resetFields(); });
 
     };
 
