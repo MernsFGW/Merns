@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Avatar, Input, Button, Switch, message } from 'antd';
 import axios from 'axios';
+import emailjs from 'emailjs-com';
 
 export const CommentForm = ({ userInfo, ideaId, setList }) => {
     const [incognito, setIncognito] = useState(false);
@@ -16,11 +17,25 @@ export const CommentForm = ({ userInfo, ideaId, setList }) => {
         }
     }
 
+    function returnParamsTemplate(data) {
+        return {
+            to_name: `${data.ideaId.userId.username}`,
+            from_name: "MERN system",
+            message: `${userInfo.user.fullName} commented to your idea (${data.ideaId.content})\n
+                      With content: ${data.content}\n
+                `
+        }
+    }
+
+
     const onFinish = (values) => {
         setIsLoading(true);
         axios.post('http://localhost:3000/api/new/feedbacks', mutateData(values))
-            .then(res => { message.success('Comment success!'); setIsLoading(false); setList(oldArray => [...oldArray, res.data]); form.resetFields(); });
-
+            .then(res => { 
+                    if(res.status == '200') {
+                      emailjs.send("service_j4lt9sj","template_rclelrs", returnParamsTemplate(res.data), "U_SRsR_nYGeEwDxFb");
+                    } 
+                    message.success('Comment success!'); setIsLoading(false); setList(oldArray => [...oldArray, res.data]); form.resetFields(); });
     };
 
     return (
