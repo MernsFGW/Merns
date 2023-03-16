@@ -54,6 +54,7 @@ import updateFeedbackRoutes from './routes/feedback.routes/update.routes';
 import deleteFeedbackRoutes from './routes/feedback.routes/remove.routes';
 import listFeedbackRoutes from './routes/feedback.routes/list.routes';
 import getFeedbackRoutes from './routes/feedback.routes/id.routes';
+import downloadFeedbackRoutes from "./routes/feedback.routes/download.routes"
 
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
@@ -121,6 +122,7 @@ app.use('/', updateFeedbackRoutes);
 app.use('/', deleteFeedbackRoutes);
 app.use('/', listFeedbackRoutes);
 app.use('/', getFeedbackRoutes);
+app.use('/', downloadFeedbackRoutes);
 
 // Catch unauthorised errors
 app.use((err, req, res, next) => {
