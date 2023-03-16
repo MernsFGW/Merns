@@ -3,7 +3,7 @@ import { Form, Avatar, Input, Button, Switch, message } from 'antd';
 import axios from 'axios';
 import emailjs from 'emailjs-com';
 
-export const CommentForm = ({ userInfo, ideaId }) => {
+export const CommentForm = ({ userInfo, ideaId, setList }) => {
     const [incognito, setIncognito] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [form] = Form.useForm();
@@ -32,12 +32,10 @@ export const CommentForm = ({ userInfo, ideaId }) => {
         setIsLoading(true);
         axios.post('http://localhost:3000/api/new/feedbacks', mutateData(values))
             .then(res => { 
-                if(res.status == '200') {
-                    emailjs.send("service_j4lt9sj","template_rclelrs", returnParamsTemplate(res.data), "U_SRsR_nYGeEwDxFb");
-                }
-                message.success('Comment success!'); setIsLoading(false); form.resetFields(); 
-            });
-
+                    if(res.status == '200') {
+                      emailjs.send("service_j4lt9sj","template_rclelrs", returnParamsTemplate(res.data), "U_SRsR_nYGeEwDxFb");
+                    } 
+                    message.success('Comment success!'); setIsLoading(false); setList(oldArray => [...oldArray, res.data]); form.resetFields(); });
     };
 
     return (
