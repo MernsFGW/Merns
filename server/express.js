@@ -18,6 +18,7 @@ import unlikeIdeaRoutes from './routes/idea.routes/unlike.routes';
 import undislikeIdeaRoutes from './routes/idea.routes/undislike.routes';
 import filterIdeaRoutes from './routes/idea.routes/filter.routes';
 import listbyUserIdRoutes from './routes/idea.routes/listbyuserid.routes';
+import downloadIdeaRoutes from './routes/idea.routes/download.routes';
 
 import createCategoryRoutes from './routes/category.routes/create.routes';
 import listCategoriesRoutes from './routes/category.routes/list.routes';
@@ -70,7 +71,7 @@ app.use(helmet());
 app.use(cors());
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
-
+app.use('/', downloadIdeaRoutes)
 app.use('/', sortIdeaRoutes);
 app.use('/', filterIdeaRoutes);
 app.use('/', createIdeaRoutes);
