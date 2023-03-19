@@ -3,6 +3,6 @@ import feedbackCtrl from "../../controllers/feedbacks.controller/list/list.contr
 
 const router = express.Router();
 
-router.route("/api/feedbacks").get(feedbackCtrl.list);
+router.route("/api/feedbacks").get(feedbackCtrl.listFeedbacks);
 
 export default router;

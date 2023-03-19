@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { InboxOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import {
@@ -14,6 +14,7 @@ import { addIdea } from '../../redux/idea';
 
 import axios from 'axios';
 import './form.css';
+import emailjs from 'emailjs-com';
 
 const normFile = (e) => {
     if (Array.isArray(e)) {
@@ -48,11 +49,27 @@ export const CreateIdeaForm = ({ handleClose, termList, categoryList }) => {
             value: item._id,
         }
     })
+    function returnParamsTemplate(data) {
+        return {
+            to_name: "Departments QA Coordinator",
+            from_name: "MERN system",
+            message: `${user.user.username} added new idea
+                      Title: ${data.idea.title}
+                      Content: ${data.idea.content}
+                      Created at: ${data.idea.createdAt}
+                      Category: ${data.idea.categoryId.title}
+                      Term: ${data.idea.termId}
+                `
+        }
+    }
 
     const onFinish = (values) => {
         setIsLoading(true);
         axios.post(`http://localhost:3000/api/ideas/new/${user.user.id}`, getFormData({ ...values, termId: ideaTerm._id }))
             .then(res => {
+                if (res.status == '200') {
+                    emailjs.send("service_j4lt9sj","template_1a9oz2d", returnParamsTemplate(res.data), "U_SRsR_nYGeEwDxFb");
+                }
                 handleClose();
                 dispatch(addIdea(res.data.idea));
                 message.success(`${res.data.idea.title} created success!`);

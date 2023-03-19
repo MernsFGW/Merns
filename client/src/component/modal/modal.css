@@ -65,3 +65,41 @@
 .close-modal-btn:hover * {
   color: var(--orange) !important;
 }
+
+.modal-p-content {
+  color: black;
+}
+.modal-p-content1 {
+  color: black;
+  font-style: italic;
+}
+.modal-p-header1{
+  color: black;
+  padding-left: 18%;
+  font-size: 35px;
+}
+.modal-p-header2{
+  color: black;
+  padding-left: 30%;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.modal-dialog{
+  overflow-y: initial
+}
+.example::-webkit-scrollbar {
+  display: none;
+}
+.modal-body{
+  height: 70vh;
+  overflow-y: auto;
+}
+div::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+.policyModal .ant-modal-content{
+  left: 50%;
+  transform: translate(-50%);
+  width: 150%;
+}
