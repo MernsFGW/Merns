@@ -7,9 +7,12 @@ const listFeedbacks = async (req, res) => {
     const startIndex = parseInt(start) || 0;
     const endIndex = parseInt(end) || 10;
     const feedbacks = await Feedback.find(ideaId?{ideaId}:{})
-      .sort({ createdAt: -1 })
       .skip(startIndex)
       .limit(endIndex - startIndex);
+    // sort by created date
+    feedbacks.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
     res.json(feedbacks);
   } catch (err) {
     return res.status(400).json({
