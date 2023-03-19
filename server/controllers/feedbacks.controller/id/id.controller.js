@@ -6,7 +6,7 @@ const feedbackById = async (req, res, next, feedbackId) => {
     const feedback = await Feedback.findById(feedbackId)
       .populate("ideaId")
       .populate("userId")
-      .populate("parentFeedbackId");
+      .populate("parentFeedbackId").exec();
     if (!feedback) {
       return res.status(404).send();
     }

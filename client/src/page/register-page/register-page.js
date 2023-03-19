@@ -115,7 +115,6 @@ export const Register = () => {
             <ContentBox>
                 <form className='register-form'>
                     <Title>Register new account</Title>
-                    <Text>Register using social networks</Text>
                     <Input
                         type="fullName"
                         label="fullName"
@@ -127,8 +126,8 @@ export const Register = () => {
                     <Input
                         type="username"
                         label="Username"
-                        className="user-input"
-                        placeholder="Username..."
+                        className="email-input"
+                        placeholder="Email..."
                         value={values.username}
                         onChange={handleChange('username')}
                     />

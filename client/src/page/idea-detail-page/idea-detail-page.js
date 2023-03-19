@@ -169,11 +169,7 @@ export const IdeaDetail = () => {
                     </div>
                 </ContentBox>
                 <ContentBox>
-                    <div className='comment-section'>
-                        <h3>Feedbacks</h3>
-                        {userInfo ? <CommentForm userInfo={userInfo} ideaId={id} /> : ''}
-                        <CommentBox></CommentBox>
-                    </div>
+                   <CommentBox ideaId={id} userInfo={userInfo} />
                 </ContentBox>
             </div>
             <div className='layout-panel extend'></div>
