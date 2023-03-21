@@ -14,7 +14,7 @@ export const Home = () => {
   const [termList, setTermList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const userInfo = JSON.parse(localStorage.getItem('user'));
+  const userInfo = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const ideaList = useSelector(state => state.idea.value);
@@ -25,21 +25,23 @@ export const Home = () => {
       return `${searchParam}=${getSearchParam}`;
     }
     return getSearchParam;
-  }
+  };
 
   const [key] = searchParams.entries();
 
   useEffect(() => {
     if (userInfo) {
-      axios.get('http://localhost:3000/api/terms')
-        .then(res => setTermList(res.data));
+      axios
+        .get("http://localhost:3000/api/terms")
+        .then((res) => setTermList(res.data));
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/categories')
-      .then(res => setCategoryList(res.data));
-  }, [])
+    axios
+      .get("http://localhost:3000/api/categories")
+      .then((res) => setCategoryList(res.data));
+  }, []);
 
   useEffect(() => {
     if (getParam('categoryId')) {
@@ -61,19 +63,30 @@ export const Home = () => {
 
   return (
     <Layout>
-      <div className='layout-panel extend'>
+      <div className="layout-panel extend">
         <FilterPanel categoryList={categoryList} />
       </div>
-      <div className='layout-panel primary'>
+      <div className="layout-panel primary">
         <ContentBox>
           <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-            <CreateIdeaForm handleClose={() => { setIsOpen(false); setIsLoading(true) }} categoryList={categoryList} termList={termList} />
+            <CreateIdeaForm
+              handleClose={() => {
+                setIsOpen(false);
+                setIsLoading(true);
+              }}
+              categoryList={categoryList}
+              termList={termList}
+            />
           </Modal>
-          <div className='update-post'>
-            {userInfo
-              ? <Avatar size={38} src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`} />
-              : <Avatar size={38} icon={<UserOutlined />} />
-            }
+          <div className="update-post">
+            {userInfo ? (
+              <Avatar
+                size={38}
+                src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`}
+              />
+            ) : (
+              <Avatar size={38} icon={<UserOutlined />} />
+            )}
             <Input
               
               onClick={userInfo ? (() => setIsOpen(true)) : (() => navigate("/login"))} type="primary"
@@ -84,15 +97,15 @@ export const Home = () => {
         </ContentBox>
         <List
           loading={isLoading}
-          className='post-list'
+          className="post-list"
           itemLayout="vertical"
           pagination={{
             onChange: (page) => {
               console.log(page);
             },
             pageSize: 5,
-            align: 'center',
-            className: 'post-list-pagination'
+            align: "center",
+            className: "post-list-pagination",
           }}
           dataSource={ideaList}
           renderItem={(item) => (
@@ -103,7 +116,6 @@ export const Home = () => {
             </List.Item>
           )}
         />
-
       </div>
       <div className='layout-panel secondary'>
         <div className='monthly-event'>
@@ -113,5 +125,4 @@ export const Home = () => {
       </div>
     </Layout>
   );
-}
-
+};
