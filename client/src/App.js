@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, IdeaDetail, Login, Register, About, Admin, UserProfile } from './page';
+import { Home, IdeaDetail, Login, Register, About, Admin, UserProfile, UserDashboard, UserPassword } from './page';
 import {
   Routes,
   Route
@@ -15,7 +15,9 @@ function App() {
         <Route path='/ideas/:id' element={<IdeaDetail />} />
         <Route path='/admin' element={<Admin />} />
         <Route path="/about" element={<About />} />
-        <Route path='/users/:id' element={<UserProfile /> } />
+        <Route path='/users/:id' element={<UserDashboard /> } />
+        <Route path='/users/:id/profile' element={<UserProfile /> } />
+        <Route path='/users/:id/changepassword' element={<UserPassword /> } />
       </Routes>
     </div>
 

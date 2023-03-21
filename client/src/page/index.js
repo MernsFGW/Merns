@@ -4,4 +4,6 @@ export {Register} from './register-page/register-page';
 export {IdeaDetail} from './idea-detail-page/idea-detail-page';
 export {About} from './about/about';
 export {Admin} from './admin/admin';
+export {UserDashboard} from './user-dashboard/user-dashboard';
 export {UserProfile} from './user-profile/user-profile';
+export {UserPassword} from './user-password/user-password';
