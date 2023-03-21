@@ -7,6 +7,7 @@ import {
   About,
   Admin,
   UserProfile,
+  AdminCreateDepartment,
 } from "./page";
 import { Routes, Route } from "react-router-dom";
 
@@ -21,6 +22,10 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/about" element={<About />} />
         <Route path="/users/:id" element={<UserProfile />} />
+        <Route
+          path="/admin/crud/department"
+          element={<AdminCreateDepartment />}
+        />
       </Routes>
     </div>
   );
