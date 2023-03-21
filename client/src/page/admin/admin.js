@@ -15,9 +15,15 @@ export const Admin = () => {
               </Link>
             </li>
             <li>
-              <Link to="/ideas">
+              <Link to="/">
                 <i class="bx bx-box"></i>
                 <span class="links_name">Main</span>
+              </Link>
+            </li>
+            <li>
+            <Link to="/users">
+                <i class="bx bx-user"></i>
+                <span class="links_name">Staff</span>
               </Link>
             </li>
             <li>
@@ -42,12 +48,6 @@ export const Admin = () => {
               <a href="#">
                 <i class="bx bx-book-alt"></i>
                 <span class="links_name">Total order</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="bx bx-user"></i>
-                <span class="links_name">Team</span>
               </a>
             </li>
             <li>
