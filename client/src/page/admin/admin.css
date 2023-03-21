@@ -1,0 +1,8 @@
+.sidebar{
+    background-color: #262d34 !important;
+    height: calc(100vh - 105px);
+    border-radius: var(--bd-rad-lg);
+}
+.button-action:hover{
+    background-color: var(--sub-contrast-color) ;
+}
