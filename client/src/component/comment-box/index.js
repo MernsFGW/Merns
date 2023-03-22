@@ -119,7 +119,7 @@ export const CommentBox = ({ userInfo, ideaId }) => {
                 dataSource={list}
                 renderItem={(item) => (
                     <List.Item
-                    >   
+                    >
                         {editMode !== item._id ? <><Skeleton avatar title={false} loading={item.loading} active>
                             <List.Item.Meta
                                 avatar={item.userId && !item.incognito
@@ -129,18 +129,21 @@ export const CommentBox = ({ userInfo, ideaId }) => {
                                 description={item.content}
                             />
                         </Skeleton>
-                        <Dropdown
-                            arrow={true}
-                            trigger={['click']}
-                            menu={{
-                                items,
-                                onClick: (key) => {onClick(key) }
-                            }}
-                        >
-                            <a onClick={(e) => { e.preventDefault(); setSeletedCmt(item._id) }}>
-                                <h2 className='post-action-dropdown'><EllipsisOutlined style={{ fontSize: 20 }} /></h2>
-                            </a>
-                        </Dropdown></> : <EditCommentForm setEditMode={setEditMode} setList={setList} userInfo={userInfo} feedback={item} setData={setData} />  }
+                            { userInfo && userInfo.user.id === item.userId._id
+                                ? <Dropdown
+                                    arrow={true}
+                                    trigger={['click']}
+                                    menu={{
+                                        items,
+                                        onClick: (key) => { onClick(key) }
+                                    }}
+                                >
+                                    <a onClick={(e) => { e.preventDefault(); setSeletedCmt(item._id) }}>
+                                        <h2 className='post-action-dropdown'><EllipsisOutlined style={{ fontSize: 20 }} /></h2>
+                                    </a>
+                                </Dropdown>
+                                : ''}
+                        </> : <EditCommentForm setEditMode={setEditMode} setList={setList} userInfo={userInfo} feedback={item} setData={setData} />}
                     </List.Item>
                 )}
 

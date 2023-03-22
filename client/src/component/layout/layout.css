@@ -98,6 +98,10 @@ a {
 
 /* overwrire antd */
 
+.ant-btn.ant-btn-lg { 
+  font-size: 14px;
+}
+
 .post-list ul.ant-list-items {
   display: flex;
   flex-direction: column;

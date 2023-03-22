@@ -56,7 +56,7 @@ export const IdeaDetail = () => {
         setConfirmLoading(true);
         await axios.delete(`http://localhost:3000/api/ideas/${id}`)
             .then(res => { dispatch(removeIdea(res.data)); message.success(res.data.message); setConfirmLoading(false); })
-            .catch((error) => console.log( error.response.request._response ) );
+            .catch((error) => console.log(error.response.request._response));
         navigate("/");
     };
 
@@ -150,19 +150,19 @@ export const IdeaDetail = () => {
                                     </>
                                 }
                             </div>
-                            { (data.userId._id === userInfo.user.id || userInfo.user.role.title === "Admin") &&
-                            <Dropdown
-                                arrow={true}
-                                trigger={['click']}
-                                menu={{
-                                    items,
-                                    onClick,
-                                }}
-                            >
-                                <a onClick={(e) => e.preventDefault()}>
-                                    <h2 className='post-action-dropdown'><EllipsisOutlined /></h2>
-                                </a>
-                            </Dropdown>
+                            {(userInfo && (data.userId._id === userInfo.user.id || userInfo.user.role.title === "Admin")) &&
+                                <Dropdown
+                                    arrow={true}
+                                    trigger={['click']}
+                                    menu={{
+                                        items,
+                                        onClick,
+                                    }}
+                                >
+                                    <a onClick={(e) => e.preventDefault()}>
+                                        <h2 className='post-action-dropdown'><EllipsisOutlined /></h2>
+                                    </a>
+                                </Dropdown>
                             }
                         </div>
                         <p className='detail-page-content'>
@@ -171,7 +171,7 @@ export const IdeaDetail = () => {
                     </div>
                 </ContentBox>
                 <ContentBox>
-                   <CommentBox ideaId={id} userInfo={userInfo} />
+                    <CommentBox ideaId={id} userInfo={userInfo} />
                 </ContentBox>
             </div>
             <div className='layout-panel extend'></div>
