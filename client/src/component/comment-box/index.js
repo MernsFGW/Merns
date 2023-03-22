@@ -1,7 +1,8 @@
-import { Avatar, Button, List, Skeleton } from 'antd';
+import { Avatar, Button, List, Skeleton, Dropdown, Modal, message } from 'antd';
+import { EllipsisOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { UserOutlined } from '@ant-design/icons';
-import { CommentForm } from '../form';
+import { CommentForm, EditCommentForm } from '../form';
 import axios from 'axios';
 import './comment-box.css';
 export const CommentBox = ({ userInfo, ideaId }) => {
@@ -13,6 +14,44 @@ export const CommentBox = ({ userInfo, ideaId }) => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [list, setList] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [confirmLoading, setConfirmLoading] = useState(false);
+    const [seletedCmt, setSeletedCmt] = useState();
+    const [editMode, setEditMode] = useState('');
+
+    const items = [
+        {
+            label: 'Edit feedback',
+            key: 'Edit',
+        },
+        {
+            label: 'Remove feeback',
+            key: 'Remove',
+        },
+    ];
+
+    const onClick = ({ key }) => {
+        if (key === 'Remove') {
+            setModalOpen(true);
+        } else {
+            setEditMode(seletedCmt);
+        }
+    };
+
+    const handleDelete = async (_id) => {
+        console.log(_id);
+        setConfirmLoading(true);
+        await axios.delete(`http://localhost:3000/api/feedbacks/${_id}`)
+            .then(res => {
+                message.success("Remove feedback success!");
+                setData(oldArray => oldArray.filter(item => item._id !== _id));
+                setList(oldArray => oldArray.filter(item => item._id !== _id));
+                setConfirmLoading(false);
+                setModalOpen(false);
+            })
+            .catch((error) => console.log(error.response.request._response));
+    };
+
     useEffect(() => {
         axios.get(fakeDataUrl)
             .then((res) => {
@@ -20,7 +59,7 @@ export const CommentBox = ({ userInfo, ideaId }) => {
                 setData(res.data);
                 setList(res.data);
             });
-    }, [list]);
+    }, []);
 
     useEffect(() => {
         const fetchMoreData = () => {
@@ -34,10 +73,8 @@ export const CommentBox = ({ userInfo, ideaId }) => {
                 window.dispatchEvent(new Event('resize'));
             });
         };
-
         fetchMoreData();
     }, [start, end]);
-
 
     const setNewUrl = () => {
         setStart(old => old + count);
@@ -73,7 +110,7 @@ export const CommentBox = ({ userInfo, ideaId }) => {
     return (
         <div className='comment-section'>
             <h3>Feedbacks</h3>
-            {userInfo ? <CommentForm setList={setList} userInfo={userInfo} ideaId={ideaId} /> : ''}
+            {userInfo ? <CommentForm setList={setList} userInfo={userInfo} ideaId={ideaId} setData={setData} /> : ''}
             <List
                 className="demo-loadmore-list"
                 loading={initLoading}
@@ -81,8 +118,9 @@ export const CommentBox = ({ userInfo, ideaId }) => {
                 loadMore={loadMore}
                 dataSource={list}
                 renderItem={(item) => (
-                    <List.Item>
-                        <Skeleton avatar title={false} loading={item.loading} active>
+                    <List.Item
+                    >   
+                        {editMode !== item._id ? <><Skeleton avatar title={false} loading={item.loading} active>
                             <List.Item.Meta
                                 avatar={item.userId && !item.incognito
                                     ? <Avatar size={40} src={`https://ui-avatars.com/api/?name=${item.userId.fullName}`} />
@@ -91,10 +129,32 @@ export const CommentBox = ({ userInfo, ideaId }) => {
                                 description={item.content}
                             />
                         </Skeleton>
+                        <Dropdown
+                            arrow={true}
+                            trigger={['click']}
+                            menu={{
+                                items,
+                                onClick: (key) => {onClick(key) }
+                            }}
+                        >
+                            <a onClick={(e) => { e.preventDefault(); setSeletedCmt(item._id) }}>
+                                <h2 className='post-action-dropdown'><EllipsisOutlined style={{ fontSize: 20 }} /></h2>
+                            </a>
+                        </Dropdown></> : <EditCommentForm setEditMode={setEditMode} setList={setList} userInfo={userInfo} feedback={item} setData={setData} />  }
                     </List.Item>
                 )}
-            />
-        </div>
 
+            />
+            <Modal
+                title="Delete confirm"
+                open={modalOpen}
+                onOk={() => { handleDelete(seletedCmt); }}
+                confirmLoading={confirmLoading}
+                onCancel={() => { setModalOpen(false); setSeletedCmt(undefined) }}
+            >
+                Do you really want to delete this comment?<br />
+                This process cannot be undone.
+            </Modal>
+        </div>
     );
 };

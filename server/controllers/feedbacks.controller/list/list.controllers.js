@@ -10,10 +10,8 @@ const listFeedbacks = async (req, res) => {
       const endIndex = parseInt(end);
       feedbacks = await Feedback.find(ideaId?{ideaId}:{})
         .skip(startIndex)
-        .limit(endIndex - startIndex);
-      feedbacks.sort((a, b) => {
-        return new Date(b.createdAt) - new Date(a.createdAt);
-      });
+        .limit(endIndex - startIndex)
+        .sort({"createdAt": -1});
     }else{
       feedbacks = await Feedback.find(ideaId?{ideaId}:{}).sort({createdAt: -1})
     }

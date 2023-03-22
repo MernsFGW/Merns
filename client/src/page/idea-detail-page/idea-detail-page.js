@@ -4,7 +4,7 @@ import { Layout, ContentBox } from '../../component';
 import { Loading } from '../loading-page/loading-page'
 import { Tag, Avatar, Dropdown, Modal as AntModal, message } from 'antd';
 import { LikeFilled, DislikeFilled, UserOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { CommentBox, Modal, UpdateIdeaForm, CommentForm } from '../../component';
+import { CommentBox, Modal, UpdateIdeaForm } from '../../component';
 import { useNavigate, useParams } from 'react-router-dom';
 import { format } from 'date-fns'
 import { removeIdea } from '../../redux/idea';
@@ -55,10 +55,10 @@ export const IdeaDetail = () => {
     const handleDelete = async () => {
         setConfirmLoading(true);
         await axios.delete(`http://localhost:3000/api/ideas/${id}`)
-            .then(res => { dispatch(removeIdea(res.data)); message.success(res.data.message); setConfirmLoading(false); });
-
+            .then(res => { dispatch(removeIdea(res.data)); message.success(res.data.message); setConfirmLoading(false); })
+            .catch((error) => console.log( error.response.request._response ) );
         navigate("/");
-    }
+    };
 
     const likeIdea = async () => {
         if (checkLiked()) {
@@ -70,7 +70,7 @@ export const IdeaDetail = () => {
             await axios.patch(`http://localhost:3000/api/ideas/${userInfo.user.id}/like/${data._id}`)
                 .then(res => setLike(res.data.likes));
         }
-    }
+    };
 
     const dislikeIdea = async () => {
         if (checkDisliked()) {
@@ -82,7 +82,7 @@ export const IdeaDetail = () => {
             await axios.patch(`http://localhost:3000/api/ideas/${userInfo.user.id}/dislike/${data._id}`)
                 .then(res => setDislike(res.data.dislikes));
         }
-    }
+    };
 
     const checkLiked = () => {
         if (userInfo) {
@@ -98,7 +98,7 @@ export const IdeaDetail = () => {
             return isDislike;
         }
         return undefined;
-    }
+    };
 
     if (loading) return <Loading />;
 
@@ -150,6 +150,7 @@ export const IdeaDetail = () => {
                                     </>
                                 }
                             </div>
+                            { (data.userId._id === userInfo.user.id || userInfo.user.role.title === "Admin") &&
                             <Dropdown
                                 arrow={true}
                                 trigger={['click']}
@@ -162,6 +163,7 @@ export const IdeaDetail = () => {
                                     <h2 className='post-action-dropdown'><EllipsisOutlined /></h2>
                                 </a>
                             </Dropdown>
+                            }
                         </div>
                         <p className='detail-page-content'>
                             {data.content}
