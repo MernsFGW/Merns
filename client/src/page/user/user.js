@@ -45,55 +45,31 @@ export const Users = () => {
   return (
     <Layout>
       <div className="layout-panel extend">
-        <div className="sidebar">
-          <ul className="nav-links">
-            <li>
+        <div class="sidebar">
+          <ul class="nav-links">
+            <li class="button-action">
               <Link to="/admin">
-                <i className="bx bx-grid-alt"></i>
-                <span className="links_name">Dashboard</span>
+                <i class="bx bx-grid-alt"></i>
+                <span class="links_name">Dashboard</span>
               </Link>
             </li>
-            <li>
+            <li className="button-action">
               <Link to="/">
-                <i className="bx bx-box"></i>
-                <span className="links_name">Main</span>
+                <i class='bx bx-home' ></i>
+                <span class="links_name">Homepage</span>
               </Link>
             </li>
-            <li>
+            <li className="button-action">
               <Link to="/users">
-                <i className="bx bx-user"></i>
-                <span className="links_name">Staff</span>
+                <i class='bx bxs-user-account' ></i>
+                <span class="links_name">Accounts</span>
               </Link>
             </li>
-            <li>
-              <a href="#">
-                <i className="bx bx-list-ul"></i>
-                <span className="links_name">Order list</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i className="bx bx-pie-chart-alt-2"></i>
-                <span className="links_name">Analytics</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i className="bx bx-folder"></i>
-                <span className="links_name">File Manager</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i className="bx bx-cart-alt"></i>
-                <span className="links_name">Products</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i className="bx bx-cog"></i>
-                <span className="links_name">Settings</span>
-              </a>
+            <li className="button-action">
+              <Link to="/admin">
+                <i class='bx bx-area' ></i>
+                <span class="links_name">Departments</span>
+              </Link>
             </li>
           </ul>
         </div>
