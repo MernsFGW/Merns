@@ -6,7 +6,7 @@ import { Tag, Avatar, Dropdown, Modal as AntModal, message } from 'antd';
 import { LikeFilled, DislikeFilled, UserOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { CommentBox, Modal, UpdateIdeaForm } from '../../component';
 import { useNavigate, useParams } from 'react-router-dom';
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 import { removeIdea } from '../../redux/idea';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -132,8 +132,8 @@ export const IdeaDetail = () => {
                                 <p className='post-detailt-text'>{format(new Date(data.createdAt), "MMM dd, yyyy")}</p>
                                 <p className='post-detailt-text'>-</p>
                                 <p className='post-detailt-text'>651,000 Feedbacks</p>
-                                <p className='post-detailt-text'>{like.length} <LikeFilled onClick={likeIdea} style={{ color: checkLiked() && '#537FE7' }} className='like-btn' /></p>
-                                <p className='post-detailt-text'>{dislike.length} <DislikeFilled onClick={dislikeIdea} style={{ color: checkDisliked() && '#FF597B' }} className='dislike-btn' /></p>
+                                <p className='post-detailt-text'>{like.length} <LikeFilled onClick={userInfo ? likeIdea : () => navigate("/login")} style={{ color: checkLiked() && '#537FE7' }} className='like-btn' /></p>
+                                <p className='post-detailt-text'>{dislike.length} <DislikeFilled onClick={userInfo ? dislikeIdea : () => navigate("/login")} style={{ color: checkDisliked() && '#FF597B' }} className='dislike-btn' /></p>
                             </div>
                         </div>
                         <h1 className='post-detail-title'>{data.title}</h1>
