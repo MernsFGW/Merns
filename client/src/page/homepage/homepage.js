@@ -7,7 +7,6 @@ import { Avatar, Input, Button, List } from 'antd';
 import { loadingIdea } from '../../redux/idea';
 import { useSelector, useDispatch } from 'react-redux';
 
-
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -29,17 +28,25 @@ export const Home = () => {
 
   const [key] = searchParams.entries();
 
-  useEffect(() => {
-    if (userInfo) {
-      axios
-        .get("http://localhost:3000/api/terms")
-        .then((res) => setTermList(res.data));
+  const checkPostable = (termList) => {
+    const currentDate = new Date();
+    if (typeof termList !== "undefined" && termList.length > 0) {
+      const currentTerm = termList.find(term => new Date(term.startDate) <= currentDate && currentDate < new Date(term.endDate));
+      if (new Date(currentTerm.closureDate) <= currentDate) {
+        return "Unpostable";
+      }
+      return "Postable";
     }
+    return "";
+  }
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/api/terms")
+      .then((res) => setTermList(res.data));
   }, []);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/categories")
+    axios.get("http://localhost:3000/api/categories")
       .then((res) => setCategoryList(res.data));
   }, []);
 
@@ -79,20 +86,28 @@ export const Home = () => {
             />
           </Modal>
           <div className="update-post">
-            {userInfo ? (
-              <Avatar
+            {userInfo
+              ? <Avatar
                 size={38}
                 src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`}
               />
-            ) : (
-              <Avatar size={38} icon={<UserOutlined />} />
-            )}
+              : <Avatar size={38} icon={<UserOutlined />} />
+            }
             <Input
-              
               onClick={userInfo ? (() => setIsOpen(true)) : (() => navigate("/login"))} type="primary"
               style={{ borderColor: 'var(--sub-contrast-color)', backgroundColor: 'var(--sub-contrast-color)', cursor: 'pointer' }}
-              size='large' placeholder="Let's share what going on your mind..." />
-            <Button onClick={userInfo ? (() => setIsOpen(true)) : (() => navigate("/login"))} type="primary">Create Post</Button>
+              size='large' placeholder="Let's share what going on your mind..."
+              // disabled={checkPostable(termList) === "Unpostable"}
+            />
+            <Button
+              onClick={userInfo
+                ? (() => setIsOpen(true))
+                : (() => navigate("/login"))} type="primary"
+              // disabled={checkPostable(termList) === "Unpostable"}
+            >
+              {/* {checkPostable(termList) === "Unpostable" ? "Posting Close" : "Create Post"} */}
+              Create Post
+            </Button>
           </div>
         </ContentBox>
         <List
@@ -111,7 +126,7 @@ export const Home = () => {
           renderItem={(item) => (
             <List.Item>
               <ContentBox>
-                <Post item={{ ...item }} />
+                <Post item={{ ...item }} termList={termList} />
               </ContentBox>
             </List.Item>
           )}

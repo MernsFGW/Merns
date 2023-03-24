@@ -130,6 +130,10 @@ a {
   background-color: #ff4401;
 }
 
+.ant-btn-primary:disabled {
+  color: var(--white);
+}
+
 .ant-input {
   background-color: var(--sub-contrast-color);
   border-color: var(--sub-contrast-color);

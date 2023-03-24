@@ -5,7 +5,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { CommentForm, EditCommentForm } from '../form';
 import axios from 'axios';
 import './comment-box.css';
-export const CommentBox = ({ userInfo, ideaId }) => {
+export const CommentBox = ({ userInfo, ideaId, feedbackAble }) => {
     const count = 3;
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(3);
@@ -18,6 +18,7 @@ export const CommentBox = ({ userInfo, ideaId }) => {
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [seletedCmt, setSeletedCmt] = useState();
     const [editMode, setEditMode] = useState('');
+    const [canLoadMore, setCanLoadMore] = useState(true);
 
     const items = [
         {
@@ -39,7 +40,6 @@ export const CommentBox = ({ userInfo, ideaId }) => {
     };
 
     const handleDelete = async (_id) => {
-        console.log(_id);
         setConfirmLoading(true);
         await axios.delete(`http://localhost:3000/api/feedbacks/${_id}`)
             .then(res => {
@@ -66,6 +66,9 @@ export const CommentBox = ({ userInfo, ideaId }) => {
             const newUrl = `http://localhost:3000/api/feedbacks?start=${start}&end=${end}&ideaId=${ideaId}`;
             setLoading(true);
             axios.get(newUrl).then((res) => {
+                if(res.data.length === 0) {
+                    setCanLoadMore(false);
+                }
                 const newData = data.concat(res.data);
                 setData(newData);
                 setList(newData);
@@ -95,7 +98,7 @@ export const CommentBox = ({ userInfo, ideaId }) => {
     };
 
     const loadMore =
-        !initLoading && !loading ? (
+        !initLoading && !loading && canLoadMore ? (
             <div
                 style={{
                     textAlign: 'center',
@@ -110,7 +113,7 @@ export const CommentBox = ({ userInfo, ideaId }) => {
     return (
         <div className='comment-section'>
             <h3>Feedbacks</h3>
-            {userInfo ? <CommentForm setList={setList} userInfo={userInfo} ideaId={ideaId} setData={setData} /> : ''}
+            {userInfo && feedbackAble && feedbackAble === "Feedback open" ? <CommentForm setList={setList} userInfo={userInfo} ideaId={ideaId} setData={setData} /> : ''}
             <List
                 className="demo-loadmore-list"
                 loading={initLoading}
@@ -129,7 +132,7 @@ export const CommentBox = ({ userInfo, ideaId }) => {
                                 description={item.content}
                             />
                         </Skeleton>
-                            { userInfo && userInfo.user.id === item.userId._id
+                            { userInfo && item.userId && userInfo.user.id === item.userId._id
                                 ? <Dropdown
                                     arrow={true}
                                     trigger={['click']}

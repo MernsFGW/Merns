@@ -5,7 +5,20 @@ import { useNavigate } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import './post.css'
 
-export const Post = ({item}) => {
+export const checkTerm = (termId, termList) => {
+    console.log(termList);
+    if (typeof termList !== "undefined" && termList.length > 0) {
+        const currentTerm = termList.find(term => term._id === termId);
+        const currentDate = new Date();
+        if (new Date(currentTerm.startDate) <= currentDate && currentDate < new Date(currentTerm.endDate)) {
+            return [currentTerm.title, "Feedback open"];
+        }
+        return [currentTerm.title, "Feedback close"];
+    }
+    return ["Unknown", "Unknown"]
+}
+
+export const Post = ({ item, termList }) => {
     const updateDate = formatDistance(new Date(item.createdAt), new Date(), { addSuffix: true });
     const navigate = useNavigate();
     const upperCaseFirstLetter = (word) => {
@@ -16,32 +29,23 @@ export const Post = ({item}) => {
         return capitalizedWord;
     }
 
-    const checkTerm = (termId) => {
-        if(termId === '63fefa350cc2a320980338b3') {
-            return "Spring Term";
-        } else if(termId === '63fefa5b0cc2a320980338b5'){
-            return "Summer Term";
-        } else if(termId === '63fefa740cc2a320980338b7'){
-            return "Fall Term";
-        }else {
-            return "Winter Term";
-        }
-    }
+    const defaultImage = 'https://res.cloudinary.com/dvxfixf5q/image/upload/v1679409069/Photo/hfszuemdpzjrc8bupmgd.jpg';
 
     return (
         <div className='post-wrapper'>
-            <img onClick={() => navigate(`/ideas/${item._id}`)} alt='' className='post-image' src={item.photo.url} />
+            <img onClick={() => navigate(`/ideas/${item._id}`)} alt='' className='post-image' src={item.photo ? item.photo.url : defaultImage} />
             <div className='post-description'>
                 <p onClick={() => navigate(`/ideas/${item._id}`)} className='text-truncate post-title'>{item.title}</p>
                 <div className='post-tag-list'>
                     <Tag className='tag-list-item' color='var(--sub-contrast-color)'>{item.categoryId.title}</Tag>
-                    <Tag className='tag-list-item' color='var(--sub-contrast-color)'>{checkTerm(item.termId)}</Tag>
+                    <Tag className='tag-list-item' color='var(--sub-contrast-color)'>{checkTerm(item.termId, termList)[0]}</Tag>
+                    <Tag className='tag-list-item' color='var(--sub-contrast-color)'>{checkTerm(item.termId, termList)[1]}</Tag>
                 </div>
                 <div className='post-user-section'>
                     <div className='post-user-wrapper'>
                         {item.incognito
-                            ? <Avatar size={38} icon={ <UserOutlined /> } />
-                            : <Avatar size={38} src={`https://ui-avatars.com/api/?name=${item.userId.fullName}`}/>
+                            ? <Avatar size={38} icon={<UserOutlined />} />
+                            : <Avatar size={38} src={`https://ui-avatars.com/api/?name=${item.userId.fullName}`} />
                         }
                         <div className='post-user-information'>
                             {item.incognito ? <h5>Anonymous</h5> : <h5>{item.userId.fullName}</h5>}
