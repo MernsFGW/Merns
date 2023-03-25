@@ -132,7 +132,7 @@ export const UpdateIdeaForm = ({ handleClose, setData, initialIdea }) => {
                     label={<p><b>Image &nbsp;&nbsp;<Switch size='small' onChange={() => setChangeImage(oldValue => !oldValue)} /></b></p>}
                 >
                     <div className='update-image-preview'>
-                        <Image height={147.14} src={initialIdea.photo.url} />
+                        <Image height={147.14} src={initialIdea?.photo?.url} />
                     </div>
                 </Form.Item>
             }

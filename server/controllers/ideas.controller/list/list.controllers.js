@@ -73,7 +73,7 @@ const list = async (req, res) => {
           incognito: 1,
           userId: 1,
           photo: 1,
-          categoryId: "$categoryId.title",
+          categoryId: {"title":"$categoryId.title"},
           likes: 1,
           dislikes: 1,
           termId: 1,
