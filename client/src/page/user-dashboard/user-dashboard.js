@@ -13,6 +13,7 @@ export const UserDashboard = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const ideas = useSelector(state => state.idea.value);
+  const [termList, setTermList] = useState([]);
 
   useEffect(() => {
     axios.get(`http://localhost:3000/api/ideas/user/${id}`)
@@ -23,7 +24,11 @@ export const UserDashboard = () => {
     setIsLoading(false);
   }, [id]);
 
-
+  useEffect(() => {
+    axios.get("http://localhost:3000/api/terms")
+      .then((res) => setTermList(res.data));
+  }, []);
+  
   return (
     <Layout>
       <div className='layout-panel secondary'>
@@ -52,7 +57,7 @@ export const UserDashboard = () => {
                 renderItem={(item) => (
                   <List.Item>
                     <ContentBox>
-                      <Post item={{ ...item }} />
+                      <Post item={{ ...item }} termList={termList}/>
                     </ContentBox>
                   </List.Item>
                 )}

@@ -3,8 +3,8 @@ import Idea from './../../../models/idea.model';
 
 const list = async (req, res) => {
   try {
-    let ideas = await Idea.aggregate([
-      { $match: {} }, // filter criteria, if any
+    const ideas = await Idea.aggregate([
+      { $match: {} },
       {
         $lookup: {
           from: "feedbacks",
@@ -60,7 +60,7 @@ const list = async (req, res) => {
           dislikes: 1,
           termId: 1,
           feedbackCount: 1,
-          user: { $arrayElemAt: ["$user", 0] },
+          userId: { $arrayElemAt: ["$user", 0] },
           createdAt: 1,
           updatedAt: 1,
         },
