@@ -29,11 +29,12 @@ import updateCategoryRoutes from './routes/category.routes/update.routes';
 import getCategoryRoutes from './routes/category.routes/get.routes';
 
 import createUserRoutes from './routes/user.routes/create.routes';
-import updateUserRoutes from './routes/user.routes/update.routes';
+import updateProfileRoutes from './routes/user.routes/updateProfile.routes';
 import deleteUserRoutes from './routes/user.routes/delete.routes';
 import listUserRoutes from './routes/user.routes/list.routes';
 import loginUserRoutes from './routes/user.routes/login.routes';
 import idUserRoutes from './routes/user.routes/id.routes';
+import updatePasswordRoutes from './routes/user.routes/updatePassword.routes';
 
 import createDepartmentRoutes from './routes/department.routes/create.routes';
 import updateDepartmentRoutes from './routes/department.routes/update.routes';
@@ -90,7 +91,6 @@ app.use('/', undislikeIdeaRoutes);
 app.use('/', filterIdeaRoutes);
 app.use('/', listbyUserIdRoutes);
 
-
 app.use('/', createCategoryRoutes);
 app.use('/', listCategoriesRoutes);
 app.use('/', removeCategoryRoutes);
@@ -98,11 +98,12 @@ app.use('/', updateCategoryRoutes);
 app.use('/', getCategoryRoutes);
 
 app.use('/', createUserRoutes);
-app.use('/', updateUserRoutes);
+app.use('/', updateProfileRoutes);
 app.use('/', loginUserRoutes);
 app.use('/', deleteUserRoutes);
 app.use('/', listUserRoutes);
 app.use('/', idUserRoutes);
+app.use('/', updatePasswordRoutes);
 
 app.use('/', createDepartmentRoutes);
 app.use('/', updateDepartmentRoutes);

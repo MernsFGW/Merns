@@ -1,6 +1,6 @@
-import User from './../../../models/user.model';
+import User from '../../../models/user.model';
 
-const update = async (req, res) => {
+const updateProfile = async (req, res) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.json({
@@ -13,5 +13,5 @@ const update = async (req, res) => {
 };
 
 export default {
-    update
+    updateProfile
 }
