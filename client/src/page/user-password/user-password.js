@@ -1,8 +1,7 @@
 import React from 'react';
-import { Layout, ContentBox, NavigationAdmin, Profile } from '../../component';
+import { Layout, ContentBox, NavigationAdmin, Password } from '../../component';
 
-export const UserProfile = () => {
-  const userInfo = JSON.parse(localStorage.getItem('user'));
+export const UserPassword = () => {
     return (
       <Layout>
         <div className='layout-panel secondary'>
@@ -10,8 +9,8 @@ export const UserProfile = () => {
         </div>
         <div className='layout-panel primary'>
             <ContentBox >
-                <Profile />
-            </ContentBox> 
+                <Password />
+            </ContentBox>
         </div>
         <div className='layout-panel extend'>
         </div>

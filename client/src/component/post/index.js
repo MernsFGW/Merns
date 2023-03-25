@@ -55,7 +55,7 @@ export const Post = ({ item, termList }) => {
                     <div className='post-action-information'>
                         <p>{item.likes.length} Upvote</p>
                         <p>{item.dislikes.length} Downvote</p>
-                        <p>651,000 Comment</p>
+                        <p>{item.feedbackCount} Comment</p>
                     </div>
                 </div>
             </div>

@@ -9,5 +9,7 @@ export {CommentBox} from "./comment-box";
 export {MyChart} from "./graph";
 export {Slider} from "./carousel";
 export {NavigationAdmin} from "./navigation-admin";
-export {Profile} from "./profile";
+export {Dashboard} from "./dashboard";
 export {PolicyModal} from "./modal/policy";
+export {Profile} from "./profile";
+export {Password} from "./password";
