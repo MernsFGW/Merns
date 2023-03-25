@@ -6,6 +6,7 @@ import compress from 'compression';
 import cors from 'cors';
 import helmet from 'helmet';
 
+
 import createIdeaRoutes from './routes/idea.routes/create.routes';
 import updateIdeaRoutes from './routes/idea.routes/update.routes';
 import deleteIdeaRoutes from './routes/idea.routes/delete.routes';
@@ -18,6 +19,8 @@ import unlikeIdeaRoutes from './routes/idea.routes/unlike.routes';
 import undislikeIdeaRoutes from './routes/idea.routes/undislike.routes';
 import filterIdeaRoutes from './routes/idea.routes/filter.routes';
 import listbyUserIdRoutes from './routes/idea.routes/listbyuserid.routes';
+import downloadIdeaRoutes from './routes/idea.routes/download.routes';
+import downloadDocumentRoutes from './routes/document.routes/download.routes';
 
 import createCategoryRoutes from './routes/category.routes/create.routes';
 import listCategoriesRoutes from './routes/category.routes/list.routes';
@@ -55,6 +58,7 @@ import updateFeedbackRoutes from './routes/feedback.routes/update.routes';
 import deleteFeedbackRoutes from './routes/feedback.routes/remove.routes';
 import listFeedbackRoutes from './routes/feedback.routes/list.routes';
 import getFeedbackRoutes from './routes/feedback.routes/id.routes';
+import downloadFeedbackRoutes from "./routes/feedback.routes/download.routes"
 
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
@@ -70,7 +74,8 @@ app.use(helmet());
 app.use(cors());
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
-
+app.use('/', downloadDocumentRoutes)
+app.use('/', downloadIdeaRoutes)
 app.use('/', sortIdeaRoutes);
 app.use('/', filterIdeaRoutes);
 app.use('/', createIdeaRoutes);
@@ -117,6 +122,7 @@ app.use('/', getTermRoutes);
 app.use('/', removeTermRoutes);
 app.use('/', updateTermRoutes);
 
+app.use('/', downloadFeedbackRoutes);
 app.use('/', createFeedbackRoutes);
 app.use('/', updateFeedbackRoutes);
 app.use('/', deleteFeedbackRoutes);

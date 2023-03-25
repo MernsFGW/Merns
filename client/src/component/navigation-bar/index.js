@@ -15,7 +15,7 @@ import {
     Dropdown,
     Space
 } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './navigation-bar.css';
 
 export const NavBar = () => {
@@ -56,12 +56,12 @@ export const NavBar = () => {
 
     return (
         <div className='navbar-wrapper'>
-            <div className='first-navbar-part'>
+            <Link to="/" className='first-navbar-part'>
                 <div className='app-logo-wrapper'>
                     <img alt='' className='app-logo' src="https://i.imgur.com/MDzKpLi.png" />
                 </div>
                 <h3 className='app-title'>University Debate</h3>
-            </div>
+            </Link>
             <div className='middle-navbar-part'>
                 <div className='navigation-btn-grp'>
                     <HomeFilled onClick={() => navigate("/")} className='active' />

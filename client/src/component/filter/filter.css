@@ -57,7 +57,7 @@
     gap: var(--spacing-md);
     position: sticky;
     top: 85px;
-    height: calc(100vh - 105px);
+    height: calc(100vh - 106px);
     overflow: auto;
 }
 
