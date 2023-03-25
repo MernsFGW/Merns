@@ -1,15 +1,5 @@
 import React from 'react';
-import { Home, IdeaDetail, Login, Register, About, Admin, UserProfile, UserDashboard, UserPassword } from './page';
-import {
-  Home,
-  IdeaDetail,
-  Login,
-  Register,
-  About,
-  Admin,
-  UserProfile,
-  Users,
-} from "./page";
+import { Home, IdeaDetail, Login, Register, About, Admin, Users, UserProfile, UserDashboard, UserPassword } from './page';
 import { Routes, Route } from "react-router-dom";
 
 function App() {
