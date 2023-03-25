@@ -9,7 +9,7 @@ const findbyUserId = async (req, res) => {
                                 .populate('like')
                                 .populate('dislike')
                                 .populate('categoryId', 'title')
-                                .populate('userId', 'fullName avatar').exec();
+                                .populate('userId', 'fullName').exec();
 
         if(!ideas) return res(404).json({ message: 'No ideas found'});
 

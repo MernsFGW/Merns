@@ -6,6 +6,7 @@ import compress from 'compression';
 import cors from 'cors';
 import helmet from 'helmet';
 
+
 import createIdeaRoutes from './routes/idea.routes/create.routes';
 import updateIdeaRoutes from './routes/idea.routes/update.routes';
 import deleteIdeaRoutes from './routes/idea.routes/delete.routes';
@@ -19,6 +20,7 @@ import undislikeIdeaRoutes from './routes/idea.routes/undislike.routes';
 import filterIdeaRoutes from './routes/idea.routes/filter.routes';
 import listbyUserIdRoutes from './routes/idea.routes/listbyuserid.routes';
 import downloadIdeaRoutes from './routes/idea.routes/download.routes';
+import downloadDocumentRoutes from './routes/document.routes/download.routes';
 
 import createCategoryRoutes from './routes/category.routes/create.routes';
 import listCategoriesRoutes from './routes/category.routes/list.routes';
@@ -27,11 +29,12 @@ import updateCategoryRoutes from './routes/category.routes/update.routes';
 import getCategoryRoutes from './routes/category.routes/get.routes';
 
 import createUserRoutes from './routes/user.routes/create.routes';
-import updateUserRoutes from './routes/user.routes/update.routes';
+import updateProfileRoutes from './routes/user.routes/updateProfile.routes';
 import deleteUserRoutes from './routes/user.routes/delete.routes';
 import listUserRoutes from './routes/user.routes/list.routes';
 import loginUserRoutes from './routes/user.routes/login.routes';
 import idUserRoutes from './routes/user.routes/id.routes';
+import updatePasswordRoutes from './routes/user.routes/updatePassword.routes';
 
 import createDepartmentRoutes from './routes/department.routes/create.routes';
 import updateDepartmentRoutes from './routes/department.routes/update.routes';
@@ -71,6 +74,7 @@ app.use(helmet());
 app.use(cors());
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
+app.use('/', downloadDocumentRoutes)
 app.use('/', downloadIdeaRoutes)
 app.use('/', sortIdeaRoutes);
 app.use('/', filterIdeaRoutes);
@@ -87,7 +91,6 @@ app.use('/', undislikeIdeaRoutes);
 app.use('/', filterIdeaRoutes);
 app.use('/', listbyUserIdRoutes);
 
-
 app.use('/', createCategoryRoutes);
 app.use('/', listCategoriesRoutes);
 app.use('/', removeCategoryRoutes);
@@ -95,11 +98,12 @@ app.use('/', updateCategoryRoutes);
 app.use('/', getCategoryRoutes);
 
 app.use('/', createUserRoutes);
-app.use('/', updateUserRoutes);
+app.use('/', updateProfileRoutes);
 app.use('/', loginUserRoutes);
 app.use('/', deleteUserRoutes);
 app.use('/', listUserRoutes);
 app.use('/', idUserRoutes);
+app.use('/', updatePasswordRoutes);
 
 app.use('/', createDepartmentRoutes);
 app.use('/', updateDepartmentRoutes);

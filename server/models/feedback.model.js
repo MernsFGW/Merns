@@ -25,6 +25,9 @@ const FeedbackSchema = new mongoose.Schema({
   incognito: {
     type: Boolean,
   },
-});
+},
+  {
+    timestamps: true,
+  });
 
 export default mongoose.model("Feedback", FeedbackSchema);

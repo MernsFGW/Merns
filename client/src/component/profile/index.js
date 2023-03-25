@@ -1,94 +1,133 @@
-import React from "react";
-
-import {
-  ClockCircleOutlined,
-  TrophyOutlined,
-  ReconciliationOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import { Avatar, Col, Row } from "antd";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { Col, Row, Input, Space, Avatar, Upload, Button, Select } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 
 export const Profile = () => {
-  const userInfo = JSON.parse(localStorage.getItem("user"));
+    const params =  useParams();
+    const [username, setUsername] = useState('');
+    const [fullName, setFullName] = useState('');
+    const [departmentId, setDepartment] = useState('')
+    const [departmentList, setDepartmentList] = useState([]);
+    const userInfo = JSON.parse(localStorage.getItem('user'));
 
-  return (
-    <>
-      <Row>
-        <Col span={7}>
-          <div className="user-avatar">
-            {userInfo ? (
-              <Avatar
-                size={170}
-                src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`}
-              />
-            ) : (
-              <Avatar size={170} icon={<UserOutlined />} />
-            )}
-          </div>
-        </Col>
-        <Col span={15}>
-          <Row>
-            <div className="user-infomation">
-              <h1>{userInfo.user.fullName}</h1>
-              <h3>
-                <TeamOutlined />
-                &nbsp;&nbsp;
-                {userInfo.user.role === "user" ? "User" : "Admin"}
-              </h3>
+    useEffect(() => {
+        axios.get('http://localhost:3000/api/departments')
+            .then(res => setDepartmentList(res.data));
+    }, [])
+
+    const options = departmentList.map(item => {
+        return {
+            label: item.title,
+            value: item._id,
+        }
+    })
+
+    useEffect(() => {
+        getUserInfo()
+    }, [])
+
+    const getUserInfo = async () => {
+        try {
+            const response = await axios.get(`http://localhost:3000/api/users/${params.id}`);
+            const result = response.data;
+            setUsername(result.username);
+            setFullName(result.fullName);
+            setDepartment(result.departmentId)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const updateProfile = async () => {
+        try {
+            const result = await axios.put(`http://localhost:3000/api/users/${params.id}`, { username, fullName, departmentId });
+            console.log(result.data);
+          } catch (error) {
+            console.error(error);
+          }
+    }
+
+    return (
+        <>
+            <Row>
+                <Col span={24}><h1>My Profile</h1></Col>
+                <Col span={24}><p>Manage and protect your account</p></Col>
+            </Row>
+            <div style={{borderBottom: 'solid white 1px'}}>
+                <br />
             </div>
-          </Row>
-          <br />
-          <br />
-          <Row>
-            <Col span={8}>
-              <div style={{ display: "flex" }}>
-                <div style={{ padding: "3px 10px 0 0" }}>
-                  <ClockCircleOutlined
-                    style={{ fontSize: "30px", color: "white" }}
-                  />
-                </div>
-                <div>
-                  <p>
-                    <strong>3+ Years Job</strong>
-                  </p>
-                  <p>Experienced</p>
-                </div>
-              </div>
-            </Col>
-            <Col span={8}>
-              <div style={{ display: "flex" }}>
-                <div style={{ padding: "3px 10px 0 0" }}>
-                  <TrophyOutlined
-                    style={{ fontSize: "30px", color: "white" }}
-                  />
-                </div>
-                <div>
-                  <p>
-                    <strong>5 Certificates</strong>
-                  </p>
-                  <p>Achieved</p>
-                </div>
-              </div>
-            </Col>
-            <Col span={8}>
-              <div style={{ display: "flex" }}>
-                <div style={{ padding: "3px 10px 0 0" }}>
-                  <ReconciliationOutlined
-                    style={{ fontSize: "30px", color: "white" }}
-                  />
-                </div>
-                <div>
-                  <p>
-                    <strong>2 Intership</strong>
-                  </p>
-                  <p>Completed</p>
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-    </>
-  );
-};
+            <br />
+            <br />
+            <Row>
+                <Col span={16} style={{borderRight: 'solid white 1px'}}>
+                    <Row>
+                        <Col span={6}><h5>Username</h5></Col>                        
+                        <Col span={14}>
+                            <Input type='text' placeholder='Enter Username' value={username} onChange={(e) => { setUsername(e.target.value)}}  />
+                        </Col>
+                    </Row>
+                    <br />
+                    <Row>
+                        <Col span={6}><h5>FullName</h5></Col>                        
+                        <Col span={14}>
+                            <Input type='text' placeholder='Enter FullName' value={fullName} onChange={(e) => { setFullName(e.target.value)}}  />
+                        </Col>
+                    </Row>
+                    <br />
+                    <Row>
+                        <Col span={6}><h5>Email</h5></Col>
+                        <Col span={14}>
+                            <Space>
+                                <h5>dmthlinh@gmail.com</h5>
+                            </Space>
+                        </Col>
+                    </Row>
+                    <br />
+                    <Row>
+                        <Col span={6}><h5>Department</h5></Col>
+                        <Col span={14}>
+                            <Select
+                                showSearch
+                                placeholder={userInfo.user.department.title}
+                                optionFilterProp="children"
+                                filterOption={(input, option) =>
+                                    option.label.toLowerCase().includes(input.toLowerCase())
+                                }
+                                options={options}
+                                onChange={value => setDepartment(value)}
+                                style={{width: '100px'}}
+                            />
+                        </Col>
+                    </Row>                
+                </Col>
+                <Col span={8}>
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                        {userInfo
+                        ? <Avatar size={120} src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`} />
+                        : <Avatar size={120} icon={<UserOutlined />} />
+                        }
+                    </div>
+                    <br />
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                        <Upload>
+                            <Button type='primary' >Select Image</Button>
+                        </Upload>
+                    </div>
+                </Col>
+            </Row>
+            <br />
+            <Row>
+                <Col span={16}>
+                    <Row>
+                        <Col span={6}></Col>
+                        <Col span={14}>
+                            <Button type='primary' onClick={updateProfile} >Save</Button>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+        </>    
+    )
+}

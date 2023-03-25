@@ -29,7 +29,7 @@ function getFormData(object) {
         if (key === 'incognito' && typeof object[key] === 'undefined') {
             formData.append(key, false)
         }
-        else{
+        else {
             formData.append(key, object[key])
         }
     });
@@ -41,7 +41,7 @@ export const CreateIdeaForm = ({ handleClose, termList, categoryList }) => {
     const user = JSON.parse(localStorage.getItem("user"));
     const dispatch = useDispatch();
     const currentDate = new Date();
-    const ideaTerm = termList.find(term => new Date(term.startDate) < currentDate && currentDate <= new Date(term.endDate));
+    const ideaTerm = termList.find(term => new Date(term.startDate) <= currentDate && currentDate < new Date(term.endDate));
 
     const options = categoryList.map(item => {
         return {
@@ -67,7 +67,7 @@ export const CreateIdeaForm = ({ handleClose, termList, categoryList }) => {
         setIsLoading(true);
         axios.post(`http://localhost:3000/api/ideas/new/${user.user.id}`, getFormData({ ...values, termId: ideaTerm._id }))
             .then(res => {
-                if (res.status == '200') {
+                if (res.status === '200') {
                     emailjs.send("service_j4lt9sj","template_1a9oz2d", returnParamsTemplate(res.data), "U_SRsR_nYGeEwDxFb");
                 }
                 handleClose();
@@ -132,26 +132,23 @@ export const CreateIdeaForm = ({ handleClose, termList, categoryList }) => {
             </Form.Item>
             <Form.Item
                 label={<p><b>Image</b></p>}
-                required
-                rules={[{ message: 'Please input idea image!' }]}
             >
                 <Form.Item
-                    required
                     name="photo" valuePropName="photo"
                     getValueFromEvent={normFile}
                     noStyle
                 >
                     <Upload.Dragger
-                        required
+                        accept="image/png, image/jpeg"
                         name='file'
                         beforeUpload={() => false}
                     >
                         <p className="ant-upload-drag-icon">
                             <InboxOutlined />
                         </p>
-                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                        <p className="ant-upload-text">Click or drag image to this area to upload</p>
                         <p className="ant-upload-hint">
-                            Support for a single or bulk upload.
+                            Support for a single upload.
                         </p>
                     </Upload.Dragger>
                 </Form.Item>

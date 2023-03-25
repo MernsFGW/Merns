@@ -9,7 +9,7 @@ import {
   HomeFilled,
 } from "@ant-design/icons";
 import { Input, Button, Avatar, Dropdown, Space } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./navigation-bar.css";
 
 export const NavBar = () => {
@@ -69,7 +69,7 @@ export const NavBar = () => {
 
   return (
     <div className="navbar-wrapper">
-      <div className="first-navbar-part">
+      <Link to="/" className="first-navbar-part">
         <div className="app-logo-wrapper">
           <img
             alt=""
@@ -78,10 +78,13 @@ export const NavBar = () => {
           />
         </div>
         <h3 className="app-title">University Debate</h3>
-      </div>
+      </Link>
       <div className="middle-navbar-part">
         <div className="navigation-btn-grp">
           <HomeFilled onClick={() => navigate("/")} className="active" />
+          <UsergroupAddOutlined />
+          <AudioOutlined />
+          <ProjectFilled />
         </div>
         <div className="search-engine">
           <Search
