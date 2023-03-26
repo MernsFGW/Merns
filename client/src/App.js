@@ -12,6 +12,7 @@ function App() {
         <Route path="/ideas/:id" element={<IdeaDetail />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/about" element={<About />} />
+        <Route path="/users" element={<Users/>}/>
         <Route path='/users/:id' element={<UserDashboard /> } />
         <Route path='/users/:id/profile' element={<UserProfile /> } />
         <Route path='/users/:id/changepassword' element={<UserPassword /> } />
