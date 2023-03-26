@@ -43,7 +43,6 @@ export const Profile = () => {
     const updateProfile = async () => {
         try {
             const result = await axios.put(`http://localhost:3000/api/users/${params.id}`, { username, fullName, departmentId });
-            console.log(result.data);
           } catch (error) {
             console.error(error);
           }

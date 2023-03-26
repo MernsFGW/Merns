@@ -103,7 +103,7 @@ export const Home = () => {
               onClick={userInfo
                 ? (() => setIsOpen(true))
                 : (() => navigate("/login"))} type="primary"
-              disabled={checkPostable(termList) === "Unpostable"}
+              // disabled={checkPostable(termList) === "Unpostable"}
             >
               {checkPostable(termList) === "Unpostable" ? "Posting Close" : "Create Post"}
             </Button>

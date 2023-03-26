@@ -4,7 +4,7 @@ import axios from 'axios';
 import emailjs from 'emailjs-com';
 import './form.css';
 
-export const CommentForm = ({ userInfo, ideaId, setList, setData }) => {
+export const CommentForm = ({ userInfo, ideaId, setList, setData, setFeedbackCount }) => {
     const [incognito, setIncognito] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [form] = Form.useForm();
@@ -40,6 +40,7 @@ export const CommentForm = ({ userInfo, ideaId, setList, setData }) => {
                 setIsLoading(false);
                 setList(oldArray => [res.data, ...oldArray]);
                 setData(oldArray => [res.data, ...oldArray]);
+                setFeedbackCount(oldValue => oldValue + 1);
                 form.resetFields();
             });
     };

@@ -6,7 +6,6 @@ import { UserOutlined } from '@ant-design/icons';
 import './post.css'
 
 export const checkTerm = (termId, termList) => {
-    console.log(termList);
     if (typeof termList !== "undefined" && termList.length > 0) {
         const currentTerm = termList.find(term => term._id === termId);
         const currentDate = new Date();
@@ -45,17 +44,17 @@ export const Post = ({ item, termList }) => {
                     <div className='post-user-wrapper'>
                         {item.incognito
                             ? <Avatar size={38} icon={<UserOutlined />} />
-                            : <Avatar size={38} src={`https://ui-avatars.com/api/?name=${item.userId.fullName}`} />
+                            : <Avatar size={38} src={`https://ui-avatars.com/api/?name=${item.user.fullName}` } />
                         }
                         <div className='post-user-information'>
-                            {item.incognito ? <h5>Anonymous</h5> : <h5>{item.userId.fullName}</h5>}
+                            {item.incognito ? <h5>Anonymous</h5> : <h5>{item.user.fullName}</h5>}
                             <p>{upperCaseFirstLetter(updateDate)}</p>
                         </div>
                     </div>
                     <div className='post-action-information'>
                         <p>{item.likes.length} Upvote</p>
                         <p>{item.dislikes.length} Downvote</p>
-                        <p>{item.feedbackCount} Comment</p>
+                        <p>{item.feedbackCount} Feedback</p>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { CommentForm, EditCommentForm } from '../form';
 import axios from 'axios';
 import './comment-box.css';
-export const CommentBox = ({ userInfo, ideaId, feedbackAble }) => {
+export const CommentBox = ({ userInfo, ideaId, feedbackAble, setFeedbackCount }) => {
     const count = 3;
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(3);
@@ -46,6 +46,7 @@ export const CommentBox = ({ userInfo, ideaId, feedbackAble }) => {
                 message.success("Remove feedback success!");
                 setData(oldArray => oldArray.filter(item => item._id !== _id));
                 setList(oldArray => oldArray.filter(item => item._id !== _id));
+                setFeedbackCount(oldValue => oldValue - 1);
                 setConfirmLoading(false);
                 setModalOpen(false);
             })
@@ -113,7 +114,7 @@ export const CommentBox = ({ userInfo, ideaId, feedbackAble }) => {
     return (
         <div className='comment-section'>
             <h3>Feedbacks</h3>
-            {userInfo && feedbackAble && feedbackAble === "Feedback open" ? <CommentForm setList={setList} userInfo={userInfo} ideaId={ideaId} setData={setData} /> : ''}
+            {userInfo && feedbackAble && feedbackAble === "Feedback open" ? <CommentForm setFeedbackCount={setFeedbackCount} setList={setList} userInfo={userInfo} ideaId={ideaId} setData={setData} /> : ''}
             <List
                 className="demo-loadmore-list"
                 loading={initLoading}
