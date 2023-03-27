@@ -4,7 +4,7 @@ import axios from 'axios';
 import emailjs from 'emailjs-com';
 import './form.css';
 
-export const CommentForm = ({ userInfo, ideaId, setList, setData }) => {
+export const CommentForm = ({ userInfo, ideaId, setList, setData, setFeedbackCount }) => {
     const [incognito, setIncognito] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [form] = Form.useForm();
@@ -22,6 +22,7 @@ export const CommentForm = ({ userInfo, ideaId, setList, setData }) => {
         return {
             to_name: `${data.ideaId.userId.username}`,
             from_name: "MERN system",
+            author: `${data.ideaId.userId.username}`,
             message: `${userInfo.user.fullName} commented to your idea (${data.ideaId.content})\n
                       With content: ${data.content}\n
                 `
@@ -33,13 +34,14 @@ export const CommentForm = ({ userInfo, ideaId, setList, setData }) => {
         setIsLoading(true);
         axios.post('http://localhost:3000/api/new/feedbacks', mutateData(values))
             .then(res => {
-                if (res.status === '200') {
+                if (res.status == '200') {
                     emailjs.send("service_j4lt9sj", "template_rclelrs", returnParamsTemplate(res.data), "U_SRsR_nYGeEwDxFb");
                 }
                 message.success('Comment success!');
                 setIsLoading(false);
                 setList(oldArray => [res.data, ...oldArray]);
                 setData(oldArray => [res.data, ...oldArray]);
+                setFeedbackCount(oldValue => oldValue + 1);
                 form.resetFields();
             });
     };

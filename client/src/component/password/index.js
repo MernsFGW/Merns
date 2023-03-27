@@ -20,7 +20,6 @@ export const Password = () => {
 
         try {
         const response = await axios.put(`http://localhost:3000/api/users/changepassword/${params.id}`, data);
-        console.log(response.data);
         message.success('Password changed successfully!');
         form.resetFields();
         } catch (error) {

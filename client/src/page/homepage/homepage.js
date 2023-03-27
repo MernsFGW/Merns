@@ -88,16 +88,16 @@ export const Home = () => {
           <div className="update-post">
             {userInfo
               ? <Avatar
-                size={38}
-                src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`}
-              />
+                  size={38}
+                  src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`}
+                />
               : <Avatar size={38} icon={<UserOutlined />} />
-            }
+              }
             <Input
               onClick={userInfo ? (() => setIsOpen(true)) : (() => navigate("/login"))} type="primary"
               style={{ borderColor: 'var(--sub-contrast-color)', backgroundColor: 'var(--sub-contrast-color)', cursor: 'pointer' }}
               size='large' placeholder="Let's share what going on your mind..."
-              // disabled={checkPostable(termList) === "Unpostable"}
+              disabled={checkPostable(termList) === "Unpostable"}
             />
             <Button
               onClick={userInfo
@@ -105,8 +105,7 @@ export const Home = () => {
                 : (() => navigate("/login"))} type="primary"
               // disabled={checkPostable(termList) === "Unpostable"}
             >
-              {/* {checkPostable(termList) === "Unpostable" ? "Posting Close" : "Create Post"} */}
-              Create Post
+              {checkPostable(termList) === "Unpostable" ? "Posting Close" : "Create Post"}
             </Button>
           </div>
         </ContentBox>

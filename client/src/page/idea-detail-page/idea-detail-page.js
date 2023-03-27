@@ -19,6 +19,7 @@ export const IdeaDetail = () => {
     const [like, setLike] = useState([]);
     const [dislike, setDislike] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [feedbackCount, setFeedbackCount] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
@@ -27,7 +28,7 @@ export const IdeaDetail = () => {
     const userInfo = JSON.parse(localStorage.getItem("user"));
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const defaultImage = 'https://res.cloudinary.com/dvxfixf5q/image/upload/v1679409069/Photo/hfszuemdpzjrc8bupmgd.jpg';
+    const defaultImage = 'https://res.cloudinary.com/dvxfixf5q/image/upload/v1679888541/Photo/ylu8rb9clvpu4fipanqy_xnjwjd.jpg';
 
     const onClick = ({ key }) => {
         key === "Edit" ? setIsOpen(true) : setModalOpen(true);
@@ -99,6 +100,14 @@ export const IdeaDetail = () => {
     }
 
     useEffect(() => {
+        axios.get(`http://localhost:3000/api/feedbacks?ideaId=${id}`)
+            .then(res => {
+                setFeedbackCount(res.data.length);
+                console.log(feedbackCount);
+            })
+    })
+
+    useEffect(() => {
         axios.get(`http://localhost:3000/api/ideas/${id}`)
             .then(res => {
                 setData(res.data.idea);
@@ -150,7 +159,7 @@ export const IdeaDetail = () => {
                             <div className='post-action-information detail-page-action'>
                                 <p className='post-detailt-text'>{format(new Date(data.createdAt), "MMM dd, yyyy")}</p>
                                 <p className='post-detailt-text'>-</p>
-                                <p className='post-detailt-text'>651,000 Feedbacks</p>
+                                <p className='post-detailt-text'>{feedbackCount} Feedbacks</p>
                                 <p className='post-detailt-text'>{like.length} <LikeFilled onClick={userInfo ? likeIdea : () => navigate("/login")} style={{ color: checkLiked() && '#537FE7' }} className='like-btn' /></p>
                                 <p className='post-detailt-text'>{dislike.length} <DislikeFilled onClick={userInfo ? dislikeIdea : () => navigate("/login")} style={{ color: checkDisliked() && '#FF597B' }} className='dislike-btn' /></p>
                             </div>
@@ -190,7 +199,7 @@ export const IdeaDetail = () => {
                     </div>
                 </ContentBox>
                 <ContentBox>
-                    <CommentBox feedbackAble={feedbackAble} ideaId={id} userInfo={userInfo} />
+                    <CommentBox setFeedbackCount={setFeedbackCount} feedbackAble={feedbackAble} ideaId={id} userInfo={userInfo} />
                 </ContentBox>
             </div>
             <div className='layout-panel extend'></div>

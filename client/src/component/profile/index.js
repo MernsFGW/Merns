@@ -30,7 +30,11 @@ export const Profile = () => {
 
     const getUserInfo = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/users/${params.id}`);
+            const response = await axios.get(`http://localhost:3000/api/users/${params.id}`, {
+                headers: {
+                    Authorization: userInfo.token,
+                },
+            });
             const result = response.data;
             setUsername(result.username);
             setFullName(result.fullName);
@@ -43,7 +47,6 @@ export const Profile = () => {
     const updateProfile = async () => {
         try {
             const result = await axios.put(`http://localhost:3000/api/users/${params.id}`, { username, fullName, departmentId });
-            console.log(result.data);
           } catch (error) {
             console.error(error);
           }
@@ -65,14 +68,14 @@ export const Profile = () => {
                     <Row>
                         <Col span={6}><h5>Username</h5></Col>                        
                         <Col span={14}>
-                            <Input type='text' placeholder='Enter Username' value={username} onChange={(e) => { setUsername(e.target.value)}}  />
+                            <Input type='text' placeholder={userInfo.user.username} value={username} onChange={(e) => { setUsername(e.target.value)}}  />
                         </Col>
                     </Row>
                     <br />
                     <Row>
                         <Col span={6}><h5>FullName</h5></Col>                        
                         <Col span={14}>
-                            <Input type='text' placeholder='Enter FullName' value={fullName} onChange={(e) => { setFullName(e.target.value)}}  />
+                            <Input type='text' placeholder={userInfo.user.fullName} value={fullName} onChange={(e) => { setFullName(e.target.value)}}  />
                         </Col>
                     </Row>
                     <br />

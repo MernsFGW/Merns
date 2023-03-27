@@ -79,7 +79,6 @@ export const Register = () => {
                     'Authorization': loginUser.token,
             }
         }).then((res) => {
-            console.log(res.data);
             // localStorage.setItem("user", JSON.stringify(res.data));
             setValues({...values, status:res.data.message, error: '', openNotification: true})
         }).catch(function (error) {

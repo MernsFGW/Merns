@@ -18,7 +18,6 @@ export const Users = () => {
       })
       .then((res) => {
         setUserList(res.data);
-        console.log(res.data);
       })
       .catch((error) => console.log(error));
     setIsLoading(false);
