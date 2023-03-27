@@ -28,7 +28,7 @@ export const IdeaDetail = () => {
     const userInfo = JSON.parse(localStorage.getItem("user"));
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const defaultImage = 'https://res.cloudinary.com/dvxfixf5q/image/upload/v1679409069/Photo/hfszuemdpzjrc8bupmgd.jpg';
+    const defaultImage = 'https://www.toponseek.com/blogs/wp-content/uploads/2022/06/viet-blog-3.jpg';
 
     const onClick = ({ key }) => {
         key === "Edit" ? setIsOpen(true) : setModalOpen(true);

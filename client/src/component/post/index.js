@@ -28,7 +28,7 @@ export const Post = ({ item, termList }) => {
         return capitalizedWord;
     }
 
-    const defaultImage = 'https://res.cloudinary.com/dvxfixf5q/image/upload/v1679409069/Photo/hfszuemdpzjrc8bupmgd.jpg';
+    const defaultImage = 'https://www.toponseek.com/blogs/wp-content/uploads/2022/06/viet-blog-3.jpg';
 
     return (
         <div className='post-wrapper'>
