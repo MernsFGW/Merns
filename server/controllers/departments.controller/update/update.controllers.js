@@ -2,7 +2,9 @@ import errorHandler from '../../../helpers/dbErrorHandler.js';
 import Department from './../../../models/department.model';
 
 const update = async (req, res) => {
-    const department = await Department.findById(req.information);
+
+    const { id } = req.params;
+    const department = await Department.findById(id);
     department.updatedAt = Date.now();
     department.title = req.body.title;
     try {

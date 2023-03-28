@@ -1,11 +1,14 @@
 import errorHandler from '../../../helpers/dbErrorHandler.js';
+import Department from './../../../models/department.model';
+import mongoose from "mongoose";
 
 const remove = async (req, res) => {
     try {
-        let department = req.information;
-        let deletedDepartment = await department.remove();
+        const { id } = req.params;
+        if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No term with that id');
+        await Department.findByIdAndRemove(id);
+
         res.status(200).json({
-            department: deletedDepartment,
             message: "Deleted department Successfully"
         });
     } catch (err) {
