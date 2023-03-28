@@ -8,3 +8,4 @@ export { Users } from "./user/user";
 export {UserDashboard} from './user-dashboard/user-dashboard';
 export {UserProfile} from './user-profile/user-profile';
 export {UserPassword} from './user-password/user-password';
+export {Departments} from './department/department';

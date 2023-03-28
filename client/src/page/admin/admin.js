@@ -28,7 +28,7 @@ export const Admin = () => {
               </Link>
             </li>
             <li className="button-action">
-              <Link to="/admin">
+              <Link to="/departments">
                 <i class='bx bx-area' ></i>
                 <span class="links_name">Departments</span>
               </Link>

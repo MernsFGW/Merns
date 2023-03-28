@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, IdeaDetail, Login, Register, About, Admin, Users, UserProfile, UserDashboard, UserPassword } from './page';
+import { Home, IdeaDetail, Login, Register, About, Admin, Users, UserProfile, UserDashboard, UserPassword, Departments} from './page';
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
         <Route path='/users/:id' element={<UserDashboard /> } />
         <Route path='/users/:id/profile' element={<UserProfile /> } />
         <Route path='/users/:id/changepassword' element={<UserPassword /> } />
+        <Route path="/departments" element={<Departments/>}/>
       </Routes>
     </div>
   );
