@@ -31,7 +31,9 @@ export const IdeaDetail = () => {
     const defaultImage = 'https://res.cloudinary.com/dvxfixf5q/image/upload/v1679888541/Photo/ylu8rb9clvpu4fipanqy_xnjwjd.jpg';
 
     const onClick = ({ key }) => {
-        key === "Edit" ? setIsOpen(true) : setModalOpen(true);
+        key === "Edit" && setIsOpen(true);
+        key === "Remove" && setModalOpen(true);
+        key === "Download" && downloadImage();
     };
     const items = [
         {
@@ -42,8 +44,17 @@ export const IdeaDetail = () => {
             label: 'Remove idea',
             key: 'Remove',
         },
+        {
+            label: 'Download image',
+            key: 'Download',
+        },
     ];
 
+    const downloadImage = async () => {
+        await axios.get(`http://localhost:3000/api/ideas/${id}/documents`)
+            .then()
+    };
+    
     const handleDelete = async () => {
         setConfirmLoading(true);
         await axios.delete(`http://localhost:3000/api/ideas/${id}`)

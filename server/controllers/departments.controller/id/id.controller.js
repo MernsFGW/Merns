@@ -3,6 +3,7 @@ import Department from './../../../models/department.model';
 const departmentById = async (req, res) => {
     try {
         const { id } = req.params;
+        console.log(id);
         const department = await Department.findById(id);
 
         if (!department) 

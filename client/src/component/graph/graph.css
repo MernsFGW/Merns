@@ -1,0 +1,23 @@
+canvas.marks {
+    border-radius: 16px;
+}
+
+.dashboard-container {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.dashboard-row {
+    display: flex;
+    gap: 20px;
+}
+
+
+.flex-2 {
+    flex: 2;
+}
+
+.flex-1 {
+    flex: 1 100%;
+}
