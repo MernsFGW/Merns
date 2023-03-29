@@ -51,7 +51,7 @@ export const IdeaDetail = () => {
     ];
 
     const downloadImage = async () => {
-        await axios.get(`http://localhost:3000/api/ideas/${id}/documents`)
+        await axios.get(`http://localhost:3000/api/documents/download?ideaId=${id}`)
             .then()
     };
     

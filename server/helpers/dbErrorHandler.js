@@ -10,9 +10,14 @@ const getErrorMessage = (err) => {
                 message = 'Something went wrong';
         }
     } else {
-        for (let errName in err.errors) {
-            if (err.errors[errName].message)
-            message = err.errors[errName].message
+        // check type of  variable err
+        if (typeof err === 'string') {
+            message = err
+        }else{
+            for (let errName in err.errors) {
+                if (err.errors[errName].message)
+                message = err.errors[errName].message
+            }
         }
     }
     return message
