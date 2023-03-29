@@ -8,13 +8,15 @@ const remove = async (req, res) => {
         if(Object.keys(idea.photo).length > 0){
             let public_id = idea.photo.public_id;
             image = idea.photo.url;
-            const photoResult = await cloudinary.uploader
-                .destroy(public_id, (err, result) => {
-                    if (err) {
-                        throw errorHandler.getErrorMessage(err)
+            if (image !== undefined){
+                const photoResult = await cloudinary.uploader
+                    .destroy(public_id, (err, result) => {
+                        if (err) {
+                            throw errorHandler.getErrorMessage(err)
+                        }
                     }
-                }
-            );
+                );
+            }
         }
         let deletedIdea = await idea.remove();
         res.status(200).json({
