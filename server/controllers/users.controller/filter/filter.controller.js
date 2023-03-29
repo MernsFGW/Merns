@@ -4,16 +4,8 @@ import User from "../../../models/user.model";
 const filterUser = async (req, res) => {
   try {
     const { departmentId } = req.query;
-    const filterCriteria = {};
 
-    if (departmentId) {
-      filterCriteria.departmentId = departmentId;
-    }
-
-    const users = await User.find(filterCriteria)
-      .populate("departmentId")
-      //.populate("userId", "fullName avatar")
-      .exec();
+    const users = await User.find({departmentId});
     res.json(users);
   } catch (err) {
     return res.status(400).json({
