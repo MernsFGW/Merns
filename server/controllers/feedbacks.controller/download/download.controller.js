@@ -3,7 +3,7 @@ import Feedback from "../../../models/feedback.model";
 import {Blob} from 'buffer';
 
 const download = async (req, res) => {
-    const { ideaId, parentId } = req.params;
+    const { ideaId, parentId } = req.query;
     try {
         let conditions = {}
         if (ideaId && parentId) {
@@ -34,7 +34,13 @@ const download = async (req, res) => {
         const blob = new Blob([csv], {type: "application/csv"});
         res.setHeader("Content-Disposition", "attachment; filename=feedbacks.csv");
         res.set("Content-Type", "text/csv");
-        res.status(200).send(blob);
+        blob.arrayBuffer().then(buffer => {
+        const data = Buffer.from(buffer);
+            res.write(data);
+            res.end();
+        }).catch(err => {
+            res.status(500).send({ error: err.message });
+        });
     } catch (error) {
         console.log(error)
         return res.status(400).json({

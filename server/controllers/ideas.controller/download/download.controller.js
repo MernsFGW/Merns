@@ -3,7 +3,7 @@ import Idea from "../../../models/idea.model";
 import {Blob} from 'buffer';
 
 const download = async (req, res) => {
-    const { ideaId, userId } = req.params;
+    const { ideaId, userId } = req.query;
     try {
         let conditions = {}
         if (ideaId && userId) {
