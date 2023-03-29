@@ -7,30 +7,30 @@ export const Admin = () => {
   return (
     <Layout>
       <div className="layout-panel extend">
-        <div class="sidebar">
-          <ul class="nav-links">
-            <li class="button-action">
+        <div className="sidebar">
+          <ul className="nav-links">
+            <li className="button-action">
               <Link to="/admin">
-                <i class="bx bx-grid-alt"></i>
-                <span class="links_name">Dashboard</span>
+                <i className="bx bx-grid-alt"></i>
+                <span className="links_name">Dashboard</span>
               </Link>
             </li>
             <li className="button-action">
               <Link to="/">
-                <i class='bx bx-home' ></i>
-                <span class="links_name">Homepage</span>
+                <i className='bx bx-home' ></i>
+                <span className="links_name">Homepage</span>
               </Link>
             </li>
             <li className="button-action">
               <Link to="/users">
-                <i class='bx bxs-user-account' ></i>
-                <span class="links_name">Accounts</span>
+                <i className='bx bxs-user-account' ></i>
+                <span className="links_name">Accounts</span>
               </Link>
             </li>
             <li className="button-action">
               <Link to="/admin">
-                <i class='bx bx-area' ></i>
-                <span class="links_name">Departments</span>
+                <i className='bx bx-area' ></i>
+                <span className="links_name">Departments</span>
               </Link>
             </li>
           </ul>
@@ -41,7 +41,6 @@ export const Admin = () => {
           <MyChart />
         </ContentBox>
       </div>
-      <div className="layout-panel secondary"></div>
     </Layout>
   );
 };

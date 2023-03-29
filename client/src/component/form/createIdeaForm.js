@@ -67,7 +67,7 @@ export const CreateIdeaForm = ({ handleClose, termList, categoryList }) => {
         setIsLoading(true);
         axios.post(`http://localhost:3000/api/ideas/new/${user.user.id}`, getFormData({ ...values, termId: ideaTerm._id }))
             .then(res => {
-                if (res.status == '200') {
+                if (res.status === '200') {
                     emailjs.send("service_j4lt9sj","template_1a9oz2d", returnParamsTemplate(res.data), "U_SRsR_nYGeEwDxFb");
                 }
                 handleClose();
