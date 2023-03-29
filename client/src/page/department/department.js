@@ -8,6 +8,9 @@ export const Departments = () => {
   const [departmentList, setDepartmentList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -31,7 +34,7 @@ export const Departments = () => {
         { title: values.title }
       );
       setDepartmentList([...departmentList, response.data]);
-      setShowModal(false);
+      setShowCreateModal(false);
       form.resetFields();
       message.success("Department created successfully!");
     } catch (error) {
@@ -47,11 +50,11 @@ export const Departments = () => {
         `http://localhost:3000/api/departments/${_id}`,
         values
       );
-      const updatedDepartmentList = departmentList.map((department) =>
-        department._id === _id ? response.data : department
+      const updatedDepartmentList = await axios.get(
+        "http://localhost:3000/api/departments"
       );
-      setDepartmentList(updatedDepartmentList);
-      setShowModal(false);
+      setDepartmentList(updatedDepartmentList.data);
+      setShowUpdateModal(false);
       form.resetFields();
       message.success("Department updated successfully!");
     } catch (error) {
@@ -62,7 +65,7 @@ export const Departments = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/departments/:departmentId`);
+      await axios.delete(`http://localhost:3000/api/departments/${id}`);
       const updatedDepartmentList = departmentList.filter(
         (department) => department._id !== id
       );
@@ -76,7 +79,7 @@ export const Departments = () => {
 
   const handleEdit = (department) => {
     form.setFieldsValue(department);
-    setShowModal(true);
+    setShowUpdateModal(true);
   };
 
   return (
@@ -115,7 +118,11 @@ export const Departments = () => {
         <ContentBox>
           <div className="content-header">
             <h2>Departments</h2>
-            <Button type="primary" onClick={() => setShowModal(true)}>
+            <Button
+              type="primary"
+              onClick={() => setShowCreateModal(true)}
+              style={{ marginRight: 8 }}
+            >
               Create
             </Button>
           </div>
@@ -150,15 +157,36 @@ export const Departments = () => {
       <div className="layout-panel secondary"></div>
       <Modal
         title="Create Department"
-        visible={showModal}
-        onCancel={() => setShowModal(false)}
+        // eslint-disable-next-line no-undef
+        visible={showCreateModal}
+        onCancel={() => setShowCreateModal(false)}
         footer={null}
+        destroyOnClose={true}
       >
-        <Form
-          form={form}
-          layout="vertical"
-          onFinish={form.isFieldsTouched() ? handleUpdate : handleCreate}
-        >
+        <Form form={form} layout="vertical" onFinish={handleCreate}>
+          <Form.Item
+            label="Title"
+            name="title"
+            rules={[{ required: true, message: "Please input title!" }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
+      <Modal
+        title="Update Department"
+        // eslint-disable-next-line no-undef
+        visible={showUpdateModal}
+        onCancel={() => setShowUpdateModal(false)}
+        footer={null}
+        destroyOnClose={true}
+      >
+        <Form form={form} layout="vertical" onFinish={handleUpdate}>
           <Form.Item name="_id" hidden>
             <Input />
           </Form.Item>
@@ -171,7 +199,7 @@ export const Departments = () => {
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              Submit
+              Update
             </Button>
           </Form.Item>
         </Form>
