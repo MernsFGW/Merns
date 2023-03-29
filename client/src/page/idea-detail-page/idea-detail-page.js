@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { checkTerm } from '../../component';
 import axios from 'axios';
 import './idea-detail-page.css';
+import FileSaver from 'file-saver';
 
 export const IdeaDetail = () => {
     let { id } = useParams();
@@ -51,8 +52,13 @@ export const IdeaDetail = () => {
     ];
 
     const downloadImage = async () => {
-        await axios.get(`http://localhost:3000/api/documents/download?ideaId=${id}`)
-            .then()
+        axios.get(`http://localhost:3000/api/documents/download?ideaId=${id}`, {
+            responseType: 'blob'
+        })
+        .then((response) => {
+            const file = new Blob([response.data], { type: 'application/zip' });
+            FileSaver.saveAs(file, 'file.zip');
+        }).catch((error) => console.log(error));
     };
     
     const handleDelete = async () => {

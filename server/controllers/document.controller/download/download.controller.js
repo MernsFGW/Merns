@@ -1,38 +1,53 @@
-import cloudinary from "cloudinary";
 import archiver from "archiver";
 import errorHandler from "../../../helpers/dbErrorHandler.js";
 import Idea from "../../../models/idea.model";
+import request from "request";
+import fs from "fs";
 
 const downloadImages = async (req, res) => {
-    const { ideaId } = req.params;
+    const { ideaId } = req.query;
 
     try {
         // Get all images urls of the idea
         const idea = await Idea.findById(ideaId);
-        const imageUrl = idea.photo.url;
+        const imageUrls = idea.photo.url;
+        console.log(imageUrls)
+        let formatImage = imageUrls.split(".")
+        formatImage = formatImage[formatImage.length - 1];
         const publicId = idea.photo.public_id;
-
-        // Download images
-        const archive = archiver("zip", {
-            zlib: { level: 9 },
-        });
-
-        // Set the archive name 
-        res.attachment(`images-${ideaId}.zip`);
-
-        // Pipe the archive to the response
-        archive.pipe(res);
-
+        const zipFileName = `${publicId}.zip`;
         // Get Image from Cloudinary
-        const resource = await cloudinary.v2.api.resource(publicId);
-        const imageStream = cloudinary.v2.uploader.download(resource.id);
-        archive.append(imageStream, { name: publicId });
+        if (publicId != undefined) {
+            request(imageUrls)
+                .pipe(fs.createWriteStream(`${publicId}.${formatImage}`))
+                .on("close", () => {
+                    const output = fs.createWriteStream(zipFileName);
+                    
+                    const archive = archiver('zip', {
+                        zlib: { level: 9 }
+                    });
 
-        // Finalize the archive and send it to the client
-        archive.finalize();
-        archive.pipe(res);
+                    output.on('close', () => {
+                        console.log(`${zipFileName} đã được tạo ra.`);
+                        res.download(zipFileName, (err) => {
+                            console.log(">>>", err)
+                        })
+                    });
+
+                    archive.on('error', err => {
+                        throw err;
+                    });
+
+                    archive.pipe(output);
+                    archive.file(`${publicId}.${formatImage}`, { name: `${publicId}.${formatImage}` });
+                    archive.finalize();
+                })
+        } else {
+            return res.status(400).json({
+                error: errorHandler.getErrorMessage("Image not found"),
+            });
+        }
     } catch (error) {
-        console.log(error)
         return res.status(400).json({
             error: errorHandler.getErrorMessage(error),
         });

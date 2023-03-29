@@ -4,6 +4,6 @@ import documentCtrl from "../../controllers/document.controller/download/downloa
 const router = express.Router();
 
 // Download images route
-router.route("/ideas/:ideaId/documents").get(documentCtrl.downloadImages);
+router.route("/api/documents/download").get(documentCtrl.downloadImages);
 
 export default router;

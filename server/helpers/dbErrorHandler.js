@@ -11,6 +11,7 @@ const getErrorMessage = (err) => {
         }
     } else {
         // check type of  variable err
+        console.log(typeof err, err);
         if (typeof err === 'string') {
             message = err
         }else{
