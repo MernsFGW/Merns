@@ -34,7 +34,7 @@ export const CommentForm = ({ userInfo, ideaId, setList, setData, setFeedbackCou
         setIsLoading(true);
         axios.post('http://localhost:3000/api/new/feedbacks', mutateData(values))
             .then(res => {
-                if (res.status === '200') {
+                if (res.status === 200) {
                     emailjs.send("service_j4lt9sj", "template_rclelrs", returnParamsTemplate(res.data), "U_SRsR_nYGeEwDxFb");
                 }
                 message.success('Comment success!');
