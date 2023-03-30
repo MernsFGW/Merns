@@ -120,8 +120,7 @@ export const IdeaDetail = () => {
         axios.get(`http://localhost:3000/api/feedbacks?ideaId=${id}`)
             .then(res => {
                 setFeedbackCount(res.data.length);
-                console.log(feedbackCount);
-            })
+        })
     })
 
     useEffect(() => {

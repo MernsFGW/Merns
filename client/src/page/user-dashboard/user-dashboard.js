@@ -63,9 +63,6 @@ export const UserDashboard = () => {
                 )}
               />
             </TabPane>
-            <TabPane tab={<h4>Comments</h4>} key="2">
-              2nd TAB PANE Content
-            </TabPane>
           </Tabs>
         </div>
       </div>

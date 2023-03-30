@@ -234,4 +234,15 @@ a {
   width: 100%;
 }
 
+.item-display h4 {
+  color: white !important;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
 @import url('https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css');

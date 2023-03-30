@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useEffect } from "react";
 import {
   UsergroupAddOutlined,
   AudioOutlined,
@@ -41,20 +41,6 @@ export const NavBar = () => {
       label: (
         <a
           onClick={() => {
-            navigate("/admin");
-          }}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Admin Page
-        </a>
-      ),
-    },
-    {
-      key: "3",
-      label: (
-        <a
-          onClick={() => {
             logoutUser();
             navigate("/");
           }}
@@ -66,6 +52,26 @@ export const NavBar = () => {
       ),
     },
   ];
+
+  useEffect(() => {
+    if (userInfo && userInfo.user.role.title === "Admin") {
+      items.unshift(
+        {
+          key: "3",
+          label: (
+            <a
+              onClick={() => {
+                navigate("/admin");
+              }}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Admin Page
+            </a>
+          ),
+        })
+    }
+  })
 
   return (
     <div className="navbar-wrapper">

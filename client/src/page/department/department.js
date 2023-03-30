@@ -123,7 +123,7 @@ export const Departments = () => {
               onClick={() => setShowCreateModal(true)}
               style={{ marginRight: 8 }}
             >
-              Create
+              New Department
             </Button>
           </div>
           <List
@@ -148,7 +148,7 @@ export const Departments = () => {
                   </Button>,
                 ]}
               >
-                <List.Item.Meta title={item.title} />
+                <List.Item.Meta className="item-display" title={item.title} />
               </List.Item>
             )}
           />

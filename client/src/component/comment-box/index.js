@@ -1,5 +1,5 @@
 import { Avatar, Button, List, Skeleton, Dropdown, Modal, message } from 'antd';
-import { EllipsisOutlined } from '@ant-design/icons';
+import { EllipsisOutlined, DownloadOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { UserOutlined } from '@ant-design/icons';
 import { CommentForm, EditCommentForm } from '../form';
@@ -53,6 +53,25 @@ export const CommentBox = ({ userInfo, ideaId, feedbackAble, setFeedbackCount })
             .catch((error) => console.log(error.response.request._response));
     };
 
+    const handleDownloadComment = async () => {
+        await axios.get(`http://localhost:3000/api/feedbacks/download?ideadId=${ideaId}`, {
+            headers: {
+                'Content-Encoding': 'gzip, deflate, br',
+                'Content-Type': 'text/csv',
+                'Authorization': userInfo.token,
+            }
+        })
+            .then(res => {
+                const url = window.URL.createObjectURL(new Blob([res.data]))
+                const link = document.createElement('a')
+                link.href = url
+                link.setAttribute('download', `CommentBox-${ideaId}.csv`)
+                document.body.appendChild(link)
+                link.click()
+                link.remove()
+            });
+    }
+
     useEffect(() => {
         axios.get(fakeDataUrl)
             .then((res) => {
@@ -67,7 +86,7 @@ export const CommentBox = ({ userInfo, ideaId, feedbackAble, setFeedbackCount })
             const newUrl = `http://localhost:3000/api/feedbacks?start=${start}&end=${end}&ideaId=${ideaId}`;
             setLoading(true);
             axios.get(newUrl).then((res) => {
-                if(res.data.length === 0) {
+                if (res.data.length === 0) {
                     setCanLoadMore(false);
                 }
                 const newData = data.concat(res.data);
@@ -113,7 +132,12 @@ export const CommentBox = ({ userInfo, ideaId, feedbackAble, setFeedbackCount })
         ) : null;
     return (
         <div className='comment-section'>
-            <h3>Feedbacks</h3>
+            <div className='export-group'>
+                <h3>Feedbacks</h3>
+                <Button onClick={handleDownloadComment} className='export-btn' type="primary" shape="round" icon={<DownloadOutlined />} size='middle'>
+                    Export Comments
+                </Button>
+            </div>
             {userInfo && feedbackAble && feedbackAble === "Feedback open" ? <CommentForm setFeedbackCount={setFeedbackCount} setList={setList} userInfo={userInfo} ideaId={ideaId} setData={setData} /> : ''}
             <List
                 className="demo-loadmore-list"
@@ -133,7 +157,7 @@ export const CommentBox = ({ userInfo, ideaId, feedbackAble, setFeedbackCount })
                                 description={item.content}
                             />
                         </Skeleton>
-                            { userInfo && item.userId && userInfo.user.id === item.userId._id
+                            {userInfo && item.userId && userInfo.user.id === item.userId._id
                                 ? <Dropdown
                                     arrow={true}
                                     trigger={['click']}
