@@ -43,3 +43,5 @@ typings/
 .env
 package-lock.json
 yarn.lock
+
+Photo/

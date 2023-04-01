@@ -54,7 +54,7 @@ export const CommentBox = ({ userInfo, ideaId, feedbackAble, setFeedbackCount })
     };
 
     const handleDownloadComment = async () => {
-        await axios.get(`http://localhost:3000/api/feedbacks/download?ideadId=${ideaId}`, {
+        await axios.get(`http://localhost:3000/api/feedbacks/download?ideaId=${ideaId}`, {
             headers: {
                 'Content-Encoding': 'gzip, deflate, br',
                 'Content-Type': 'text/csv',

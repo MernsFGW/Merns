@@ -20,6 +20,7 @@ const download = async (req, res) => {
             .populate("parentFeedbackId")
             .lean();
         const records = feedbacks.map((feedback) => {
+            console.log(feedback)
             return {
                 content: feedback.content,
                 incognito: feedback.incognito,
@@ -35,7 +36,7 @@ const download = async (req, res) => {
         res.setHeader("Content-Disposition", "attachment; filename=feedbacks.csv");
         res.set("Content-Type", "text/csv");
         blob.arrayBuffer().then(buffer => {
-        const data = Buffer.from(buffer);
+            const data = Buffer.from(buffer);
             res.write(data);
             res.end();
         }).catch(err => {
