@@ -29,8 +29,8 @@ export const Admin = () => {
             </li>
             <li className="button-action">
               <Link to="/departments">
-                <i class='bx bx-area' ></i>
-                <span class="links_name">Departments</span>
+                <i className='bx bx-area' ></i>
+                <span className="links_name">Departments</span>
               </Link>
             </li>
           </ul>

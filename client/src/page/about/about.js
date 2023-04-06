@@ -5,14 +5,14 @@ export const About = () => {
   return (
     <div>
         <nav></nav>
-    <div class="header">
+    <div className="header">
 
     </div>
 
-    <div class="container">
+    <div className="container">
 
-        <div class="about">
-            <div class="left">
+        <div className="about">
+            <div className="left">
                 <h1>About us</h1>
                 <hr />
                 <p>University Debate helps students find the answers they need, when they need them.
@@ -22,11 +22,11 @@ export const About = () => {
                     home. These products include, Feedback for University, Collectives on Univeristy, and
                     University Talent.</p>
             </div>
-            <div class="right">
+            <div className="right">
                 <img alt=''
                     src="https://www.abdn.ac.uk/img/450x/students/feature-images/Feedback%20-%20You%20Shape%20UoA_rdax_450x253.png" />
             </div>
-            <div class="clear"></div>
+            <div className="clear"></div>
         </div>
     </div>
     <footer>

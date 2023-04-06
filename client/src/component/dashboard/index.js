@@ -24,7 +24,7 @@ export const Dashboard = () => {
               <h1>{userInfo.user.fullName}</h1>
               <h3>
               <TeamOutlined />&nbsp;&nbsp;
-              {userInfo.user.department.title} department
+              {userInfo?.user?.department?.title} department
               </h3>
             </div>
           </Row>

@@ -21,8 +21,8 @@ function PolicyModal({ isModalOpen, setIsModalOpen }) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <div class="modal-dialog" >
-          <div class="modal-body">
+        <div className="modal-dialog" >
+          <div className="modal-body">
             <h1 className="modal-p-header1">UNIVERSITY OF GREENWICH</h1>
             <h2 className="modal-p-header2">Social Media Website Policy</h2>
             <h3 className="modal-p-content1">

@@ -93,7 +93,7 @@ export const Profile = () => {
                         <Col span={14}>
                             <Select
                                 showSearch
-                                placeholder={userInfo.user.department.title}
+                                placeholder={userInfo?.user?.department?.title}
                                 optionFilterProp="children"
                                 filterOption={(input, option) =>
                                     option.label.toLowerCase().includes(input.toLowerCase())
