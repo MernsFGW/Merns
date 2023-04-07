@@ -89,7 +89,7 @@ export const Home = () => {
             {userInfo
               ? <Avatar
                   size={38}
-                  src={`https://ui-avatars.com/api/?name=${userInfo.user.fullName}`}
+                  src={`https://ui-avatars.com/api/?name=${userInfo.user?.fullName}`}
                 />
               : <Avatar size={38} icon={<UserOutlined />} />
               }

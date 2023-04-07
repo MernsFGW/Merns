@@ -44,10 +44,10 @@ export const Post = ({ item, termList }) => {
                     <div className='post-user-wrapper'>
                         {item.incognito
                             ? <Avatar size={38} icon={<UserOutlined />} />
-                            : <Avatar size={38} src={`https://ui-avatars.com/api/?name=${item.userId.fullName}` } />
+                            : <Avatar size={38} src={`https://ui-avatars.com/api/?name=${item.userId?.fullName}` } />
                         }
                         <div className='post-user-information'>
-                            {item.incognito ? <h5>Anonymous</h5> : <h5>{item.userId.fullName}</h5>}
+                            {item.incognito ? <h5>Anonymous</h5> : item.userId ? <h5>{item.userId.fullName}</h5> : <h5>Anonymous</h5>} 
                             <p>{upperCaseFirstLetter(updateDate)}</p>
                         </div>
                     </div>
