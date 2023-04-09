@@ -4,9 +4,11 @@ import { Filter } from './filter';
 import { ContentBox } from '../content-box';
 import { useSearchParams } from 'react-router-dom';
 import { ClearOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 
 export const FilterPanel = ({categoryList}) => {
     const [searchParams, setSearchParams] = useSearchParams();
+    const userRole = JSON.parse(localStorage.getItem("user")).user.role.title;
 
     const setQueryParams = (searchParam, searchParamValue) => {
       removeQueryParams(searchParam);
@@ -42,6 +44,7 @@ export const FilterPanel = ({categoryList}) => {
                 <h5 style={{paddingBottom: 10}}>#Category</h5>
                 <CategoryFilter setQueryParams={setQueryParams} removeQueryParams={removeQueryParams} categoryList={categoryList} />
             </ContentBox>
+            {userRole && userRole === "Admin" ? <Button shape='round'>Export Post Data</Button> : ''}
         </div>
     )
 }
