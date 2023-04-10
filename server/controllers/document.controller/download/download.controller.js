@@ -28,21 +28,9 @@ const downloadImages = async (req, res) => {
             let formatImage = imageUrls.split(".");
             formatImage = formatImage[formatImage.length - 1];
             const publicId = idea.photo.public_id;
-            const ideaZipFileName = `document_${idea._id}.zip`;
-            const ideaOutput = fs.createWriteStream(ideaZipFileName);
-            const ideaArchive = archiver("zip", { zlib: { level: 9 } });
-            ideaArchive.pipe(ideaOutput);
             
             const imageName =`${publicId}.${formatImage}`;
-            ideaArchive.append(request(imageUrl), { name: imageName });
-
-            await ideaArchive.finalize();
-
-            zip.append(fs.createReadStream(ideaZipFileName), {
-                name: ideaZipFileName,
-            });
-
-            fs.unlinkSync(ideaZipFileName);
+            zip.append(request(imageUrls), { name: imageName });
         }
 
         zip.finalize();

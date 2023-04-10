@@ -23,8 +23,8 @@ const download = async (req, res) => {
             return {
                 content: feedback.content,
                 incognito: feedback.incognito,
-                userId: feedback.userId._id,
-                userName: feedback.userId.username,
+                userId: feedback.userId?._id,
+                userName: feedback.userId?.username,
                 parentFeedbackId: feedback.parentFeedbackId[0]?._id,
             };
         });
