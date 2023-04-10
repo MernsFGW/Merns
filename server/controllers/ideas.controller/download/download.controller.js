@@ -23,8 +23,8 @@ const download = async (req, res) => {
                 title: idea.title,
                 content: idea.content,
                 incognito: idea.incognito,
-                userId: idea.userId._id,
-                userName: idea.userId.username
+                userId: idea.userId?._id,
+                userName: idea.userId?.username
             }
         });
         const header = Object.keys(records[0]).toString();

@@ -20,7 +20,6 @@ const download = async (req, res) => {
             .populate("parentFeedbackId")
             .lean();
         const records = feedbacks.map((feedback) => {
-            console.log(feedback)
             return {
                 content: feedback.content,
                 incognito: feedback.incognito,
