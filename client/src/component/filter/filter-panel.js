@@ -5,6 +5,7 @@ import { ContentBox } from '../content-box';
 import { useSearchParams } from 'react-router-dom';
 import { ClearOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+import FileSaver from 'file-saver';
 import axios from 'axios';
 
 export const FilterPanel = ({categoryList}) => {
@@ -32,7 +33,7 @@ export const FilterPanel = ({categoryList}) => {
         }
     }
 
-    const downloadAllData = async () => {
+    const downloadIdea = async () => {
         await axios.get('http://localhost:3000/api/ideas/download', {
             headers: {
                 'Content-Encoding': 'gzip, deflate, br',
@@ -49,7 +50,35 @@ export const FilterPanel = ({categoryList}) => {
                 link.click()
                 link.remove()
             });
-        await axios.get()
+    }
+
+    const downloadDocument = async () => {
+        await axios.get('http://localhost:3000/api/documents/download', {
+            responseType: 'blob'
+        })
+        .then((response) => {
+            const file = new Blob([response.data], { type: 'application/zip' });
+            FileSaver.saveAs(file, 'document.zip');
+        }).catch((error) => console.log(error));
+    }
+
+    const downloadFeedback = async () => {
+        await axios.get('http://localhost:3000/api/feedbacks/download', {
+            headers: {
+                'Content-Encoding': 'gzip, deflate, br',
+                'Content-Type': 'text/csv',
+                'Authorization': user.token,
+            }
+        })
+            .then(res => {
+                const url = window.URL.createObjectURL(new Blob([res.data]))
+                const link = document.createElement('a')
+                link.href = url
+                link.setAttribute('download', 'FeedbackData.csv')
+                document.body.appendChild(link)
+                link.click()
+                link.remove()
+            });
     }
 
     return (
@@ -65,7 +94,7 @@ export const FilterPanel = ({categoryList}) => {
                 <h5 style={{paddingBottom: 10}}>#Category</h5>
                 <CategoryFilter setQueryParams={setQueryParams} removeQueryParams={removeQueryParams} categoryList={categoryList} />
             </ContentBox>
-            {user && user.user.role.title === "Admin" ? <Button onClick={downloadAllData} shape='round'>Export Post Data</Button> : ''}
+            {user && user.user.role.title === "Admin" ? <Button onClick={() => {downloadIdea(); downloadDocument(); downloadFeedback()}} shape='round'>Export Data</Button> : ''}
         </div>
     )
 }
