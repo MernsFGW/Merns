@@ -1,0 +1,83 @@
+h1, h2, h3, h4, h5, p {
+    color: white;
+}
+
+h1 {
+    font-weight: 500;
+    font-size: 45px;
+}
+
+.post-detail-image {
+    width: 100%;
+    max-height: 450px;
+    border-radius: var(--bd-rad-lg);
+}
+
+.post-detail-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing);
+    padding-bottom: var(--spacing-md);
+}
+
+.social-info-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-detailt-text {
+    font-size: var(--fs-md);
+}
+
+.detail-page-user {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.detail-page-content {
+    text-align: justify;
+}
+
+.detail-page-user-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ant-form-item .ant-form-item-label > label {
+    height: 40px;
+}
+
+.comment-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing);
+}
+
+.create-comment-form > * {
+    margin: 0 !important;
+}
+
+.post-action-dropdown:hover {
+    cursor: pointer;
+    color: var(--orange);
+}
+
+.like-btn , .dislike-btn {
+    font-size: 18px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+.like-btn:hover {
+    color: #537FE7;
+}
+
+.dislike-btn:hover {
+    color: #FF597B;
+}
+
+.post-action-information.detail-page-action {
+    font-weight: 500;
+}

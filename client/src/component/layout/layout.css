@@ -1,0 +1,248 @@
+/* global css */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --orange: #ff4401;
+  --contrast-color: #262d34;
+  --sub-contrast-color: #2c353d;
+  --main-bg-color: #1e252b;
+  --bd-rad-md: 7px;
+  --bd-rad-lg: 16px;
+  --bd-rad-sm: 4px;
+  --spacing: 20px;
+  --spacing-md: 15px;
+  --spacing-sm: 10px;
+  --spacing-lg: 30px;
+  --white: white;
+  --black: black;
+  --fs-lg: 18px;
+  --fs: 16px;
+  --fs-md: 14px;
+  --fs-sm: 12px;
+  --fs-xs: 10px;
+  --font-color: #858ead;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* end of global css */
+.layout-wrapper {
+  background-color: var(--main-bg-color);
+  height: 100vh;
+  overflow: auto;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--main-bg-color);
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  border: 1px solid var(--main-bg-color);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-left: 5px solid var(--main-bg-color);
+  background-clip: padding-box;
+}
+
+.page-content {
+  display: flex;
+  padding: var(--spacing) var(--spacing-lg);
+  gap: var(--spacing);
+}
+
+.post-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+  align-items: center;
+}
+
+.layout-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+  position: relative;
+}
+
+.primary {
+  flex: 6;
+}
+
+.extend {
+  flex: 2;
+}
+
+.secondary {
+  flex: 3;
+}
+
+.new-secondary {
+  flex: 4;
+}
+
+/* overwrire antd */
+
+.ant-btn.ant-btn-lg { 
+  font-size: 14px;
+}
+
+.post-list ul.ant-list-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+  height: 1034px;
+}
+
+.post-list li.ant-list-item {
+  padding: 0;
+}
+
+.post-list-pagination .ant-pagination-item > a {
+  color: white;
+}
+
+.post-list-pagination .ant-pagination-item-active {
+  background-color: var(--contrast-color);
+  border-color: var(--contrast-color);
+}
+
+.post-list-pagination span {
+  color: white !important;
+}
+
+.ant-btn-primary {
+  background-color: #ff4401;
+}
+
+.ant-btn-primary:disabled {
+  color: var(--white);
+}
+
+.ant-input {
+  background-color: var(--sub-contrast-color);
+  border-color: var(--sub-contrast-color);
+  color: var(--font-color);
+}
+
+.ant-input::placeholder {
+  color: #858ead;
+}
+
+.layout-header {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.monthly-event {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  position: sticky;
+  top: 85px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+.sidebar {
+  position: fixed;
+  height: 100%;
+  width: 240px;
+  background-color: var(--contrast-color);
+  border-color: var(--contrast-color);
+  transition: all 0.5s ease;
+}
+.sidebar.active {
+  width: 60px;
+}
+.sidebar .logo-details {
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+.sidebar .logo-details i {
+  font-size: 28px;
+  font-weight: 500;
+  color: #fff;
+  min-width: 60px;
+  text-align: center;
+}
+.sidebar .logo-details .logo_name {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+}
+.sidebar .nav-links {
+  margin-top: 10px;
+}
+.sidebar .nav-links li {
+  position: relative;
+  list-style: none;
+  height: 50px;
+}
+.sidebar .nav-links li a {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+}
+.sidebar .nav-links li a.active {
+  background: #081d45;
+}
+.sidebar .nav-links li a:hover {
+  background: #081d45;
+}
+.sidebar .nav-links li i {
+  min-width: 60px;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+}
+.sidebar .nav-links li a .links_name {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.sidebar .nav-links .log_out {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.item-display h4 {
+  color: white !important;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+@import url('https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css');

@@ -1,0 +1,45 @@
+.form-title {
+    align-self: center;
+    padding-top: var(--spacing);
+    padding-bottom: 5px;
+    margin-bottom: var(--spacing-sm);
+    border-bottom: 1px white solid;
+}
+
+.submit-form-btn {
+    font-weight: 600;
+}
+
+
+.ant-select-selector {
+    background: none !important;
+}
+
+.update-image-preview {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    border: 1px dashed #d9d9d9;
+    border-radius: 8px;
+}
+
+.incognito-mode > div {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+}
+
+.incognito-mode {
+    margin: 0;
+}
+
+.incognito-mode > div > div {
+    padding-top: 3px;
+    padding-left: 20px;
+    width: unset !important;
+}
+
+.comment-action-btn {
+    font-size: 13px !important;
+}
